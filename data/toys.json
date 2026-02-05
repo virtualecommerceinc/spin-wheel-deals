@@ -1,0 +1,8 @@
+[
+  {"label": "Squeaky Bone", "color": "#FF6F61", "link": "?toy=squeaky-bone", "svg": "assets/squeaky-bone.svg"},
+  {"label": "Rubber Duck", "color": "#6B5B95", "link": "?toy=rubber-duck", "svg": "assets/rubber-duck.svg"},
+  {"label": "Chew Rope", "color": "#88B04B", "link": "?toy=chew-rope", "svg": "assets/chew-rope.svg"},
+  {"label": "Frisbee", "color": "#F7CAC9", "link": "?toy=frisbee", "svg": "assets/frisbee.svg"},
+  {"label": "Tennis Ball", "color": "#92A8D1", "link": "?toy=tennis-ball", "svg": "assets/tennis-ball.svg"},
+  {"label": "Plush Toy", "color": "#955251", "link": "?toy=plush-toy", "svg": "assets/plush-toy.svg"}
+]
