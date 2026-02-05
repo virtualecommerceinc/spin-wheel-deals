@@ -2,33 +2,34 @@ const wheel = document.getElementById('wheel');
 const ctx = wheel.getContext('2d');
 const btn = document.getElementById('spin-btn');
 const msg = document.getElementById('message');
-const dog = document.getElementById('dog');
+const pointer = document.querySelector('.paw-pointer');
 let sectors = [];
 let size, center, radius;
 
-// Fetch sectors data and initialize
+// Load toy sectors
 fetch('data/toys.json')
   .then(res => res.json())
   .then(data => {
     sectors = data;
-    setupWheel();
+    drawWheel();
   })
-  .catch(err => console.error('Error loading data:', err));
+  .catch(err => console.error('Error loading toys:', err));
 
-function setupWheel() {
+// Draw the wheel segments
+function drawWheel() {
   size = wheel.width;
   center = size / 2;
   radius = size / 2 - 10;
   ctx.clearRect(0, 0, size, size);
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.font = '14px sans-serif';
+  ctx.font = `${Math.floor(size / 15)}px sans-serif`;
 
   sectors.forEach((s, i) => {
-    const angle = (i / sectors.length) * 2 * Math.PI;
+    const angle = (i / sectors.length) * Math.PI * 2;
     ctx.beginPath();
     ctx.moveTo(center, center);
-    ctx.arc(center, center, radius, angle, angle + 2 * Math.PI / sectors.length);
+    ctx.arc(center, center, radius, angle, angle + (Math.PI * 2 / sectors.length));
     ctx.fillStyle = s.color;
     ctx.fill();
     ctx.fillStyle = '#fff';
@@ -40,31 +41,33 @@ function setupWheel() {
   });
 }
 
+// Spin button handler
 btn.addEventListener('click', () => {
   if (!sectors.length) return;
   btn.disabled = true;
   msg.textContent = '';
-  dog.hidden = true;
-  const spins = Math.random() * 8 + 8;
-  const finalAngle = spins * 2 * Math.PI;
-  wheel.style.transition = 'transform 4s ease-out';
+  pointer.hidden = true;
+
+  const spins = Math.random() * 6 + 6;
+  const finalAngle = spins * Math.PI * 2;
+  wheel.style.transition = 'transform 5s ease-out';
   wheel.style.transform = `rotate(${finalAngle}rad)`;
 
-  // Dog animation
+  // After spin completes
   setTimeout(() => {
-    dog.hidden = false;
-    dog.classList.add('spin-animation');
-  }, 3500);
-
-  setTimeout(() => {
-    const normalized = finalAngle % (2 * Math.PI);
-    const idx = Math.floor((2 * Math.PI - normalized) / (2 * Math.PI) * sectors.length) % sectors.length;
+    const normalized = finalAngle % (Math.PI * 2);
+    const idx = Math.floor(((Math.PI * 2 - normalized) / (Math.PI * 2)) * sectors.length) % sectors.length;
     const sector = sectors[idx];
 
-    msg.innerHTML = `Congratulations! You got <strong>${sector.label}</strong>.<br>` +
-      `<img src="${sector.svg}" alt="Toy image" class="toy-img" /><br>` +
-      `<a href="result.html${sector.link}">Claim Your Toy</a>`;
-    dog.classList.remove('spin-animation');
+    // Display result with image and link
+    msg.innerHTML = `Congratulations! You got <strong>${sector.label}</strong>!<br>` +
+                    `<img src="${sector.svg}" alt="${sector.label}" class="toy-img" /><br>` +
+                    `<a href="result.html${sector.link}">Claim Your Toy</a>`;
+    pointer.hidden = false;
     btn.disabled = false;
-  }, 4500);
+
+    // Reset wheel rotation for next spin
+    wheel.style.transition = '';
+    wheel.style.transform = `rotate(${normalized}rad)`;
+  }, 5000);
 });
