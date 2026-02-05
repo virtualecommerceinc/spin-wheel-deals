@@ -1,17 +1,17 @@
-/* Mobile-first responsive design */
+/* ============== Base ============== */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
 body {
   margin: 0;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #fff;
+  overflow-x: hidden; /* keep horizontal safe without killing vertical */
 }
 
-/* Layered Animated Dog Park Background */
+/* ============== Background (keep your vibe, slightly tuned) ============== */
 .background {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   overflow: hidden;
   z-index: -1;
 }
@@ -24,27 +24,28 @@ body {
   animation: move 60s linear infinite;
 }
 .layer.sky {
-  background: linear-gradient(to bottom, #87ceeb 0%, #a8e6cf 100%);
+  background: linear-gradient(to bottom, #7ad3ff 0%, #9ef0c8 100%);
 }
 .layer.clouds {
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 20%, transparent 21%),
-              radial-gradient(circle at 70% 20%, rgba(255,255,255,0.7) 15%, transparent 16%),
-              radial-gradient(circle at 50% 60%, rgba(255,255,255,0.6) 25%, transparent 26%);
-  opacity: 0.8;
+  background:
+    radial-gradient(circle at 25% 30%, rgba(255,255,255,0.85) 18%, transparent 19%),
+    radial-gradient(circle at 60% 18%, rgba(255,255,255,0.75) 14%, transparent 15%),
+    radial-gradient(circle at 80% 55%, rgba(255,255,255,0.65) 22%, transparent 23%);
+  opacity: 0.85;
   animation-duration: 90s;
 }
 .layer.trees {
-  background: linear-gradient(to top, #228B22 0%, transparent 80%);
+  background: linear-gradient(to top, rgba(18,110,46,0.95) 0%, transparent 75%);
   bottom: 0;
   width: 200%;
-  height: 150%;
+  height: 160%;
   animation-duration: 120s;
 }
 .layer.grass {
-  background: linear-gradient(to top, #006400 0%, transparent 80%);
+  background: linear-gradient(to top, rgba(0,90,40,0.98) 0%, transparent 78%);
   bottom: 0;
   width: 200%;
-  height: 100%;
+  height: 110%;
   animation-duration: 30s;
 }
 @keyframes move {
@@ -52,82 +53,148 @@ body {
   to   { transform: translate(-50%, -50%); }
 }
 
-/* Game Area */
+/* ============== Layout ============== */
 .game-area {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px 40px;
 }
 
+.hero {
+  text-align: center;
+  margin-bottom: 14px;
+}
 #title {
-  color: #fff;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  margin-bottom: 20px;
+  margin: 0;
+  font-size: clamp(28px, 4.5vw, 44px);
+  letter-spacing: 0.2px;
+  text-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+.subtitle {
+  margin: 10px 0 0;
+  opacity: 0.95;
+  font-size: clamp(14px, 2.2vw, 18px);
+  text-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
 
-/* Wheel container and mask */
+/* ============== Card ============== */
+.wheel-card {
+  width: min(520px, 92vw);
+  padding: 18px 16px 16px;
+  border-radius: 22px;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 18px 55px rgba(0,0,0,0.30);
+  backdrop-filter: blur(8px);
+}
+
+/* ============== Wheel ============== */
 #wheel-container {
   position: relative;
+  width: min(420px, 82vw);
+  aspect-ratio: 1 / 1; /* always square */
+  margin: 8px auto 14px;
+  display: grid;
+  place-items: center;
 }
+
 #wheel {
-  width: 300px;
-  height: 300px;
-  mask: url(#paw-mask);
-  -webkit-mask: url(#paw-mask);
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+  box-shadow:
+    0 18px 38px rgba(0,0,0,0.35),
+    inset 0 0 0 10px rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.07); /* in case canvas is blank during load */
+  transform: rotate(0rad);
+  transform-origin: 50% 50%;
 }
-.paw-pointer {
+
+/* Clean top pointer */
+.pointer {
   position: absolute;
-  top: 50%;
+  top: -10px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 48px;
-  animation: paw-bounce 1.5s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes paw-bounce {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); }
-  50%      { transform: translate(-50%, -60%) scale(1.1); }
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 28px solid rgba(255,255,255,0.95);
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,0.35));
+  z-index: 2;
 }
 
-/* Spin Button */
-#spin-btn {
-  margin-top: 20px;
-  padding: 12px 24px;
-  font-size: 20px;
-  background: #ffcc00;
+/* ============== Paw Button ============== */
+.paw-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 18px;
   cursor: pointer;
-  transition: background 0.3s;
-}
-#spin-btn:disabled {
-  background: #ccc;
-  cursor: not-allowed;
-}
-#spin-btn:hover:not(:disabled) {
-  background: #ffdd33;
-}
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
 
-/* Message */
-#message {
-  margin-top: 20px;
+  background: linear-gradient(135deg, #ffd34d, #ffb400);
+  color: #2b1b00;
+  font-weight: 800;
   font-size: 18px;
-  color: #fff;
+  letter-spacing: 0.2px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.28);
+  transition: transform 0.12s ease, filter 0.12s ease, opacity 0.12s ease;
+}
+.paw-btn svg { fill: #2b1b00; }
+.paw-btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.paw-btn:active { transform: translateY(1px) scale(0.99); }
+
+.paw-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+}
+
+.paw-btn__text { line-height: 1.1; }
+
+/* ============== Message / Result ============== */
+#message {
+  margin-top: 14px;
   text-align: center;
+  font-size: 16px;
+  line-height: 1.45;
+  text-shadow: 0 6px 16px rgba(0,0,0,0.32);
 }
 
-/* Toy image styling */
 .toy-img {
-  width: 80px;
-  margin: 10px 0;
+  width: 88px;
+  height: auto;
+  margin: 10px 0 6px;
+  display: inline-block;
+  filter: drop-shadow(0 10px 14px rgba(0,0,0,0.25));
 }
 
-/* Responsive enhancements */
-@media (min-width: 600px) {
-  #wheel { width: 400px; height: 400px; }
-  #spin-btn { font-size: 24px; padding: 16px 32px; }
-  #message { font-size: 20px; }
+#message a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.22);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+#message a:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+/* Slightly roomier desktop */
+@media (min-width: 900px) {
+  .wheel-card { padding: 22px 20px 18px; }
+  #message { font-size: 17px; }
 }
