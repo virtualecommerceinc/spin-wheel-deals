@@ -3,37 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Let Your Dog Pick Their Next Toy V3</title>
+  <title>Let Your Dog Pick Their Next Toy!</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- SVG Mask Definition for Paw Shape -->
-  <svg width="0" height="0" aria-hidden="true" focusable="false">
-    <defs>
-      <mask id="paw-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="300" height="300">
-        <rect width="300" height="300" fill="white"/>
-        <text x="50%" y="55%" text-anchor="middle" alignment-baseline="middle" font-size="220">🐾</text>
-      </mask>
-    </defs>
-  </svg>
-
   <!-- Layered Animated Dog Park Background -->
-  <div class="background">
+  <div class="background" aria-hidden="true">
     <div class="layer sky"></div>
     <div class="layer clouds"></div>
     <div class="layer trees"></div>
     <div class="layer grass"></div>
   </div>
 
-  <div class="game-area">
-    <h1 id="title">Let Your Dog Pick Their Next Toy!</h1>
-    <div id="wheel-container">
-      <canvas id="wheel" width="300" height="300" aria-label="Toy selection wheel" role="img" style="mask:url(#paw-mask);-webkit-mask:url(#paw-mask);"></canvas>
-      <div class="paw-pointer" aria-hidden="true">🐶🐾</div>
-    </div>
-    <button id="spin-btn" aria-label="Spin the wheel to choose a toy" role="button">🐾 Let Your Dog Choose!</button>
-    <div id="message" role="status" aria-live="polite"></div>
-  </div>
+  <main class="game-area">
+    <header class="hero">
+      <h1 id="title">Let Your Dog Pick Their Next Toy!</h1>
+      <p class="subtitle">Spin the wheel and get a surprise pick 🐶</p>
+    </header>
+
+    <section class="wheel-card" aria-label="Dog toy surprise spinner">
+      <div id="wheel-container">
+        <div class="pointer" aria-hidden="true"></div>
+        <canvas id="wheel" aria-label="Toy selection wheel" role="img"></canvas>
+      </div>
+
+      <button id="spin-btn" class="paw-btn" aria-label="Spin the wheel to choose a toy" type="button">
+        <span class="paw-btn__icon" aria-hidden="true">
+          <!-- Paw SVG -->
+          <svg viewBox="0 0 128 128" width="44" height="44" focusable="false" aria-hidden="true">
+            <path d="M40 54c-8 0-15-10-15-22S32 10 40 10s15 10 15 22-7 22-15 22Zm48 0c-8 0-15-10-15-22S80 10 88 10s15 10 15 22-7 22-15 22ZM22 78c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15Zm84 0c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15ZM64 118c-16 0-34-10-34-26 0-14 12-22 22-26 4-2 8-3 12-3s8 1 12 3c10 4 22 12 22 26 0 16-18 26-34 26Z" />
+          </svg>
+        </span>
+        <span class="paw-btn__text">Let Your Dog Choose!</span>
+      </button>
+
+      <div id="message" role="status" aria-live="polite"></div>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
