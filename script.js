@@ -1,7 +1,13 @@
 const wheel = document.getElementById('wheel');
 const ctx = wheel.getContext('2d');
+
 const btn = document.getElementById('spin-btn');
-const btnText = document.getElementById('spin-btn-text');
+// Robust: support either #spin-btn-text OR the existing .paw-btn__text span
+const btnText =
+  document.getElementById('spin-btn-text') ||
+  btn.querySelector('.paw-btn__text') ||
+  btn;
+
 const msg = document.getElementById('message');
 const wheelContainer = document.getElementById('wheel-container');
 
@@ -9,6 +15,18 @@ let sectors = [];
 let rotation = 0;            // stable rotation state (radians)
 let isSpinning = false;
 let pendingAmazonLink = '';  // set after spin; click button to open
+
+// Wheel render modes
+// - "labels": show sector labels (idle)
+// - "mystery": show icons / question marks (during/after spin)
+let wheelMode = 'labels';
+
+// Crossfade control (0 = labels only, 1 = mystery only)
+let mysteryMix = 0;
+
+// Fun, generic icons that DON'T directly reveal the toy type.
+// (We cycle them across slices. You can change these anytime.)
+const MYSTERY_ICONS = ['🐾', '🐶', '❤️', '🌈', '⭐', '🎁', '👀', '💥', '✨', '🦴'];
 
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
@@ -20,12 +38,10 @@ function resizeCanvasToDisplaySize() {
   const dpr = window.devicePixelRatio || 1;
 
   const px = Math.floor(cssSize * dpr);
-
   if (wheel.width !== px || wheel.height !== px) {
     wheel.width = px;
     wheel.height = px;
   }
-
   drawWheel();
 }
 
@@ -69,7 +85,7 @@ function drawFittedLabel(text, maxWidth, startPx, minPx) {
     return;
   }
 
-  // simplest split (labels are short now)
+  // simplest split
   const best = { a: parts[0], b: parts.slice(1).join(' ') };
 
   px = Math.max(minPx, Math.floor(startPx * 0.85));
@@ -86,6 +102,12 @@ function drawFittedLabel(text, maxWidth, startPx, minPx) {
   const lineGap = Math.max(4, Math.floor(px * 0.25));
   ctx.fillText(best.a, 0, -lineGap);
   ctx.fillText(best.b, 0, lineGap);
+}
+
+function drawMysteryIcon(icon, sizePx) {
+  // Use emoji font fallbacks; emoji rendering varies by OS, but that's fine for fun UI.
+  ctx.font = `900 ${sizePx}px system-ui, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif`;
+  ctx.fillText(icon, 0, 0);
 }
 
 function drawWheel() {
@@ -108,6 +130,14 @@ function drawWheel() {
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
+  // Label sizing
+  const labelStartPx = clamp(Math.floor(size / 16), 16, 28);
+  const labelMinPx = 12;
+  const labelMaxWidth = radius * 0.58;
+
+  // Icon sizing
+  const iconPx = clamp(Math.floor(size / 10), 22, 44);
+
   for (let i = 0; i < sectors.length; i++) {
     const s = sectors[i];
     const start = i * slice;
@@ -126,21 +156,40 @@ function drawWheel() {
     ctx.lineWidth = Math.max(2, Math.floor(size / 180));
     ctx.stroke();
 
-    // Label
+    // Content (labels and/or icons with crossfade mix)
     ctx.save();
     ctx.translate(center, center);
     ctx.rotate(start + slice / 2);
 
-    ctx.fillStyle = 'rgba(255,255,255,0.95)';
+    // Position at consistent radius
+    ctx.translate(radius * 0.62, 0);
+
+    // Shadows
     ctx.shadowColor = 'rgba(0,0,0,0.25)';
     ctx.shadowBlur = Math.floor(size / 90);
 
-    const startPx = clamp(Math.floor(size / 16), 16, 28);
-    const minPx = 12;
-    const maxWidth = radius * 0.58;
+    const labelText = (s.label || '').toString();
+    const icon = MYSTERY_ICONS[i % MYSTERY_ICONS.length];
 
-    ctx.translate(radius * 0.62, 0);
-    drawFittedLabel((s.label || ''), maxWidth, startPx, minPx);
+    // Determine alphas
+    const labelAlpha = clamp(1 - mysteryMix, 0, 1);
+    const iconAlpha = clamp(mysteryMix, 0, 1);
+
+    // LABEL layer (only if labelAlpha > 0)
+    if (labelAlpha > 0.001) {
+      ctx.save();
+      ctx.fillStyle = `rgba(255,255,255,${0.95 * labelAlpha})`;
+      drawFittedLabel(labelText, labelMaxWidth, labelStartPx, labelMinPx);
+      ctx.restore();
+    }
+
+    // ICON layer (only if iconAlpha > 0)
+    if (iconAlpha > 0.001) {
+      ctx.save();
+      ctx.fillStyle = `rgba(255,255,255,${0.95 * iconAlpha})`;
+      drawMysteryIcon(icon, iconPx);
+      ctx.restore();
+    }
 
     ctx.restore();
   }
@@ -162,23 +211,46 @@ function resetCTA() {
   btn.disabled = false;
   btnText.textContent = 'Let Your Dog Choose!';
   msg.textContent = '';
+  wheelMode = 'labels';
+  mysteryMix = 0;
+  drawWheel();
 }
 
 function openPupPick() {
   if (!pendingAmazonLink) return;
 
-  // User-initiated navigation (safe). Open in new tab.
+  // User-initiated navigation in a new tab.
   window.open(pendingAmazonLink, '_blank', 'noopener,noreferrer');
 
-  // Reset UI for next spin (optional; keeps experience clean)
+  // Reset for next spin
   resetCTA();
+}
+
+/**
+ * Crossfade labels->icons over durationMs.
+ * Uses requestAnimationFrame to redraw with a changing mysteryMix.
+ */
+function crossfadeToMystery(durationMs = 220) {
+  const start = performance.now();
+  const from = mysteryMix;
+  const to = 1;
+
+  function step(t) {
+    const p = clamp((t - start) / durationMs, 0, 1);
+    // Ease a bit
+    const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+    mysteryMix = from + (to - from) * eased;
+    drawWheel();
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
 }
 
 function spinOnce() {
   if (!sectors.length) return;
   if (isSpinning) return;
 
-  // If we already have a pending pick, button click should open it (not spin again)
+  // If we already have a pending pick, button click reveals it (opens Amazon)
   if (pendingAmazonLink) {
     openPupPick();
     return;
@@ -187,6 +259,10 @@ function spinOnce() {
   isSpinning = true;
   btn.disabled = true;
   msg.textContent = '';
+
+  // Switch into mystery mode right as spin begins
+  wheelMode = 'mystery';
+  crossfadeToMystery(220);
 
   const targetIndex = Math.floor(Math.random() * sectors.length);
 
@@ -207,13 +283,17 @@ function spinOnce() {
     const sector = sectors[targetIndex] || {};
     const amazonLink = (sector.link || '').toString().trim();
 
-    // IMPORTANT: No on-page reveal. Amazon is the reveal.
+    // No on-page reveal. Amazon is the reveal.
     pendingAmazonLink = amazonLink;
+
+    // Keep wheel in mystery mode after spin
+    mysteryMix = 1;
+    drawWheel();
 
     msg.textContent = '🐾 Your pup made a pick…';
 
     if (pendingAmazonLink) {
-      btnText.textContent = "See your pup’s pick";
+      btnText.textContent = "Reveal your pup’s pick";
       btn.disabled = false;
     } else {
       btnText.textContent = 'Link coming soon';
@@ -248,10 +328,10 @@ window.addEventListener('resize', () => {
 
 // Button click:
 // - If no pending link => spin
-// - If pending link => open Amazon
+// - If pending link => open Amazon (reveal)
 btn.addEventListener('click', () => spinOnce());
 
-// Click/tap wheel spins only (not open link)
+// Click/tap wheel spins only (never opens link)
 wheelContainer.addEventListener('click', () => {
   if (!pendingAmazonLink) spinOnce();
 });
