@@ -2,9 +2,11 @@ const wheel = document.getElementById('wheel');
 const ctx = wheel.getContext('2d');
 const btn = document.getElementById('spin-btn');
 const msg = document.getElementById('message');
+const wheelContainer = document.getElementById('wheel-container');
 
 let sectors = [];
 let rotation = 0; // stable rotation state (radians)
+let isSpinning = false;
 
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
@@ -98,32 +100,11 @@ function setWheelRotation(rad) {
   wheel.style.transform = `rotate(${rotation}rad)`;
 }
 
-// Load toy sectors (ROOT FILE: dog_toys.json)
-fetch('dog_toys.json', { cache: 'no-store' })
-  .then(res => {
-    if (!res.ok) throw new Error(`Failed to load dog_toys.json (${res.status})`);
-    return res.json();
-  })
-  .then(data => {
-    sectors = Array.isArray(data) ? data : [];
-    resizeCanvasToDisplaySize();
-    setWheelRotation(0);
-  })
-  .catch(err => {
-    console.error('Error loading toys:', err);
-    msg.innerHTML = `⚠️ Couldn’t load toy list. Please refresh in a moment.<br><small>${String(err.message || err)}</small>`;
-  });
-
-// Keep wheel crisp + correctly sized on resize
-window.addEventListener('resize', () => {
-  window.clearTimeout(window.__wheelResizeTimer);
-  window.__wheelResizeTimer = window.setTimeout(resizeCanvasToDisplaySize, 120);
-});
-
-// Spin button handler
-btn.addEventListener('click', () => {
+function spinOnce() {
   if (!sectors.length) return;
+  if (isSpinning) return;
 
+  isSpinning = true;
   btn.disabled = true;
   msg.textContent = '';
 
@@ -168,5 +149,42 @@ btn.addEventListener('click', () => {
         : `<span>Link coming soon.</span>`);
 
     btn.disabled = false;
+    isSpinning = false;
   }, 5050);
+}
+
+// Load toy sectors (ROOT FILE: dog_toys.json)
+fetch('dog_toys.json', { cache: 'no-store' })
+  .then(res => {
+    if (!res.ok) throw new Error(`Failed to load dog_toys.json (${res.status})`);
+    return res.json();
+  })
+  .then(data => {
+    sectors = Array.isArray(data) ? data : [];
+    resizeCanvasToDisplaySize();
+    setWheelRotation(0);
+  })
+  .catch(err => {
+    console.error('Error loading toys:', err);
+    msg.innerHTML = `⚠️ Couldn’t load toy list. Please refresh in a moment.<br><small>${String(err.message || err)}</small>`;
+  });
+
+// Keep wheel crisp + correctly sized on resize
+window.addEventListener('resize', () => {
+  window.clearTimeout(window.__wheelResizeTimer);
+  window.__wheelResizeTimer = window.setTimeout(resizeCanvasToDisplaySize, 120);
+});
+
+// Button click spins
+btn.addEventListener('click', () => spinOnce());
+
+// Click/tap anywhere on the wheel spins
+wheelContainer.addEventListener('click', () => spinOnce());
+
+// Keyboard accessibility: Enter/Space spins when wheel area is focused
+wheelContainer.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    spinOnce();
+  }
 });
