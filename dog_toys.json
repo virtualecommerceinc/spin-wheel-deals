@@ -1,0 +1,62 @@
+[
+  {
+    "label": "Fetch Ball",
+    "color": "#f44336",
+    "image": "images/chuckit-ball.png",
+    "link": "https://amzn.to/4agZc30"
+  },
+  {
+    "label": "Durable Chew Toy",
+    "color": "#ff9800",
+    "image": "images/benebone.png",
+    "link": "https://amzn.to/4aClE71"
+  },
+  {
+    "label": "Squeaky Plush",
+    "color": "#ffeb3b",
+    "image": "images/squeaky.png",
+    "link": "https://amzn.to/4r0YX3e"
+  },
+  {
+    "label": "Plush Cuddle Toy",
+    "color": "#8bc34a",
+    "image": "images/lambchop.png",
+    "link": "https://amzn.to/4rwzgXY"
+  },
+  {
+    "label": "Fetch Stick",
+    "color": "#4caf50",
+    "image": "images/fetch-stick.png",
+    "link": "https://amzn.to/4a0xTuY"
+  },
+  {
+    "label": "Tough Tug Toy",
+    "color": "#009688",
+    "image": "images/tuffy.png",
+    "link": "https://amzn.to/4ccI54N"
+  },
+  {
+    "label": "Treat Rubber Ball",
+    "color": "#03a9f4",
+    "image": "images/hol-ee.png",
+    "link": "https://amzn.to/49ZmlIn"
+  },
+  {
+    "label": "Classic KONG",
+    "color": "#3f51b5",
+    "image": "images/kong.png",
+    "link": "https://amzn.to/3OnIdEF"
+  },
+  {
+    "label": "Rope Tug Toy",
+    "color": "#9c27b0",
+    "image": "images/rope.png",
+    "link": "https://amzn.to/4thooPl"
+  },
+  {
+    "label": "Flying Disc",
+    "color": "#e91e63",
+    "image": "images/frisbee.png",
+    "link": "https://amzn.to/3OadniR"
+  }
+]
