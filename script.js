@@ -16,20 +16,28 @@ let rotation = 0;            // stable rotation state (radians)
 let isSpinning = false;
 let pendingAmazonLink = '';  // set after spin; click button to open
 
-// Wheel render modes
-// - "labels": show sector labels (idle)
-// - "mystery": show icons / question marks (during/after spin)
-let wheelMode = 'labels';
-
 // Crossfade control (0 = labels only, 1 = mystery only)
 let mysteryMix = 0;
 
 // Fun, generic icons that DON'T directly reveal the toy type.
-// (We cycle them across slices. You can change these anytime.)
 const MYSTERY_ICONS = ['🐾', '🐶', '❤️', '🌈', '⭐', '🎁', '👀', '💥', '✨', '🦴'];
+
+const TAU = Math.PI * 2;
+
+// IMPORTANT:
+// Your pointer is now at 3 o’clock (right side), so the pointer angle is 0 radians.
+// If you ever move the pointer again:
+// - top (12 o’clock) would be -Math.PI/2
+// - left (9 o’clock) would be Math.PI
+// - bottom (6 o’clock) would be Math.PI/2
+const POINTER_ANGLE = 0;
 
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
+}
+
+function normAngle(rad) {
+  return ((rad % TAU) + TAU) % TAU;
 }
 
 function resizeCanvasToDisplaySize() {
@@ -48,6 +56,34 @@ function resizeCanvasToDisplaySize() {
 function setWheelRotation(rad) {
   rotation = rad;
   wheel.style.transform = `rotate(${rotation}rad)`;
+}
+
+/**
+ * Compute which sector is under the pointer based on the wheel’s final rotation.
+ * This is the key fix: it makes the button reveal ALWAYS match what the pointer shows.
+ */
+function getIndexUnderPointer(rotRad) {
+  if (!sectors.length) return 0;
+
+  const n = sectors.length;
+  const slice = TAU / n;
+
+  // CSS rotate(rad) rotates clockwise visually.
+  // Sectors are drawn starting at 0 rad on the right (3 o’clock).
+  // The angle under the pointer corresponds to "where the wheel's 0 ended up",
+  // so we invert the rotation to map pointer space back to sector space.
+  const r = normAngle(rotRad);
+
+  // Angle in sector-space that currently sits under the pointer
+  const angleAtPointer = normAngle(POINTER_ANGLE - r);
+
+  // Convert angle to index:
+  // Each sector occupies [i*slice, (i+1)*slice)
+  let idx = Math.floor(angleAtPointer / slice);
+
+  // Safety clamp
+  idx = ((idx % n) + n) % n;
+  return idx;
 }
 
 /**
@@ -85,7 +121,6 @@ function drawFittedLabel(text, maxWidth, startPx, minPx) {
     return;
   }
 
-  // simplest split
   const best = { a: parts[0], b: parts.slice(1).join(' ') };
 
   px = Math.max(minPx, Math.floor(startPx * 0.85));
@@ -105,7 +140,6 @@ function drawFittedLabel(text, maxWidth, startPx, minPx) {
 }
 
 function drawMysteryIcon(icon, sizePx) {
-  // Use emoji font fallbacks; emoji rendering varies by OS, but that's fine for fun UI.
   ctx.font = `900 ${sizePx}px system-ui, Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif`;
   ctx.fillText(icon, 0, 0);
 }
@@ -121,11 +155,11 @@ function drawWheel() {
 
   // Outer subtle ring
   ctx.beginPath();
-  ctx.arc(center, center, radius, 0, Math.PI * 2);
+  ctx.arc(center, center, radius, 0, TAU);
   ctx.fillStyle = 'rgba(255,255,255,0.06)';
   ctx.fill();
 
-  const slice = (Math.PI * 2) / sectors.length;
+  const slice = TAU / sectors.length;
 
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
@@ -171,11 +205,9 @@ function drawWheel() {
     const labelText = (s.label || '').toString();
     const icon = MYSTERY_ICONS[i % MYSTERY_ICONS.length];
 
-    // Determine alphas
     const labelAlpha = clamp(1 - mysteryMix, 0, 1);
     const iconAlpha = clamp(mysteryMix, 0, 1);
 
-    // LABEL layer (only if labelAlpha > 0)
     if (labelAlpha > 0.001) {
       ctx.save();
       ctx.fillStyle = `rgba(255,255,255,${0.95 * labelAlpha})`;
@@ -183,7 +215,6 @@ function drawWheel() {
       ctx.restore();
     }
 
-    // ICON layer (only if iconAlpha > 0)
     if (iconAlpha > 0.001) {
       ctx.save();
       ctx.fillStyle = `rgba(255,255,255,${0.95 * iconAlpha})`;
@@ -196,12 +227,12 @@ function drawWheel() {
 
   // Center hub
   ctx.beginPath();
-  ctx.arc(center, center, radius * 0.18, 0, Math.PI * 2);
+  ctx.arc(center, center, radius * 0.18, 0, TAU);
   ctx.fillStyle = 'rgba(0,0,0,0.18)';
   ctx.fill();
 
   ctx.beginPath();
-  ctx.arc(center, center, radius * 0.12, 0, Math.PI * 2);
+  ctx.arc(center, center, radius * 0.12, 0, TAU);
   ctx.fillStyle = 'rgba(255,255,255,0.16)';
   ctx.fill();
 }
@@ -211,7 +242,6 @@ function resetCTA() {
   btn.disabled = false;
   btnText.textContent = 'Let Your Dog Choose!';
   msg.textContent = '';
-  wheelMode = 'labels';
   mysteryMix = 0;
   drawWheel();
 }
@@ -219,17 +249,10 @@ function resetCTA() {
 function openPupPick() {
   if (!pendingAmazonLink) return;
 
-  // User-initiated navigation in a new tab.
   window.open(pendingAmazonLink, '_blank', 'noopener,noreferrer');
-
-  // Reset for next spin
   resetCTA();
 }
 
-/**
- * Crossfade labels->icons over durationMs.
- * Uses requestAnimationFrame to redraw with a changing mysteryMix.
- */
 function crossfadeToMystery(durationMs = 220) {
   const start = performance.now();
   const from = mysteryMix;
@@ -237,7 +260,6 @@ function crossfadeToMystery(durationMs = 220) {
 
   function step(t) {
     const p = clamp((t - start) / durationMs, 0, 1);
-    // Ease a bit
     const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
     mysteryMix = from + (to - from) * eased;
     drawWheel();
@@ -260,30 +282,39 @@ function spinOnce() {
   btn.disabled = true;
   msg.textContent = '';
 
-  // Switch into mystery mode right as spin begins
-  wheelMode = 'mystery';
   crossfadeToMystery(220);
 
-  const targetIndex = Math.floor(Math.random() * sectors.length);
+  const n = sectors.length;
+  const slice = TAU / n;
 
-  const slice = (Math.PI * 2) / sectors.length;
+  // Choose a target index (still fine)
+  const targetIndex = Math.floor(Math.random() * n);
+
+  // Center angle of the target slice in sector-space (0 = right)
   const targetAngle = targetIndex * slice + slice / 2;
 
-  const extraSpins = (Math.random() * 3 + 6) * Math.PI * 2; // 6–9 full spins
-  const finalRotation = (Math.PI * 2 - targetAngle) + extraSpins;
+  // 6–9 full spins
+  const extraSpins = (Math.random() * 3 + 6) * TAU;
+
+  // Rotate so the target center lands at the pointer angle.
+  // For pointer at right, POINTER_ANGLE=0; this becomes TAU - targetAngle (mod TAU).
+  const finalRotation = (POINTER_ANGLE - targetAngle) + extraSpins;
 
   wheel.style.transition = 'transform 5s cubic-bezier(0.12, 0.85, 0.12, 1)';
   setWheelRotation(finalRotation);
 
   window.setTimeout(() => {
-    const normalized = ((finalRotation % (Math.PI * 2)) + (Math.PI * 2)) % (Math.PI * 2);
+    // Normalize and lock-in the final rotation
+    const normalized = normAngle(finalRotation);
     wheel.style.transition = 'none';
     setWheelRotation(normalized);
 
-    const sector = sectors[targetIndex] || {};
+    // ✅ CRITICAL FIX:
+    // Determine the sector that is ACTUALLY under the pointer from the final rotation.
+    const winnerIndex = getIndexUnderPointer(normalized);
+    const sector = sectors[winnerIndex] || {};
     const amazonLink = (sector.link || '').toString().trim();
 
-    // No on-page reveal. Amazon is the reveal.
     pendingAmazonLink = amazonLink;
 
     // Keep wheel in mystery mode after spin
