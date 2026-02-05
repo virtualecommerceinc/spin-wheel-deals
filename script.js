@@ -28,6 +28,76 @@ function resizeCanvasToDisplaySize() {
   drawWheel();
 }
 
+function setWheelRotation(rad) {
+  rotation = rad;
+  wheel.style.transform = `rotate(${rotation}rad)`;
+}
+
+/**
+ * Draw label that:
+ * - uses a starting font size
+ * - shrinks until it fits maxWidth
+ * - if still too wide, splits into 2 lines (best effort)
+ */
+function drawFittedLabel(text, maxWidth, startPx, minPx) {
+  const clean = (text || '').toString().trim();
+  if (!clean) return;
+
+  // Helper to measure current font
+  function setFont(px) {
+    ctx.font = `800 ${px}px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif`;
+  }
+
+  // 1) Try single-line shrink-to-fit
+  let px = startPx;
+  setFont(px);
+  while (px > minPx && ctx.measureText(clean).width > maxWidth) {
+    px -= 1;
+    setFont(px);
+  }
+
+  // Fits single line
+  if (ctx.measureText(clean).width <= maxWidth) {
+    ctx.fillText(clean, 0, 0);
+    return;
+  }
+
+  // 2) Still too long: try 2-line split on space
+  const parts = clean.split(/\s+/);
+  if (parts.length === 1) {
+    // single word too long even at minPx; just draw it anyway at minPx
+    setFont(minPx);
+    ctx.fillText(clean, 0, 0);
+    return;
+  }
+
+  // Build a reasonable two-line split
+  let best = null;
+  for (let i = 1; i < parts.length; i++) {
+    const a = parts.slice(0, i).join(' ');
+    const b = parts.slice(i).join(' ');
+    best = { a, b };
+    break; // simplest split; labels are short now
+  }
+
+  // Slightly smaller for two lines
+  px = Math.max(minPx, Math.floor(startPx * 0.85));
+  setFont(px);
+
+  // Shrink until both lines fit
+  while (
+    px > minPx &&
+    (ctx.measureText(best.a).width > maxWidth || ctx.measureText(best.b).width > maxWidth)
+  ) {
+    px -= 1;
+    setFont(px);
+  }
+
+  const lineGap = Math.max(4, Math.floor(px * 0.25));
+  ctx.fillText(best.a, 0, -lineGap);
+  ctx.fillText(best.b, 0, lineGap);
+}
+
 function drawWheel() {
   if (!sectors.length) return;
 
@@ -45,18 +115,15 @@ function drawWheel() {
 
   const slice = (Math.PI * 2) / sectors.length;
 
-  // Scale font with size
-  const fontPx = clamp(Math.floor(size / 18), 16, 34);
-  ctx.font = `800 ${fontPx}px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
 
-  // Draw segments
   for (let i = 0; i < sectors.length; i++) {
     const s = sectors[i];
     const start = i * slice;
     const end = start + slice;
 
+    // Segment fill
     ctx.beginPath();
     ctx.moveTo(center, center);
     ctx.arc(center, center, radius, start, end);
@@ -69,16 +136,29 @@ function drawWheel() {
     ctx.lineWidth = Math.max(2, Math.floor(size / 180));
     ctx.stroke();
 
-    // Text
+    // Label
     ctx.save();
     ctx.translate(center, center);
     ctx.rotate(start + slice / 2);
+
     ctx.fillStyle = 'rgba(255,255,255,0.95)';
     ctx.shadowColor = 'rgba(0,0,0,0.25)';
     ctx.shadowBlur = Math.floor(size / 90);
 
-    const label = (s.label || '').toString();
-    ctx.fillText(label, radius * 0.62, 0);
+    // Base font sizing:
+    // - slightly bigger on small canvases (mobile) so it doesn't look tiny
+    // - but still capped so desktop doesn't get goofy
+    const startPx = clamp(Math.floor(size / 16), 16, 28);
+    const minPx = 12;
+
+    // Max width allowed for label in this slice
+    const maxWidth = radius * 0.58;
+
+    // Position label at a consistent radius
+    ctx.translate(radius * 0.62, 0);
+
+    // We drew by translating, so fillText at (0,0)
+    drawFittedLabel((s.label || ''), maxWidth, startPx, minPx);
 
     ctx.restore();
   }
@@ -95,11 +175,6 @@ function drawWheel() {
   ctx.fill();
 }
 
-function setWheelRotation(rad) {
-  rotation = rad;
-  wheel.style.transform = `rotate(${rotation}rad)`;
-}
-
 function spinOnce() {
   if (!sectors.length) return;
   if (isSpinning) return;
@@ -108,23 +183,18 @@ function spinOnce() {
   btn.disabled = true;
   msg.textContent = '';
 
-  // Choose a target sector index fairly
   const targetIndex = Math.floor(Math.random() * sectors.length);
 
-  // Pointer is at top. We want the target sector's CENTER to land at angle 0 (top).
   const slice = (Math.PI * 2) / sectors.length;
   const targetAngle = targetIndex * slice + slice / 2;
 
-  // Add extra spins + land precisely
   const extraSpins = (Math.random() * 3 + 6) * Math.PI * 2; // 6–9 full spins
   const finalRotation = (Math.PI * 2 - targetAngle) + extraSpins;
 
-  // Animate from current rotation
   wheel.style.transition = 'transform 5s cubic-bezier(0.12, 0.85, 0.12, 1)';
   setWheelRotation(finalRotation);
 
   window.setTimeout(() => {
-    // Normalize rotation to keep next spins stable
     const normalized = ((finalRotation % (Math.PI * 2)) + (Math.PI * 2)) % (Math.PI * 2);
     wheel.style.transition = 'none';
     setWheelRotation(normalized);
@@ -132,13 +202,11 @@ function spinOnce() {
     const sector = sectors[targetIndex] || {};
     const safeLabel = (sector.label || 'Mystery Toy').toString();
 
-    // Support either "image" (new) or "svg" (legacy)
     const imgSrc = sector.image || sector.svg || '';
     const imgHtml = imgSrc
       ? `<img src="${imgSrc}" alt="${safeLabel}" class="toy-img" />`
       : '';
 
-    // Amazon link (direct)
     const amazonLink = sector.link || '';
 
     msg.innerHTML =
@@ -169,19 +237,13 @@ fetch('dog_toys.json', { cache: 'no-store' })
     msg.innerHTML = `⚠️ Couldn’t load toy list. Please refresh in a moment.<br><small>${String(err.message || err)}</small>`;
   });
 
-// Keep wheel crisp + correctly sized on resize
 window.addEventListener('resize', () => {
   window.clearTimeout(window.__wheelResizeTimer);
   window.__wheelResizeTimer = window.setTimeout(resizeCanvasToDisplaySize, 120);
 });
 
-// Button click spins
 btn.addEventListener('click', () => spinOnce());
-
-// Click/tap anywhere on the wheel spins
 wheelContainer.addEventListener('click', () => spinOnce());
-
-// Keyboard accessibility: Enter/Space spins when wheel area is focused
 wheelContainer.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
     e.preventDefault();
