@@ -4,5 +4,9 @@
   {"label": "Chew Rope", "color": "#88B04B", "link": "?toy=chew-rope", "svg": "assets/chew-rope.svg"},
   {"label": "Frisbee", "color": "#F7CAC9", "link": "?toy=frisbee", "svg": "assets/frisbee.svg"},
   {"label": "Tennis Ball", "color": "#92A8D1", "link": "?toy=tennis-ball", "svg": "assets/tennis-ball.svg"},
-  {"label": "Plush Toy", "color": "#955251", "link": "?toy=plush-toy", "svg": "assets/plush-toy.svg"}
+  {"label": "Plush Toy", "color": "#955251", "link": "?toy=plush-toy", "svg": "assets/plush-toy.svg"},
+  {"label": "Treat Puzzle", "color": "#FFD662", "link": "?toy=treat-puzzle", "svg": "assets/treat-puzzle.svg"},
+  {"label": "Bungee Tug", "color": "#FF9F1C", "link": "?toy=bungee-tug", "svg": "assets/bungee-tug.svg"},
+  {"label": "Ball Launcher", "color": "#2EC4B6", "link": "?toy=ball-launcher", "svg": "assets/ball-launcher.svg"},
+  {"label": "Kong Classic", "color": "#E71D36", "link": "?toy=kong-classic", "svg": "assets/kong-classic.svg"}
 ]
