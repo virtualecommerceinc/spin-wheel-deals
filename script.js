@@ -1,19 +1,20 @@
 const wheel = document.getElementById('wheel');
 const ctx = wheel.getContext('2d');
 const btn = document.getElementById('spin-btn');
+const btnText = document.getElementById('spin-btn-text');
 const msg = document.getElementById('message');
 const wheelContainer = document.getElementById('wheel-container');
 
 let sectors = [];
-let rotation = 0; // stable rotation state (radians)
+let rotation = 0;            // stable rotation state (radians)
 let isSpinning = false;
+let pendingAmazonLink = '';  // set after spin; click button to open
 
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
 
 function resizeCanvasToDisplaySize() {
-  // Match canvas internal pixels to its CSS size (fixes blur + prevents clipping weirdness)
   const rect = wheel.getBoundingClientRect();
   const cssSize = Math.floor(Math.min(rect.width, rect.height));
   const dpr = window.devicePixelRatio || 1;
@@ -43,12 +44,11 @@ function drawFittedLabel(text, maxWidth, startPx, minPx) {
   const clean = (text || '').toString().trim();
   if (!clean) return;
 
-  // Helper to measure current font
   function setFont(px) {
     ctx.font = `800 ${px}px system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif`;
   }
 
-  // 1) Try single-line shrink-to-fit
+  // 1) single-line shrink-to-fit
   let px = startPx;
   setFont(px);
   while (px > minPx && ctx.measureText(clean).width > maxWidth) {
@@ -56,35 +56,25 @@ function drawFittedLabel(text, maxWidth, startPx, minPx) {
     setFont(px);
   }
 
-  // Fits single line
   if (ctx.measureText(clean).width <= maxWidth) {
     ctx.fillText(clean, 0, 0);
     return;
   }
 
-  // 2) Still too long: try 2-line split on space
+  // 2) two-line split on spaces
   const parts = clean.split(/\s+/);
   if (parts.length === 1) {
-    // single word too long even at minPx; just draw it anyway at minPx
     setFont(minPx);
     ctx.fillText(clean, 0, 0);
     return;
   }
 
-  // Build a reasonable two-line split
-  let best = null;
-  for (let i = 1; i < parts.length; i++) {
-    const a = parts.slice(0, i).join(' ');
-    const b = parts.slice(i).join(' ');
-    best = { a, b };
-    break; // simplest split; labels are short now
-  }
+  // simplest split (labels are short now)
+  const best = { a: parts[0], b: parts.slice(1).join(' ') };
 
-  // Slightly smaller for two lines
   px = Math.max(minPx, Math.floor(startPx * 0.85));
   setFont(px);
 
-  // Shrink until both lines fit
   while (
     px > minPx &&
     (ctx.measureText(best.a).width > maxWidth || ctx.measureText(best.b).width > maxWidth)
@@ -145,19 +135,11 @@ function drawWheel() {
     ctx.shadowColor = 'rgba(0,0,0,0.25)';
     ctx.shadowBlur = Math.floor(size / 90);
 
-    // Base font sizing:
-    // - slightly bigger on small canvases (mobile) so it doesn't look tiny
-    // - but still capped so desktop doesn't get goofy
     const startPx = clamp(Math.floor(size / 16), 16, 28);
     const minPx = 12;
-
-    // Max width allowed for label in this slice
     const maxWidth = radius * 0.58;
 
-    // Position label at a consistent radius
     ctx.translate(radius * 0.62, 0);
-
-    // We drew by translating, so fillText at (0,0)
     drawFittedLabel((s.label || ''), maxWidth, startPx, minPx);
 
     ctx.restore();
@@ -175,9 +157,32 @@ function drawWheel() {
   ctx.fill();
 }
 
+function resetCTA() {
+  pendingAmazonLink = '';
+  btn.disabled = false;
+  btnText.textContent = 'Let Your Dog Choose!';
+  msg.textContent = '';
+}
+
+function openPupPick() {
+  if (!pendingAmazonLink) return;
+
+  // User-initiated navigation (safe). Open in new tab.
+  window.open(pendingAmazonLink, '_blank', 'noopener,noreferrer');
+
+  // Reset UI for next spin (optional; keeps experience clean)
+  resetCTA();
+}
+
 function spinOnce() {
   if (!sectors.length) return;
   if (isSpinning) return;
+
+  // If we already have a pending pick, button click should open it (not spin again)
+  if (pendingAmazonLink) {
+    openPupPick();
+    return;
+  }
 
   isSpinning = true;
   btn.disabled = true;
@@ -200,23 +205,21 @@ function spinOnce() {
     setWheelRotation(normalized);
 
     const sector = sectors[targetIndex] || {};
-    const safeLabel = (sector.label || 'Mystery Toy').toString();
+    const amazonLink = (sector.link || '').toString().trim();
 
-    const imgSrc = sector.image || sector.svg || '';
-    const imgHtml = imgSrc
-      ? `<img src="${imgSrc}" alt="${safeLabel}" class="toy-img" />`
-      : '';
+    // IMPORTANT: No on-page reveal. Amazon is the reveal.
+    pendingAmazonLink = amazonLink;
 
-    const amazonLink = sector.link || '';
+    msg.textContent = '🐾 Your pup made a pick…';
 
-    msg.innerHTML =
-      `🎉 Your pup picked <strong>${safeLabel}</strong>!<br>` +
-      `${imgHtml}<br>` +
-      (amazonLink
-        ? `<a href="${amazonLink}" target="_blank" rel="nofollow sponsored noopener noreferrer">See this toy on Amazon</a>`
-        : `<span>Link coming soon.</span>`);
+    if (pendingAmazonLink) {
+      btnText.textContent = "See your pup’s pick";
+      btn.disabled = false;
+    } else {
+      btnText.textContent = 'Link coming soon';
+      btn.disabled = true;
+    }
 
-    btn.disabled = false;
     isSpinning = false;
   }, 5050);
 }
@@ -231,6 +234,7 @@ fetch('dog_toys.json', { cache: 'no-store' })
     sectors = Array.isArray(data) ? data : [];
     resizeCanvasToDisplaySize();
     setWheelRotation(0);
+    resetCTA();
   })
   .catch(err => {
     console.error('Error loading toys:', err);
@@ -242,11 +246,19 @@ window.addEventListener('resize', () => {
   window.__wheelResizeTimer = window.setTimeout(resizeCanvasToDisplaySize, 120);
 });
 
+// Button click:
+// - If no pending link => spin
+// - If pending link => open Amazon
 btn.addEventListener('click', () => spinOnce());
-wheelContainer.addEventListener('click', () => spinOnce());
+
+// Click/tap wheel spins only (not open link)
+wheelContainer.addEventListener('click', () => {
+  if (!pendingAmazonLink) spinOnce();
+});
+
 wheelContainer.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' || e.key === ' ') {
     e.preventDefault();
-    spinOnce();
+    if (!pendingAmazonLink) spinOnce();
   }
 });
