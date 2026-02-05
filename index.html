@@ -18,12 +18,16 @@
   <main class="game-area">
     <header class="hero">
       <h1 id="title">Let Your Dog Pick Their Next Toy!</h1>
-      <p class="subtitle">Spin the wheel and get a surprise pick 🐶</p>
+      <p class="subtitle">Tap the wheel (or the button) and get a surprise pick 🐶</p>
     </header>
 
     <section class="wheel-card" aria-label="Dog toy surprise spinner">
-      <div id="wheel-container">
+      <div id="wheel-container" class="wheel-tap-zone" aria-label="Tap the wheel to spin" role="button" tabindex="0">
         <div class="pointer" aria-hidden="true"></div>
+
+        <!-- Transparent paw overlay cue (does NOT block clicks) -->
+        <div class="paw-overlay" aria-hidden="true"></div>
+
         <canvas id="wheel" aria-label="Toy selection wheel" role="img"></canvas>
       </div>
 
@@ -38,6 +42,17 @@
       </button>
 
       <div id="message" role="status" aria-live="polite"></div>
+
+      <!-- Required disclosures (visible + compliant) -->
+      <footer class="disclosure" aria-label="Affiliate disclosure">
+        <p class="disclosure__headline">Affiliate Disclosure</p>
+        <p class="disclosure__text">
+          As an Amazon Associate I earn from qualifying purchases. This site contains affiliate links, which means I may earn a small commission at no extra cost to you.
+        </p>
+        <p class="disclosure__text disclosure__fine">
+          Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is not endorsed by Amazon.
+        </p>
+      </footer>
     </section>
   </main>
 
