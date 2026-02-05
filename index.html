@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Spin & Win Deals</title>
+    <title>Dog Toy Surprise Spinner V2</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<div class="container">
-    <h1>Spin the Wheel & Unlock Your Deal!</h1>
-    <canvas id="wheel" width="300" height="300"></canvas>
-    <button id="spin-btn">Spin Now</button>
-    <div id="message"></div>
-</div>
-<script src="script.js"></script>
+  <div class="container">
+    <h1 id="title">Dog Toy Surprise Spinner!</h1>
+    <div id="wheel-container">
+      <canvas id="wheel" width="300" height="300" aria-label="Prize wheel" role="img"></canvas>
+      <img id="dog" src="assets/cartoon-dog.svg" alt="Cartoon dog celebrating" hidden />
+    </div>
+    <button id="spin-btn" aria-live="polite">Spin the Wheel</button>
+    <div id="message" role="status" aria-live="polite"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
