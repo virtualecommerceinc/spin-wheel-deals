@@ -4,14 +4,14 @@ const btn = document.getElementById('spin-btn');
 const msg = document.getElementById('message');
 
 let sectors = [];
-let rotation = 0; // keep a stable rotation state (radians)
+let rotation = 0; // stable rotation state (radians)
 
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
 
 function resizeCanvasToDisplaySize() {
-  // Match canvas internal pixels to its CSS size (fixes blur + prevents weird clipping)
+  // Match canvas internal pixels to its CSS size (fixes blur + prevents clipping weirdness)
   const rect = wheel.getBoundingClientRect();
   const cssSize = Math.floor(Math.min(rect.width, rect.height));
   const dpr = window.devicePixelRatio || 1;
@@ -23,7 +23,6 @@ function resizeCanvasToDisplaySize() {
     wheel.height = px;
   }
 
-  // Redraw after resize
   drawWheel();
 }
 
@@ -75,7 +74,10 @@ function drawWheel() {
     ctx.fillStyle = 'rgba(255,255,255,0.95)';
     ctx.shadowColor = 'rgba(0,0,0,0.25)';
     ctx.shadowBlur = Math.floor(size / 90);
-    ctx.fillText(s.label, radius * 0.62, 0);
+
+    const label = (s.label || '').toString();
+    ctx.fillText(label, radius * 0.62, 0);
+
     ctx.restore();
   }
 
@@ -96,19 +98,24 @@ function setWheelRotation(rad) {
   wheel.style.transform = `rotate(${rotation}rad)`;
 }
 
-// Load toy sectors
-fetch('data/toys.json')
-  .then(res => res.json())
+// Load toy sectors (ROOT FILE: dog_toys.json)
+fetch('dog_toys.json', { cache: 'no-store' })
+  .then(res => {
+    if (!res.ok) throw new Error(`Failed to load dog_toys.json (${res.status})`);
+    return res.json();
+  })
   .then(data => {
     sectors = Array.isArray(data) ? data : [];
     resizeCanvasToDisplaySize();
     setWheelRotation(0);
   })
-  .catch(err => console.error('Error loading toys:', err));
+  .catch(err => {
+    console.error('Error loading toys:', err);
+    msg.innerHTML = `⚠️ Couldn’t load toy list. Please refresh in a moment.<br><small>${String(err.message || err)}</small>`;
+  });
 
-// Keep wheel crisp + correctly sized on resize/orientation changes
+// Keep wheel crisp + correctly sized on resize
 window.addEventListener('resize', () => {
-  // debounce a bit to avoid spamming
   window.clearTimeout(window.__wheelResizeTimer);
   window.__wheelResizeTimer = window.setTimeout(resizeCanvasToDisplaySize, 120);
 });
@@ -141,17 +148,24 @@ btn.addEventListener('click', () => {
     wheel.style.transition = 'none';
     setWheelRotation(normalized);
 
-    const sector = sectors[targetIndex];
+    const sector = sectors[targetIndex] || {};
+    const safeLabel = (sector.label || 'Mystery Toy').toString();
 
-    // Display result with image and link (keep your current pattern)
-    const safeLabel = sector.label || 'Mystery Toy';
-    const img = sector.svg ? `<img src="${sector.svg}" alt="${safeLabel}" class="toy-img" />` : '';
-    const link = sector.link ? `result.html${sector.link}` : 'result.html';
+    // Support either "image" (new) or "svg" (legacy)
+    const imgSrc = sector.image || sector.svg || '';
+    const imgHtml = imgSrc
+      ? `<img src="${imgSrc}" alt="${safeLabel}" class="toy-img" />`
+      : '';
+
+    // Amazon link (direct)
+    const amazonLink = sector.link || '';
 
     msg.innerHTML =
       `🎉 Your pup picked <strong>${safeLabel}</strong>!<br>` +
-      `${img}<br>` +
-      `<a href="${link}">Claim Your Toy</a>`;
+      `${imgHtml}<br>` +
+      (amazonLink
+        ? `<a href="${amazonLink}" target="_blank" rel="nofollow sponsored noopener noreferrer">See this toy on Amazon</a>`
+        : `<span>Link coming soon.</span>`);
 
     btn.disabled = false;
   }, 5050);
