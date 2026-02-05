@@ -128,17 +128,18 @@ body {
   transform-origin: 50% 50%;
 }
 
-/* Transparent paw overlay cue (does NOT block clicks) */
+/* Transparent paw overlay cue — FULL WHEEL */
 .paw-overlay {
   position: absolute;
-  inset: 10%;
+  inset: 0;              /* cover the full wheel */
   border-radius: 50%;
   pointer-events: none;
-  opacity: 0.12;
+  opacity: 0.20;         /* more visible */
   filter: drop-shadow(0 12px 16px rgba(0,0,0,0.18));
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: 92% 92%;
+  transform: rotate(-10deg);
   /* Inline SVG paw (static-safe) */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23ffffff' d='M40 54c-8 0-15-10-15-22S32 10 40 10s15 10 15 22-7 22-15 22Zm48 0c-8 0-15-10-15-22S80 10 88 10s15 10 15 22-7 22-15 22ZM22 78c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15Zm84 0c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15ZM64 118c-16 0-34-10-34-26 0-14 12-22 22-26 4-2 8-3 12-3s8 1 12 3c10 4 22 12 22 26 0 16-18 26-34 26Z'/%3E%3C/svg%3E");
 }
@@ -222,31 +223,31 @@ body {
   background: rgba(255,255,255,0.22);
 }
 
-/* ============== Disclosure ============== */
+/* ============== Disclosure (tighter + smaller) ============== */
 .disclosure {
-  margin-top: 16px;
-  padding: 14px 12px 10px;
-  border-radius: 16px;
-  background: rgba(0,0,0,0.18);
-  border: 1px solid rgba(255,255,255,0.14);
+  margin-top: 14px;
+  padding: 10px 10px 8px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.16);
+  border: 1px solid rgba(255,255,255,0.12);
 }
 .disclosure__headline {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   font-weight: 900;
   letter-spacing: 0.2px;
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
-  opacity: 0.95;
-}
-.disclosure__text {
-  margin: 0 0 8px;
-  font-size: 13px;
-  line-height: 1.45;
   opacity: 0.92;
 }
-.disclosure__fine {
+.disclosure__text {
+  margin: 0 0 6px;
   font-size: 12px;
-  opacity: 0.80;
+  line-height: 1.35;
+  opacity: 0.88;
+}
+.disclosure__fine {
+  font-size: 11px;
+  opacity: 0.78;
 }
 
 /* Slightly roomier desktop */
