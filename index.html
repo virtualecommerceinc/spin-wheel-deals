@@ -1,21 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Let Your Dog Pick Their Next Toy V3</title>
-    <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Let Your Dog Pick Their Next Toy V3</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
+  <!-- SVG Mask Definition for Paw Shape -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <mask id="paw-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="300" height="300">
+        <rect width="300" height="300" fill="white"/>
+        <text x="50%" y="55%" text-anchor="middle" alignment-baseline="middle" font-size="220">🐾</text>
+      </mask>
+    </defs>
+  </svg>
+
+  <!-- Layered Animated Dog Park Background -->
+  <div class="background">
+    <div class="layer sky"></div>
+    <div class="layer clouds"></div>
+    <div class="layer trees"></div>
+    <div class="layer grass"></div>
+  </div>
+
+  <div class="game-area">
     <h1 id="title">Let Your Dog Pick Their Next Toy!</h1>
     <div id="wheel-container">
-      <canvas id="wheel" width="300" height="300" aria-label="Prize wheel" role="img"></canvas>
-      <img id="dog" src="assets/cartoon-dog.svg" alt="Cartoon dog celebrating" />
+      <canvas id="wheel" width="300" height="300" aria-label="Toy selection wheel" role="img" style="mask:url(#paw-mask);-webkit-mask:url(#paw-mask);"></canvas>
+      <div class="paw-pointer" aria-hidden="true">🐶🐾</div>
     </div>
-    <button id="spin-btn" aria-live="polite">🐾 Spin the Wheel 🐾</button>
+    <button id="spin-btn" aria-label="Spin the wheel to choose a toy" role="button">🐾 Let Your Dog Choose!</button>
     <div id="message" role="status" aria-live="polite"></div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
