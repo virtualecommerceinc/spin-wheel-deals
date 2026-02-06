@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://virtualecommerceinc.com/spin-wheel-deals/sitemap.xml
