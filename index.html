@@ -90,47 +90,74 @@
     <div class="layer grass"></div>
   </div>
 
-  <main class="game-area">
-    <header class="hero">
-      <h1 id="title">Let Your Dog Pick Their Next Toy!</h1>
-      <p class="subtitle">Tap the wheel (or the button) and get a surprise pick 🐶</p>
-    </header>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-    <section class="wheel-card" aria-label="Dog toy surprise spinner">
-      <div id="wheel-container" class="wheel-tap-zone" aria-label="Tap the wheel to spin" role="button" tabindex="0">
-        <div class="pointer" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-logo" href="index.html">Spin Wheel Deals</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a class="site-nav__link is-active" href="index.html" aria-current="page">Home</a>
+        <a class="site-nav__link" href="dog-toys.html">Dog Toys</a>
+        <a class="site-nav__link" href="dog-training.html">Dog Training</a>
+        <a class="site-nav__link" href="dog-health.html">Dog Health</a>
+      </nav>
+    </div>
+  </header>
 
-        <!-- Transparent paw overlay cue (does NOT block clicks) -->
-        <div class="paw-overlay" aria-hidden="true"></div>
+  <main id="main" class="site-main">
+    <section class="game-area">
+      <header class="hero">
+        <p class="eyebrow">Featured interactive pick</p>
+        <h1 id="title">Let Your Dog Pick Their Next Toy!</h1>
+        <p class="subtitle">Tap the wheel (or the button) and get a surprise pick 🐶</p>
+      </header>
 
-        <canvas id="wheel" aria-label="Toy selection wheel" role="img"></canvas>
-      </div>
+      <section class="wheel-card" aria-label="Dog toy surprise spinner">
+        <div id="wheel-container" class="wheel-tap-zone" aria-label="Tap the wheel to spin" role="button" tabindex="0">
+          <div class="pointer" aria-hidden="true"></div>
 
-      <button id="spin-btn" class="paw-btn" aria-label="Spin the wheel to choose a toy" type="button">
-        <span class="paw-btn__icon" aria-hidden="true">
-          <!-- Paw SVG -->
-          <svg viewBox="0 0 128 128" width="44" height="44" focusable="false" aria-hidden="true">
-            <path d="M40 54c-8 0-15-10-15-22S32 10 40 10s15 10 15 22-7 22-15 22Zm48 0c-8 0-15-10-15-22S80 10 88 10s15 10 15 22-7 22-15 22ZM22 78c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15Zm84 0c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15ZM64 118c-16 0-34-10-34-26 0-14 12-22 22-26 4-2 8-3 12-3s8 1 12 3c10 4 22 12 22 26 0 16-18 26-34 26Z" />
-          </svg>
-        </span>
-        <span class="paw-btn__text" id="spin-btn-text">Let Your Dog Choose!</span>
-      </button>
+          <!-- Transparent paw overlay cue (does NOT block clicks) -->
+          <div class="paw-overlay" aria-hidden="true"></div>
 
-      <div id="message" role="status" aria-live="polite"></div>
+          <canvas id="wheel" aria-label="Toy selection wheel" role="img"></canvas>
+        </div>
 
-      <!-- Required disclosures (visible + compliant) -->
-      <footer class="disclosure" aria-label="Affiliate disclosure">
-        <p class="disclosure__headline">Affiliate Disclosure</p>
-        <p class="disclosure__text">
-          Clicking “Reveal your pup’s pick” will open the toy your pup picked on Amazon in a new tab. No purchase required.
-          As an Amazon Associate I earn from qualifying purchases. This site contains affiliate links, which means I may earn a small commission at no extra cost to you.
-        </p>
-        <p class="disclosure__text disclosure__fine">
-          Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is not endorsed by Amazon.
-        </p>
-      </footer>
+        <button id="spin-btn" class="paw-btn" aria-label="Spin the wheel to choose a toy" type="button">
+          <span class="paw-btn__icon" aria-hidden="true">
+            <!-- Paw SVG -->
+            <svg viewBox="0 0 128 128" width="44" height="44" focusable="false" aria-hidden="true">
+              <path d="M40 54c-8 0-15-10-15-22S32 10 40 10s15 10 15 22-7 22-15 22Zm48 0c-8 0-15-10-15-22S80 10 88 10s15 10 15 22-7 22-15 22ZM22 78c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15Zm84 0c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15ZM64 118c-16 0-34-10-34-26 0-14 12-22 22-26 4-2 8-3 12-3s8 1 12 3c10 4 22 12 22 26 0 16-18 26-34 26Z" />
+            </svg>
+          </span>
+          <span class="paw-btn__text" id="spin-btn-text">Let Your Dog Choose!</span>
+        </button>
+
+        <div id="message" role="status" aria-live="polite"></div>
+
+        <!-- Required disclosures (visible + compliant) -->
+        <footer class="disclosure" aria-label="Affiliate disclosure">
+          <p class="disclosure__headline">Affiliate Disclosure</p>
+          <p class="disclosure__text">
+            Clicking “Reveal your pup’s pick” will open the toy your pup picked on Amazon in a new tab. No purchase required.
+            As an Amazon Associate I earn from qualifying purchases. This site contains affiliate links, which means I may earn a small commission at no extra cost to you.
+          </p>
+          <p class="disclosure__text disclosure__fine">
+            Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. This site is not endorsed by Amazon.
+          </p>
+        </footer>
+      </section>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>© 2024 Spin Wheel Deals. All rights reserved.</p>
+      <div class="site-footer__links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
 
   <script src="script.js"></script>
 </body>
