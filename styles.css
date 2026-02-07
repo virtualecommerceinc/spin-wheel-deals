@@ -203,6 +203,30 @@ a:focus-visible {
   line-height: 1.5;
 }
 
+.section-heading {
+  width: min(960px, 92vw);
+  margin: 8px 0 0;
+  text-align: left;
+}
+
+.section-heading h2 {
+  margin: 0 0 6px;
+  font-size: clamp(22px, 3vw, 28px);
+}
+
+.section-heading p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+.post-meta {
+  margin: 0 0 6px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
 /* ============== Product Grid ============== */
 .product-grid {
   width: min(960px, 92vw);
