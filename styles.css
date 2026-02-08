@@ -551,3 +551,139 @@ button:focus, a:focus {
 a {
   transition: all 0.2s ease;
 }
+
+/* ===== Dog Health Components ===== */
+.hero-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+}
+.hero-section .eyebrow {
+  text-transform: uppercase;
+  opacity: 0.7;
+  letter-spacing: 1px;
+}
+.hero-section h1 {
+  margin: 12px 0;
+  font-size: clamp(32px, 4vw, 48px);
+}
+.hero-section .subtitle {
+  font-size: clamp(16px, 2.5vw, 20px);
+  opacity: 0.9;
+}
+.hero-section .cta-btn {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.jump-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin: 32px 0;
+}
+.jump-nav a {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.card-group.features,
+.card-group .card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+.card {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.card p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+.calculator,
+.checklist,
+.nutrition-cards,
+.accordion,
+.safety-cards,
+.toolkit {
+  width: min(800px, 90vw);
+  margin: 40px auto;
+}
+.calculator form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  align-items: end;
+}
+.calculator label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+.calculator input,
+.calculator select {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+.calculator .disclosure {
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+.accordion .accordion-toggle {
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+.accordion .accordion-panel {
+  display: none;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+}
+
+.toolkit .card-group {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.toolkit .cta-btn {
+  display: block;
+  text-align: center;
+  margin: 30px auto 0;
+}
+
+.nutrition-cards .card-group,
+.safety-cards .card-group {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.cta-btn {
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ffd700, #ff8800);
+  color: #1a1a1a;
+  border-radius: 6px;
+  font-weight: 600;
+}

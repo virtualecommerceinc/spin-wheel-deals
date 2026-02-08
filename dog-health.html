@@ -2,31 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dog Health — Spin Wheel Deals</title>
-  <meta name="description" content="Dog health safety guide: wellness essentials, nutrition basics, preventive care, and vet-recommended products to keep your pup thriving." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dog Health Guide — Spin Wheel Deals</title>
+  <meta name="description" content="Comprehensive dog health guide: feeding calculator, preventive care checklist, warning signs, nutrition tips, parasite safety, and wellness toolkit." />
   <link rel="canonical" href="https://virtualecommerceinc.com/spin-wheel-deals/dog-health.html" />
   <meta name="robots" content="index,follow" />
-  <meta name="theme-color" content="#0b1a2b" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Dog Health — Spin Wheel Deals" />
-  <meta property="og:description" content="Dog health safety guide: wellness essentials, nutrition basics, and recommended products." />
-  <meta property="og:url" content="https://virtualecommerceinc.com/spin-wheel-deals/dog-health.html" />
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Dog Health — Spin Wheel Deals" />
-  <meta name="twitter:description" content="Dog health safety guide: wellness essentials, nutrition basics, and recommended products." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="background" aria-hidden="true">
-    <div class="layer sky"></div>
-    <div class="layer clouds"></div>
-    <div class="layer trees"></div>
-    <div class="layer grass"></div>
-  </div>
-
   <a class="skip-link" href="#main">Skip to main content</a>
-
   <header class="site-header">
     <div class="site-header__inner">
       <a class="site-logo" href="index.html">Spin Wheel Deals</a>
@@ -41,52 +25,169 @@
   </header>
 
   <main id="main" class="site-main">
-    <section class="page-hero">
-      <p class="eyebrow">Wellness guidance</p>
-      <h1>Dog Health</h1>
-      <p class="page-subtitle">Essential safety tips, wellness supplies, and preventive care strategies to help your dog live their happiest, healthiest life.</p>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <p class="eyebrow">Wellness Guidance</p>
+      <h1>Complete Dog Health Guide</h1>
+      <p class="subtitle">Tools, tips, and resources to keep your furry friend happy and healthy.</p>
+      <a href="#features" class="cta-btn">Explore Guide</a>
     </section>
 
-    <section class="content">
-      <p class="affiliate-disclosure"><strong>Affiliate Disclosure:</strong> This post contains affiliate links. If you make a purchase through these links, we may earn a commission at no extra cost to you. This content is for informational purposes and should not replace advice from a licensed veterinarian. Always consult your vet for health concerns.</p>
+    <!-- Feature Cards / Jump Navigation -->
+    <section id="features" class="card-group">
+      <a href="#feeding-calculator" class="card">
+        <h3>Feeding Calculator</h3>
+        <p>Estimate daily calories</p>
+      </a>
+      <a href="#preventive-care" class="card">
+        <h3>Preventive Care</h3>
+        <p>Checklist for routine wellness</p>
+      </a>
+      <a href="#warning-signs" class="card">
+        <h3>Warning Signs</h3>
+        <p>Recognize health issues early</p>
+      </a>
+    </section>
 
-      <h2>Why Regular Health Checkups Matter</h2>
-      <p>Preventive care is the cornerstone of keeping your dog healthy and catching potential issues early. Annual wellness exams allow your veterinarian to establish baseline health metrics, monitor weight, check dental health, and screen for age-related concerns. During these visits, your vet can also update vaccinations and discuss nutrition tailored to your dog's life stage and any specific health considerations. Beyond annual checkups, pay attention to changes in your dog's behavior, appetite, energy level, or bathroom habits—these can signal that a visit to the vet is warranted. Senior dogs (age 7+) benefit from twice-yearly checkups to monitor organ function and catch age-related conditions early. Building a strong relationship with your veterinarian ensures your dog receives personalized care and preventive guidance throughout their lifetime.</p>
+    <!-- Jump Nav -->
+    <nav class="jump-nav" aria-label="Quick Navigation">
+      <a href="#feeding-calculator">Feeding Calculator</a>
+      <a href="#preventive-care">Preventive Care</a>
+      <a href="#nutrition-tips">Nutrition Tips</a>
+      <a href="#warning-signs">Warning Signs</a>
+      <a href="#parasite-safety">Parasite & Seasonal Safety</a>
+      <a href="#health-toolkit">Wellness Toolkit</a>
+    </nav>
 
-      <h2>Essential Health Supplies & Equipment</h2>
-      <p>Having the right wellness tools at home supports proactive dog care between vet visits. Stock your dog care cabinet with these essentials:</p>
-      <ul>
-        <li><strong>First-aid kit:</strong> Include gauze, bandages, antiseptic wipes, and tweezers for minor cuts or splinter removal.</li>
-        <li><strong>Thermometer:</strong> A digital pet thermometer helps you monitor temperature if your dog seems unwell.</li>
-        <li><strong>Grooming tools:</strong> Regular brushing, nail trimming, and ear cleaning reduce risk of infections and skin issues.</li>
-        <li><strong>Food and water bowls:</strong> Stainless steel or ceramic options are more hygienic than plastic and less likely to harbor bacteria.</li>
-        <li><strong>ID tags and microchip:</strong> Critical for recovery if your dog ever gets lost.</li>
-        <li><strong>Oral care supplies:</strong> Dog-safe toothbrush and toothpaste support dental health and reduce tartar buildup.</li>
+    <!-- Feeding Calculator -->
+    <section id="feeding-calculator" class="calculator">
+      <h2>Feeding Calculator</h2>
+      <form id="calorie-form">
+        <label>
+          Weight (kg):
+          <input type="number" id="weight" name="weight" min="1" step="0.1" required />
+        </label>
+        <label>
+          Life Stage:
+          <select id="lifestage" name="lifestage">
+            <option value="adult">Adult (1×RER)</option>
+            <option value="puppy">Puppy (3×RER)</option>
+            <option value="senior">Senior (1.2×RER)</option>
+          </select>
+        </label>
+        <label>
+          Activity Level:
+          <select id="activity" name="activity">
+            <option value="low">Low (+0.8×RER)</option>
+            <option value="moderate" selected>Moderate (+1.0×RER)</option>
+            <option value="high">High (+1.5×RER)</option>
+          </select>
+        </label>
+        <button type="submit" class="cta-btn">Calculate</button>
+      </form>
+      <div id="calorie-result" class="disclosure">
+        <p class="disclosure__headline">Estimated Calories</p>
+        <p class="disclosure__text" id="result-text">-- kcal/day</p>
+        <p class="disclosure__fine">*This is an estimate only. Consult your veterinarian for personalized feeding advice.</p>
+      </div>
+    </section>
+
+    <!-- Preventive Care Checklist -->
+    <section id="preventive-care" class="checklist">
+      <h2>Preventive Care Checklist</h2>
+      <ul class="bullet-list">
+        <li>Annual vet exam & vaccinations</li>
+        <li>Dental check & clean as needed</li>
+        <li>Parasite prevention (fleas, ticks, heartworm)</li>
+        <li>Regular grooming & nail trims</li>
+        <li>Weight monitoring every 3 months</li>
+        <li>Behavior & mobility assessments</li>
       </ul>
+    </section>
 
-      <h2>Nutrition & Feeding Basics</h2>
-      <p>A balanced diet is fundamental to your dog's long-term health and energy levels. Nutrition needs vary based on age (puppy, adult, senior), size, activity level, and any individual health sensitivities. High-quality dog food should list a named meat protein as the first ingredient and be formulated to meet AAFCO (Association of American Feed Control Officials) standards. Avoid overfeeding, as obesity in dogs leads to joint stress, diabetes, and heart issues. Most adult dogs thrive on once or twice-daily feeding schedules; puppies require more frequent meals. Provide fresh, clean water at all times, especially during warm weather or after exercise. Avoid human foods that are toxic to dogs, including chocolate, grapes, onions, xylitol-containing products, and fatty table scraps. If you're considering dietary changes—such as switching to grain-free, raw, or specialized diets—consult your veterinarian first to ensure the new food meets your dog's nutritional needs.</p>
+    <!-- Nutrition Cards -->
+    <section id="nutrition-tips" class="nutrition-cards">
+      <h2>Nutrition Tips</h2>
+      <div class="card-group">
+        <div class="card">
+          <h3>Balanced Diet</h3>
+          <p>Choose AAFCO-approved food with named protein sources.</p>
+        </div>
+        <div class="card">
+          <h3>Portion Control</h3>
+          <p>Measure meals & avoid free-feeding to prevent obesity.</p>
+        </div>
+        <div class="card">
+          <h3>Fresh Water</h3>
+          <p>Ensure access to clean water at all times.</p>
+        </div>
+      </div>
+    </section>
 
-      <h2>Recognizing Common Health Concerns</h2>
-      <p>Early detection is crucial when health issues arise. Familiarize yourself with warning signs that warrant a vet visit: persistent vomiting or diarrhea, loss of appetite, excessive drinking or urination, lethargy, coughing, limping, ear scratching or head shaking, skin lesions or hot spots, and difficulty climbing stairs or jumping. Some of these can indicate temporary issues (like eating something off-limits), while others may signal infections, allergies, or chronic conditions. Keep notes on when symptoms appear, their duration, and any triggers you notice—this information helps your vet diagnose and treat the underlying cause more effectively. Behavioral changes like sudden aggression, excessive panting, or anxiety can also signal discomfort or health problems. Don't wait for symptoms to worsen; contact your vet if you notice anything out of the ordinary. Regular grooming and hands-on checks (feeling for lumps, inspecting ears and paws) help you catch issues early.</p>
+    <!-- Warning Signs Accordion -->
+    <section id="warning-signs" class="accordion">
+      <h2>Warning Signs</h2>
+      <div class="card">
+        <button class="accordion-toggle">Digestive Issues</button>
+        <div class="accordion-panel">
+          <p>Persistent vomiting or diarrhea can signal infections or dietary issues.</p>
+        </div>
+      </div>
+      <div class="card">
+        <button class="accordion-toggle">Respiratory Symptoms</button>
+        <div class="accordion-panel">
+          <p>Coughing, sneezing, or difficulty breathing needs prompt vet attention.</p>
+        </div>
+      </div>
+      <div class="card">
+        <button class="accordion-toggle">Mobility Problems</button>
+        <div class="accordion-panel">
+          <p>Stiffness, limping, or reluctance to move may indicate joint issues.</p>
+        </div>
+      </div>
+    </section>
 
-      <h2>Health-Focused Products Toolkit</h2>
-      <p>These carefully selected products support your dog's overall wellness and preventive care routine:</p>
-      <ul class="health-toolkit">
-        <li><a href="https://amzn.to/healthproduct1" target="_blank" rel="noopener">KONG Extreme Dog Toy with treat insert</a> – Durable for mental enrichment and long-lasting chewing; helps reduce anxiety.</li>
-        <li><a href="https://amzn.to/healthproduct2" target="_blank" rel="noopener">Purina Pro Plan Veterinary Diets</a> – Nutritionally complete formulas designed for various health needs and life stages.</li>
-        <li><a href="https://amzn.to/healthproduct3" target="_blank" rel="noopener">FURminator Undercoat Deshedding Tool</a> – Reduces shedding and promotes healthy skin and coat.</li>
-        <li><a href="https://amzn.to/healthproduct4" target="_blank" rel="noopener">Virbac C.E.T. Enzymatic Dog Toothpaste</a> – Supports oral health and reduces tartar buildup without brushing.</li>
-        <li><a href="https://amzn.to/healthproduct5" target="_blank" rel="noopener">Petmate Replendish Water Fountain</a> – Encourages hydration with fresh, filtered water circulation.</li>
-        <li><a href="https://amzn.to/healthproduct6" target="_blank" rel="noopener">Ruffwear Front Range Harness</a> – Distributes weight safely during walks and reduces strain on the neck and joints.</li>
-      </ul>
+    <!-- Parasites & Seasonal Safety -->
+    <section id="parasite-safety" class="safety-cards">
+      <h2>Parasite & Seasonal Safety</h2>
+      <div class="card-group">
+        <div class="card">
+          <h3>Flea & Tick Prevention</h3>
+          <p>Use vet-recommended topical or oral preventatives year-round.</p>
+        </div>
+        <div class="card">
+          <h3>Heartworm Protection</h3>
+          <p>Monthly medication is essential in all regions.</p>
+        </div>
+        <div class="card">
+          <h3>Hot/Cold Weather Tips</h3>
+          <p>Avoid mid-day heat; provide shade & coat protection in winter.</p>
+        </div>
+      </div>
+    </section>
 
-      <h2>Wellness Habits That Make a Difference</h2>
-      <p>Beyond supplies and nutrition, daily habits compound to support long-term health. Regular exercise tailored to your dog's age and breed maintains muscle tone, supports cardiovascular health, and helps manage weight. Puppies benefit from frequent, short play sessions to build endurance, while senior dogs appreciate gentle walks that keep joints mobile without excessive strain. Adequate sleep (dogs need 12-14 hours daily) is essential for immune function and mental well-being—provide a comfortable, quiet sleeping area away from household hustle.</p>
-      <p>Stress reduction through predictable routines, positive interactions, and socialization supports emotional and physical health. Dogs thrive on consistency; feeding times, exercise schedules, and bedtimes should remain stable. Keep up with grooming, including nail trimming, ear cleaning, and dental care, to prevent infections and catch early signs of skin or ear problems. Protect your dog from environmental hazards like extreme heat, toxic plants, and unsafe toys. During seasonal changes, monitor your dog more closely for heat stress in summer and cold-related issues in winter. Manage parasites year-round with veterinarian-recommended prevention (fleas, ticks, heartworms, intestinal parasites). These small, consistent habits create a strong foundation for lifelong wellness and help you spot problems early.</p>
-
-      <h2>Next Steps and Additional Resources</h2>
-      <p>Your dog's health journey is ongoing and best guided by your veterinarian. For interactive play and enrichment, explore our <a href="dog-toys.html">Dog Toys page</a> or browse our <a href="best-dog-toys-by-type.html">guide to the best dog toys by type</a>. Discover behavioral support techniques on our <a href="dog-training.html">Dog Training guide</a>. Read more wellness insights and tips on our <a href="blog.html">Blog</a>. Need more information? Start at <a href="index.html">home</a> for all our guides, resources, and exclusive deals to support your dog's well-being.</p>
+    <!-- Wellness Toolkit -->
+    <section id="health-toolkit" class="toolkit">
+      <h2>Wellness Toolkit</h2>
+      <div class="card-group">
+        <a class="card" href="https://amzn.to/healthproduct1" target="_blank" rel="noopener">
+          <h3>KONG Extreme Dog Toy</h3>
+          <p>Durable enrichment for strong chewers.</p>
+        </a>
+        <a class="card" href="https://amzn.to/healthproduct2" target="_blank" rel="noopener">
+          <h3>Veterinary Diets</h3>
+          <p>Targeted nutrition for health conditions.</p>
+        </a>
+        <a class="card" href="https://amzn.to/healthproduct3" target="_blank" rel="noopener">
+          <h3>Undercoat Deshedding Tool</h3>
+          <p>Reduce shedding & improve coat health.</p>
+        </a>
+        <a class="card" href="https://amzn.to/healthproduct4" target="_blank" rel="noopener">
+          <h3>Enzymatic Toothpaste</h3>
+          <p>Supports dental hygiene without brushing.</p>
+        </a>
+      </div>
+      <a href="https://virtualecommerceinc.com/spin-wheel-deals/dog-toys.html" class="cta-btn">Discover More Tools</a>
     </section>
   </main>
 
@@ -99,5 +200,32 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Feeding Calculator Script
+    document.getElementById('calorie-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const w = parseFloat(document.getElementById('weight').value);
+      const stage = document.getElementById('lifestage').value;
+      const activity = document.getElementById('activity').value;
+      const rer = 70 * Math.pow(w, 0.75);
+      let factor = 1;
+      if (stage === 'puppy') factor = 3;
+      else if (stage === 'senior') factor = 1.2;
+      if (activity === 'low') factor += 0.8;
+      else if (activity === 'high') factor += 1.5;
+      const mer = Math.round(rer * factor);
+      document.getElementById('result-text').textContent = mer + ' kcal/day';
+    });
+    // Accordion Behavior
+    document.querySelectorAll('.accordion-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const panel = btn.nextElementSibling;
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        panel.style.display = expanded ? 'none' : 'block';
+      });
+    });
+  </script>
 </body>
 </html>
