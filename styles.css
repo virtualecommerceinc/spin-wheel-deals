@@ -11,6 +11,12 @@ html, body { height: 100%; }
   --border-light: rgba(255, 255, 255, 0.12);
   --accent1: #ffd34d;
   --accent2: #ffb400;
+
+  /* extra tokens */
+  --shadow-lg: 0 18px 45px rgba(0,0,0,0.18);
+  --shadow-md: 0 12px 30px rgba(0,0,0,0.12);
+  --radius-lg: 20px;
+  --radius-md: 14px;
 }
 
 body {
@@ -34,15 +40,8 @@ body {
   flex-direction: column;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus-visible {
-  text-decoration: underline;
-}
+a { color: inherit; text-decoration: none; }
+a:hover, a:focus-visible { text-decoration: underline; }
 
 .skip-link {
   position: absolute;
@@ -54,10 +53,7 @@ a:focus-visible {
   border-radius: 999px;
   z-index: 20;
 }
-
-.skip-link:focus {
-  left: 16px;
-}
+.skip-link:focus { left: 16px; }
 
 /* ============== Background ============== */
 .background {
@@ -74,9 +70,7 @@ a:focus-visible {
   left: 0;
   animation: move 60s linear infinite;
 }
-.layer.sky {
-  background: linear-gradient(to bottom, #7ad3ff 0%, #9ef0c8 100%);
-}
+.layer.sky { background: linear-gradient(to bottom, #7ad3ff 0%, #9ef0c8 100%); }
 .layer.clouds {
   background:
     radial-gradient(circle at 25% 30%, rgba(255,255,255,0.85) 18%, transparent 19%),
@@ -131,7 +125,7 @@ a:focus-visible {
   font-weight: 800;
   font-size: 18px;
   letter-spacing: 0.4px;
-  color: #fff; /* FIX: left logo stays readable */
+  color: #fff;
   text-decoration: none;
   position: relative;
   padding: 6px 10px;
@@ -174,7 +168,6 @@ a:focus-visible {
   opacity: 0.95;
   animation: logo-nudge 1.9s ease-in-out infinite;
 }
-
 @keyframes logo-nudge{
   0%,100% { transform: translateX(0); }
   50% { transform: translateX(5px); }
@@ -185,13 +178,10 @@ a:focus-visible {
   border-color: rgba(255,255,255,0.22);
   background: rgba(255,255,255,0.10);
 }
-
 .site-logo:focus-visible{
   outline: 3px solid rgba(255,255,255,0.55);
   outline-offset: 3px;
 }
-
-/* Hide the extra CTA text on very small screens (keep icon + brand) */
 @media (max-width: 520px){
   .site-logo::after{ content:""; }
 }
@@ -203,7 +193,6 @@ a:focus-visible {
   gap: 12px;
   font-size: 14px;
 }
-
 .site-nav__link {
   padding: 6px 10px;
   border-radius: 999px;
@@ -211,12 +200,7 @@ a:focus-visible {
   background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.92);
 }
-
-.site-nav__link:hover {
-  background: rgba(255,255,255,0.14);
-  text-decoration: none;
-}
-
+.site-nav__link:hover { background: rgba(255,255,255,0.14); text-decoration: none; }
 .site-nav__link.is-active {
   border-color: rgba(255, 255, 255, 0.70);
   background: rgba(255, 255, 255, 0.20);
@@ -233,17 +217,8 @@ a:focus-visible {
   gap: 24px;
 }
 
-.game-area {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  gap: 18px;
-}
-
-.hero {
-  text-align: center;
-  margin-bottom: 14px;
-}
+/* ============== Generic typography helpers ============== */
+.hero { text-align: center; margin-bottom: 14px; }
 
 /* Keep hero text bright over busy background */
 #title {
@@ -278,13 +253,11 @@ a:focus-visible {
   padding: 12px 12px 0;
   color: var(--ink);
 }
-
 .page-hero h1 {
   margin: 0 0 10px;
   font-size: clamp(28px, 4vw, 40px);
   color: var(--ink);
 }
-
 .page-subtitle {
   margin: 0;
   font-size: clamp(15px, 2.4vw, 18px);
@@ -298,33 +271,21 @@ a:focus-visible {
   justify-content: center;
   margin: 18px 0 4px;
 }
-
-.blog-actions__link {
-  text-decoration: none;
-}
+.blog-actions__link { text-decoration: none; }
 
 /* ============== Readable content containers ============== */
 .content-card {
   width: min(760px, 92vw);
   padding: 20px 22px;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   background: var(--paper);
   border: 1px solid rgba(15,23,42,0.10);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(8px);
   color: var(--ink);
 }
-
-.content-card h1,
-.content-card h2,
-.content-card h3 {
-  color: var(--ink);
-}
-
-.content-card p,
-.content-card li {
-  color: var(--ink-soft);
-}
+.content-card h1, .content-card h2, .content-card h3 { color: var(--ink); }
+.content-card p, .content-card li { color: var(--ink-soft); }
 
 .bullet-list {
   margin: 12px 0 0;
@@ -340,19 +301,14 @@ a:focus-visible {
   border: 1px solid rgba(15,23,42,0.08);
   border-radius: 16px;
   padding: 14px 16px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.10);
+  box-shadow: var(--shadow-md);
 }
-
 .section-heading h2 {
   margin: 0 0 6px;
   font-size: clamp(22px, 3vw, 28px);
   color: var(--ink);
 }
-
-.section-heading p {
-  margin: 0;
-  color: var(--ink-soft);
-}
+.section-heading p { margin: 0; color: var(--ink-soft); }
 
 .post-meta {
   margin: 0 0 6px;
@@ -375,7 +331,7 @@ a:focus-visible {
   display: grid;
   gap: 16px;
   padding: 20px;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   background: var(--paper-soft);
   border: 1px solid rgba(15,23,42,0.10);
   box-shadow: 0 18px 45px rgba(0,0,0,0.16);
@@ -383,7 +339,6 @@ a:focus-visible {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   color: var(--ink);
 }
-
 .product-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 22px 50px rgba(0,0,0,0.22);
@@ -399,32 +354,20 @@ a:focus-visible {
   place-items: center;
   overflow: hidden;
 }
+.product-card__media img { width: 100%; height: 100%; object-fit: cover; }
 
-.product-card__media img {
+.product-card__body h2 { margin: 0 0 8px; font-size: 20px; color: var(--ink); }
+.product-card__body p { margin: 0; line-height: 1.55; color: var(--ink-soft); }
+.product-card__cta { margin-top: 14px; text-decoration: none; text-align: center; }
+
+/* ============== Wheel Card + Game Area ============== */
+.game-area {
+  display: grid;
+  place-items: center;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  gap: 18px;
 }
 
-.product-card__body h2 {
-  margin: 0 0 8px;
-  font-size: 20px;
-  color: var(--ink);
-}
-
-.product-card__body p {
-  margin: 0;
-  line-height: 1.55;
-  color: var(--ink-soft);
-}
-
-.product-card__cta {
-  margin-top: 14px;
-  text-decoration: none;
-  text-align: center;
-}
-
-/* ============== Card ============== */
 .wheel-card {
   width: min(520px, 92vw);
   padding: 18px 16px 16px;
@@ -487,7 +430,7 @@ a:focus-visible {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23ffffff' d='M40 54c-8 0-15-10-15-22S32 10 40 10s15 10 15 22-7 22-15 22Zm48 0c-8 0-15-10-15-22S80 10 88 10s15 10 15 22-7 22-15 22ZM22 78c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15Zm84 0c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15ZM64 118c-16 0-34-10-34-26 0-14 12-22 22-26 4-2 8-3 12-3s8 1 12 3c10 4 22 12 22 26 0 16-18 26-34 26Z'/%3E%3C/svg%3E");
 }
 
-/* ============== Dog Nose Pointer (moved to 3 o'clock) ============== */
+/* ============== Dog Nose Pointer (3 o'clock) ============== */
 .pointer {
   position: absolute;
   top: 50%;
@@ -504,13 +447,12 @@ a:focus-visible {
   background-size: contain;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Cdefs%3E%3Cfilter id='s' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeDropShadow dx='0' dy='6' stdDeviation='6' flood-color='rgba(0,0,0,0.35)'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23s)'%3E%3Cpath d='M24 62c0-22 16-40 46-40s46 18 46 40c0 32-18 56-46 56S24 94 24 62Z' fill='%23F4C28B'/%3E%3Cpath d='M34 54c-10-8-14-20-6-30 10-12 26 0 30 8' fill='%23C9925C'/%3E%3Cpath d='M106 54c10-8 14-20 6-30-10-12-26 0-30 8' fill='%23C9925C'/%3E%3Ccircle cx='54' cy='66' r='6' fill='%232B1B00' opacity='0.55'/%3E%3Ccircle cx='86' cy='66' r='6' fill='%232B1B00' opacity='0.55'/%3E%3Cpath d='M58 84c6 6 18 6 24 0' stroke='%232B1B00' stroke-width='6' stroke-linecap='round' opacity='0.35'/%3E%3Cpath d='M70 96l-14 16h28l-14-16Z' fill='%232B1B00'/%3E%3Ccircle cx='70' cy='92' r='10' fill='%232B1B00'/%3E%3Ccircle cx='67' cy='89' r='3' fill='white' opacity='0.25'/%3E%3C/g%3E%3C/svg%3E");
 }
-
 @keyframes pointer-bob {
   0%, 100% { transform: translateY(-50%) translateX(0) rotate(-270deg); }
   50% { transform: translateY(-50%) translateX(2px) rotate(-270deg); }
 }
 
-/* ============== Paw Button ============== */
+/* ============== Paw Button (game) ============== */
 .paw-btn {
   width: 100%;
   margin-top: 10px;
@@ -533,15 +475,10 @@ a:focus-visible {
 .paw-btn svg { fill: #2b1b00; }
 .paw-btn:hover { filter: brightness(1.05); transform: translateY(-1px); text-decoration: none; }
 .paw-btn:active { transform: translateY(1px) scale(0.99); }
-.paw-btn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-  transform: none;
-  filter: none;
-}
+.paw-btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; filter: none; }
 .paw-btn__text { line-height: 1.1; }
 
-/* ============== Message / Result ============== */
+/* ============== Message / Result (game) ============== */
 #message {
   margin-top: 14px;
   text-align: center;
@@ -551,7 +488,7 @@ a:focus-visible {
   text-shadow: 0 6px 16px rgba(0,0,0,0.32);
 }
 
-/* ============== Disclosure (tighter + smaller) ============== */
+/* ============== Disclosure (game) ============== */
 .disclosure {
   margin-top: 14px;
   padding: 10px 10px 8px;
@@ -574,10 +511,7 @@ a:focus-visible {
   line-height: 1.35;
   opacity: 0.88;
 }
-.disclosure__fine {
-  font-size: 11px;
-  opacity: 0.78;
-}
+.disclosure__fine { font-size: 11px; opacity: 0.78; }
 
 /* ============== Footer ============== */
 .site-footer {
@@ -586,7 +520,6 @@ a:focus-visible {
   backdrop-filter: blur(10px);
   color: rgba(255,255,255,0.92);
 }
-
 .site-footer__inner {
   display: flex;
   flex-wrap: wrap;
@@ -596,11 +529,7 @@ a:focus-visible {
   padding: 18px clamp(16px, 4vw, 40px);
   font-size: 13px;
 }
-
-.site-footer__links {
-  display: flex;
-  gap: 16px;
-}
+.site-footer__links { display: flex; gap: 16px; }
 
 /* ===== Focus styles (accessible, but not ugly) ===== */
 button:focus-visible,
@@ -609,7 +538,257 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
-/* Slightly roomier desktop */
+/* =========================================================
+   Dog Health / Dog Training “Guide Page” System (fixed)
+   Key fix: DO NOT turn every .card into a grid container.
+   Only .card-group becomes the grid wrapper.
+   ========================================================= */
+
+/* hero on guide pages needs readable contrast */
+.hero-section {
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto 18px;
+  padding: 10px 8px 0;
+  color: #fff;
+}
+.hero-section h1{
+  margin: 12px 0 10px;
+  font-size: clamp(32px, 4vw, 52px);
+  color: #fff;
+  text-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+.hero-section .subtitle{
+  margin: 0 auto;
+  max-width: 62ch;
+  font-size: clamp(16px, 2.4vw, 20px);
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 8px 22px rgba(0,0,0,0.32);
+}
+
+/* primary CTA style (used across pages) */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 14px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffd700, #ff8800);
+  color: #1a1a1a;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.20);
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.cta-btn:hover { text-decoration: none; filter: brightness(1.03); transform: translateY(-1px); }
+.cta-btn:active { transform: translateY(1px); }
+
+/* quick jump nav (chips) */
+.jump-nav {
+  width: min(980px, 92vw);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px 0 10px;
+  padding: 0 4px;
+}
+.jump-nav a {
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(15,23,42,0.12);
+  font-size: 13px;
+  color: var(--ink);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+}
+.jump-nav a:hover { text-decoration: none; background: #fff; }
+
+/* section wrapper used by guide pages */
+.calculator,
+.checklist,
+.nutrition-cards,
+.accordion,
+.safety-cards,
+.toolkit{
+  width: min(980px, 92vw);
+  margin: 18px auto;
+}
+
+/* “card group” is the GRID WRAPPER */
+.card-group{
+  width: min(980px, 92vw);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 18px auto;
+}
+
+/* the actual card */
+.card{
+  padding: 18px 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.10);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  color: var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+a.card:hover,
+.card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.16);
+  text-decoration: none;
+}
+.card h3{ margin: 0 0 8px; color: var(--ink); }
+.card p{ margin: 0; color: var(--ink-soft); line-height: 1.5; }
+
+/* calculator styling on light surface */
+.calculator h2,
+.checklist h2,
+.nutrition-cards h2,
+.accordion h2,
+.safety-cards h2,
+.toolkit h2{
+  margin: 0 0 12px;
+  font-size: clamp(22px, 3vw, 30px);
+  color: #fff;
+  text-shadow: 0 10px 22px rgba(0,0,0,0.30);
+  text-align: center;
+}
+
+/* calculator surface */
+.calculator form{
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  align-items: end;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.10);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+}
+
+.calculator label{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.calculator input,
+.calculator select{
+  padding: 10px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.18);
+  font-size: 14px;
+}
+
+.calculator .cta-btn{
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* result box for calculator (light, readable) */
+#calorie-result.disclosure{
+  width: min(980px, 92vw);
+  margin: 14px auto 0;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.10);
+  color: var(--ink);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+}
+#calorie-result .disclosure__headline{
+  color: rgba(15,23,42,0.85);
+  opacity: 1;
+}
+#calorie-result .disclosure__text{
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--ink);
+  opacity: 1;
+}
+#calorie-result .disclosure__fine{
+  color: rgba(15,23,42,0.70);
+  opacity: 1;
+}
+
+/* checklist on a light surface */
+.checklist .bullet-list{
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  padding: 16px 26px 18px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.10);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+}
+.checklist .bullet-list li{ color: var(--ink-soft); }
+
+/* accordion (your current HTML uses buttons + panels) */
+.accordion .card{
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+}
+.accordion .accordion-toggle{
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  background: rgba(15,23,42,0.06);
+  border: none;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  color: var(--ink);
+}
+.accordion .accordion-panel{
+  display: none;
+  padding: 14px 16px 16px;
+  background: rgba(255,255,255,0.92);
+}
+.accordion .accordion-panel p{
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* affiliate disclosure (inside light surface) */
+.affiliate-disclosure{
+  width: min(980px, 92vw);
+  margin: 14px auto 0;
+  background: rgba(255,255,255,0.90);
+  border-left: 4px solid #3366ff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--ink);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+}
+.affiliate-disclosure strong{
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* toolkit CTA at bottom */
+.toolkit .cta-btn{
+  display: flex;
+  width: min(420px, 92vw);
+  margin: 12px auto 0;
+}
+
+/* ============== Responsive refinements ============== */
 @media (min-width: 900px) {
   .wheel-card { padding: 22px 20px 18px; }
   #message { font-size: 17px; }
@@ -624,283 +803,3 @@ a:focus-visible {
   .product-grid { grid-template-columns: 1fr; }
   .product-card { padding: 18px; }
 }
-
-/* ===== Dog Health Components ===== */
-.hero-section {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 40px;
-}
-.hero-section .eyebrow {
-  text-transform: uppercase;
-  opacity: 0.7;
-  letter-spacing: 1px;
-}
-.hero-section h1 {
-  margin: 12px 0;
-  font-size: clamp(32px, 4vw, 48px);
-}
-.hero-section .subtitle {
-  font-size: clamp(16px, 2.5vw, 20px);
-  opacity: 0.9;
-}
-.hero-section .cta-btn {
-  display: inline-block;
-  margin-top: 20px;
-}
-
-.jump-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  margin: 32px 0;
-}
-.jump-nav a {
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 999px;
-  font-size: 14px;
-}
-
-.card-group.features,
-.card-group .card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  margin-bottom: 40px;
-}
-.card {
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-.card:hover {
-  transform: translateY(-4px);
-}
-.card h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-.card p {
-  margin: 0;
-  opacity: 0.85;
-}
-
-.calculator,
-.checklist,
-.nutrition-cards,
-.accordion,
-.safety-cards,
-.toolkit {
-  width: min(800px, 90vw);
-  margin: 40px auto;
-}
-.calculator form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-  align-items: end;
-}
-.calculator label {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-}
-.calculator input,
-.calculator select {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-.calculator .disclosure {
-  max-width: 400px;
-  margin-top: 20px;
-}
-
-.accordion .accordion-toggle {
-  width: 100%;
-  text-align: left;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  margin-top: 8px;
-  cursor: pointer;
-}
-.accordion .accordion-panel {
-  display: none;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
-}
-
-.toolkit .card-group {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-}
-.toolkit .cta-btn {
-  display: block;
-  text-align: center;
-  margin: 30px auto 0;
-}
-
-.nutrition-cards .card-group,
-.safety-cards .card-group {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-}
-
-.cta-btn {
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #ffd700, #ff8800);
-  color: #1a1a1a;
-  border-radius: 6px;
-  font-weight: 600;
-}
-
-/* New reusable components for dog-health redesign */
-
-.content-surface {
-  max-width: 800px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 8px;
-  backdrop-filter: blur(4px);
-}
-
-.toc-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin: 2rem 0;
-}
-
-.toc-chips a {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  text-decoration: none;
-  color: #0f172a;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.toc-chips a:hover {
-  background: #fff;
-  border-color: #0f172a;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-.info-card {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 1.5rem;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
-}
-
-.info-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.calculator-card {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 2rem;
-  margin: 2rem 0;
-}
-
-.calculator-card input,
-.calculator-card select {
-  width: 100%;
-  padding: 0.75rem;
-  margin: 0.5rem 0 1rem 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.calculator-card label {
-  display: block;
-  margin: 1rem 0 0.5rem 0;
-  color: #0f172a;
-  font-weight: 600;
-}
-
-.calculator-output {
-  background: rgba(240, 248, 255, 0.6);
-  padding: 1.5rem;
-  border-radius: 4px;
-  margin: 1.5rem 0;
-  border-left: 4px solid #0f172a;
-}
-
-.calculator-disclaimer {
-  background: rgba(255, 200, 0, 0.1);
-  border-left: 3px solid #ffcc00;
-  padding: 1rem;
-  margin: 1rem 0;
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.accordion-item {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  margin: 1rem 0;
-}
-
-.accordion-item summary {
-  padding: 1rem;
-  cursor: pointer;
-  font-weight: 600;
-  color: #0f172a;
-  user-select: none;
-}
-
-.accordion-item summary:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.accordion-item[open] summary {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.accordion-item p {
-  padding: 0 1rem 1rem 1rem;
-  margin: 0;
-  color: #1a1a1a;
-  line-height: 1.6;
-}
-
-.affiliate-disclosure {
-  background: rgba(100, 150, 255, 0.1);
-  border-left: 4px solid #3366ff;
-  border-radius: 4px;
-  padding: 1.25rem;
-  margin: 2rem 0;
-  font-size: 0.95rem;
-  color: #0f172a;
-}
-
-.affiliate-disclosure strong {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
