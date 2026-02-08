@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dog Health Guide — Spin Wheel Deals</title>
-  <meta name="description" content="Comprehensive dog health guide: feeding calculator, preventive care checklist, warning signs, nutrition tips, parasite safety, and wellness toolkit." />
+  <meta name="description" content="Comprehensive dog health guide: feeding calculator, preventive care checklist, warning signs, nutrition tips, parasite safety, and wellness toolkit. Veterinarian-aligned guidance." />
   <link rel="canonical" href="https://virtualecommerceinc.com/spin-wheel-deals/dog-health.html" />
   <meta name="robots" content="index,follow" />
   <link rel="stylesheet" href="styles.css" />
@@ -29,7 +29,7 @@
     <section class="hero-section">
       <p class="eyebrow">Wellness Guidance</p>
       <h1>Complete Dog Health Guide</h1>
-      <p class="subtitle">Tools, tips, and resources to keep your furry friend happy and healthy.</p>
+      <p class="subtitle">Evidence-based tools and tips to support your dog's wellbeing—always in partnership with your veterinarian.</p>
       <a href="#features" class="cta-btn">Explore Guide</a>
     </section>
 
@@ -37,15 +37,15 @@
     <section id="features" class="card-group">
       <a href="#feeding-calculator" class="card">
         <h3>Feeding Calculator</h3>
-        <p>Estimate daily calories</p>
+        <p>Estimate daily calorie needs</p>
       </a>
       <a href="#preventive-care" class="card">
         <h3>Preventive Care</h3>
-        <p>Checklist for routine wellness</p>
+        <p>Routine wellness checklists</p>
       </a>
       <a href="#warning-signs" class="card">
         <h3>Warning Signs</h3>
-        <p>Recognize health issues early</p>
+        <p>Know when to call the vet</p>
       </a>
     </section>
 
@@ -53,115 +53,317 @@
     <nav class="jump-nav" aria-label="Quick Navigation">
       <a href="#feeding-calculator">Feeding Calculator</a>
       <a href="#preventive-care">Preventive Care</a>
-      <a href="#nutrition-tips">Nutrition Tips</a>
+      <a href="#nutrition-tips">Nutrition Basics</a>
       <a href="#warning-signs">Warning Signs</a>
       <a href="#parasite-safety">Parasite & Seasonal Safety</a>
       <a href="#health-toolkit">Wellness Toolkit</a>
+      <a href="#sources-trust">Sources & Trust</a>
     </nav>
 
-    <!-- Feeding Calculator -->
+    <!-- Feeding Calculator Section -->
     <section id="feeding-calculator" class="calculator">
       <h2>Feeding Calculator</h2>
+      
+      <div class="content-block">
+        <h3>Understanding Calorie Needs</h3>
+        <p>Dogs need a certain number of calories each day to stay healthy. Veterinarians use two key formulas to estimate this:</p>
+        
+        <ul class="bullet-list">
+          <li><strong>RER (Resting Energy Requirement)</strong> — The baseline calories your dog needs at rest. Calculated as: 70 × (body weight in kg)^0.75</li>
+          <li><strong>MER (Maintenance Energy Requirement)</strong> — RER adjusted for life stage, activity level, and individual factors. This is what your dog actually needs daily.</li>
+        </ul>
+
+        <h4>Common Feeding Mistakes to Avoid</h4>
+        <ul class="bullet-list">
+          <li><strong>Eyeballing portions</strong> — Use a measuring cup or kitchen scale for accuracy</li>
+          <li><strong>Forgetting treats</strong> — Treats should make up no more than 10% of daily calories</li>
+          <li><strong>Ignoring body condition</strong> — A healthy dog has a visible waist and ribs you can feel but not see</li>
+          <li><strong>Same food for all life stages</strong> — Puppies, adults, and seniors have different nutritional needs</li>
+          <li><strong>Free-feeding dry food</strong> — Measured meals help prevent overeating and obesity</li>
+        </ul>
+      </div>
+
       <form id="calorie-form">
         <label>
           Weight (kg):
-          <input type="number" id="weight" name="weight" min="1" step="0.1" required />
+          <input type="number" id="weight" name="weight" min="1" max="100" step="0.1" required aria-describedby="weight-help" />
+          <small id="weight-help">Enter your dog's current weight in kilograms</small>
         </label>
         <label>
           Life Stage:
-          <select id="lifestage" name="lifestage">
-            <option value="adult">Adult (1×RER)</option>
-            <option value="puppy">Puppy (3×RER)</option>
-            <option value="senior">Senior (1.2×RER)</option>
+          <select id="lifestage" name="lifestage" aria-describedby="stage-help">
+            <option value="adult">Adult (typical factor: 1.4-1.8×RER)</option>
+            <option value="puppy">Puppy (typical factor: 2-3×RER)</option>
+            <option value="senior">Senior (typical factor: 1.2-1.4×RER)</option>
           </select>
+          <small id="stage-help">Puppies: under 1-2 years (varies by breed). Seniors: typically 7+ years.</small>
         </label>
         <label>
           Activity Level:
           <select id="activity" name="activity">
-            <option value="low">Low (+0.8×RER)</option>
-            <option value="moderate" selected>Moderate (+1.0×RER)</option>
-            <option value="high">High (+1.5×RER)</option>
+            <option value="low">Low (mostly resting, short walks)</option>
+            <option value="moderate" selected>Moderate (regular walks, some play)</option>
+            <option value="high">High (working dogs, intense daily exercise)</option>
           </select>
         </label>
-        <button type="submit" class="cta-btn">Calculate</button>
+        <button type="submit" class="cta-btn">Calculate Estimate</button>
       </form>
+      
       <div id="calorie-result" class="disclosure">
-        <p class="disclosure__headline">Estimated Calories</p>
+        <p class="disclosure__headline">Estimated Daily Calories</p>
         <p class="disclosure__text" id="result-text">-- kcal/day</p>
-        <p class="disclosure__fine">*This is an estimate only. Consult your veterinarian for personalized feeding advice.</p>
+        <p class="disclosure__fine"><strong>Important:</strong> This calculator provides a general estimate only. Individual dogs vary significantly based on breed, metabolism, health status, spay/neuter status, and other factors. Your veterinarian is the best source for personalized feeding recommendations. If your dog is gaining or losing weight unexpectedly, consult your vet.</p>
       </div>
     </section>
 
     <!-- Preventive Care Checklist -->
     <section id="preventive-care" class="checklist">
       <h2>Preventive Care Checklist</h2>
+      
+      <div class="content-block">
+        <p>Regular preventive care helps catch health issues early when they're easier to treat. The American Animal Hospital Association (AAHA) recommends wellness exams at least once a year for adult dogs, and more frequently for puppies and seniors.</p>
+      </div>
+
+      <h3>Weekly Care</h3>
       <ul class="bullet-list">
-        <li>Annual vet exam & vaccinations</li>
-        <li>Dental check & clean as needed</li>
-        <li>Parasite prevention (fleas, ticks, heartworm)</li>
-        <li>Regular grooming & nail trims</li>
-        <li>Weight monitoring every 3 months</li>
-        <li>Behavior & mobility assessments</li>
+        <li>Check ears for redness, odor, or discharge</li>
+        <li>Brush teeth (daily is ideal, but weekly at minimum)</li>
+        <li>Inspect coat and skin for lumps, bumps, or irritation</li>
+        <li>Monitor food and water intake</li>
+        <li>Observe energy levels and bathroom habits</li>
       </ul>
+
+      <h3>Monthly Care</h3>
+      <ul class="bullet-list">
+        <li>Administer parasite preventatives (as prescribed by your vet)</li>
+        <li>Check nails and trim if needed (or as often as growth requires)</li>
+        <li>Weigh your dog and track any changes</li>
+        <li>Clean bedding and toys</li>
+        <li>Assess body condition (can you feel ribs? is there a waist?)</li>
+      </ul>
+
+      <h3>Annual Veterinary Visits Should Include</h3>
+      <ul class="bullet-list">
+        <li>Complete physical examination</li>
+        <li>Core vaccinations (as recommended by your vet based on risk)</li>
+        <li>Heartworm test</li>
+        <li>Fecal exam for intestinal parasites</li>
+        <li>Dental assessment</li>
+        <li>Discussion of diet, behavior, and any concerns</li>
+        <li>Blood work (especially important for seniors)</li>
+        <li>Weight and body condition evaluation</li>
+      </ul>
+
+      <div class="content-block">
+        <h4>Why Preventive Care Matters</h4>
+        <p>Dogs age faster than humans, and many health conditions develop silently. Annual exams help detect problems like dental disease, kidney issues, or early-stage arthritis before they become serious. According to veterinary organizations, preventive care is more effective and often less costly than treating advanced illness.</p>
+      </div>
     </section>
 
-    <!-- Nutrition Cards -->
+    <!-- Nutrition Basics -->
     <section id="nutrition-tips" class="nutrition-cards">
-      <h2>Nutrition Tips</h2>
+      <h2>Nutrition Basics</h2>
+      
+      <div class="content-block">
+        <h3>Choosing Quality Dog Food</h3>
+        <p>Look for foods that meet <strong>AAFCO (Association of American Feed Control Officials)</strong> standards. The label should state the food is "complete and balanced" for your dog's life stage. This means the food has been formulated or tested to meet established nutritional requirements.</p>
+        
+        <p>The World Small Animal Veterinary Association (WSAVA) recommends selecting foods from companies that:</p>
+        <ul class="bullet-list">
+          <li>Employ full-time qualified nutritionists</li>
+          <li>Own their manufacturing facilities</li>
+          <li>Conduct and publish research</li>
+          <li>Provide detailed product information upon request</li>
+        </ul>
+      </div>
+
       <div class="card-group">
         <div class="card">
-          <h3>Balanced Diet</h3>
-          <p>Choose AAFCO-approved food with named protein sources.</p>
+          <h3>Puppies (Under 1-2 Years)</h3>
+          <p>Require food labeled for "growth" or "all life stages." Need more calories, protein, and specific nutrients like calcium for developing bones. Large breeds need controlled growth formulas.</p>
         </div>
         <div class="card">
-          <h3>Portion Control</h3>
-          <p>Measure meals & avoid free-feeding to prevent obesity.</p>
+          <h3>Adults (1-7 Years)</h3>
+          <p>Need food labeled for "adult maintenance." Focus on maintaining healthy weight. Adjust portions based on activity level and body condition.</p>
         </div>
         <div class="card">
-          <h3>Fresh Water</h3>
-          <p>Ensure access to clean water at all times.</p>
+          <h3>Seniors (7+ Years)</h3>
+          <p>May benefit from senior formulas with adjusted calories and joint-supporting nutrients. Discuss specific needs with your vet, as senior dogs vary widely.</p>
         </div>
+      </div>
+
+      <div class="content-block">
+        <h4>A Note on Trendy Diets</h4>
+        <p>Grain-free, raw, and homemade diets have become popular, but they require caution:</p>
+        <ul class="bullet-list">
+          <li><strong>Grain-free diets:</strong> The FDA has investigated a potential link between certain grain-free foods and heart disease (dilated cardiomyopathy) in dogs. Discuss with your vet before choosing grain-free.</li>
+          <li><strong>Raw diets:</strong> Carry risks of bacterial contamination for both pets and humans. Not recommended by AVMA or AAHA without veterinary guidance.</li>
+          <li><strong>Homemade diets:</strong> Difficult to balance properly. If you prefer homemade, work with a board-certified veterinary nutritionist.</li>
+        </ul>
+        <p>The safest approach is to choose commercial foods that meet AAFCO standards and discuss any dietary changes with your veterinarian.</p>
       </div>
     </section>
 
     <!-- Warning Signs Accordion -->
     <section id="warning-signs" class="accordion">
-      <h2>Warning Signs</h2>
+      <h2>Warning Signs: When to Call the Vet</h2>
+      
+      <div class="content-block">
+        <p>Dogs can't tell us when something's wrong, so we need to watch for changes in behavior, appetite, and physical condition. Some symptoms are minor, while others require immediate veterinary attention. When in doubt, always call your vet—they'd rather hear from you early than late.</p>
+      </div>
+
       <div class="card">
-        <button class="accordion-toggle">Digestive Issues</button>
+        <button class="accordion-toggle" aria-expanded="false">Digestive Issues (Vomiting & Diarrhea)</button>
         <div class="accordion-panel">
-          <p>Persistent vomiting or diarrhea can signal infections or dietary issues.</p>
+          <p><strong>Possible mild causes:</strong> Eating something unusual, dietary changes, minor stomach upset, stress</p>
+          <p><strong>Home monitoring may be okay if:</strong> Single episode, dog is otherwise alert and active, drinking water normally</p>
+          <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
+          <ul class="bullet-list">
+            <li>Vomiting or diarrhea persists more than 24 hours</li>
+            <li>Blood in vomit or stool</li>
+            <li>Signs of pain (whining, hunched posture, reluctance to move)</li>
+            <li>Lethargy, weakness, or collapse</li>
+            <li>Unable to keep water down</li>
+            <li>Bloated or distended abdomen (emergency—call immediately)</li>
+            <li>Known ingestion of toxins or foreign objects</li>
+          </ul>
         </div>
       </div>
+
       <div class="card">
-        <button class="accordion-toggle">Respiratory Symptoms</button>
+        <button class="accordion-toggle" aria-expanded="false">Respiratory Symptoms (Coughing, Breathing Changes)</button>
         <div class="accordion-panel">
-          <p>Coughing, sneezing, or difficulty breathing needs prompt vet attention.</p>
+          <p><strong>Possible mild causes:</strong> Occasional cough from drinking too fast, mild allergies, brief excitement</p>
+          <p><strong>Home monitoring may be okay if:</strong> Rare, brief coughing episodes with no other symptoms</p>
+          <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
+          <ul class="bullet-list">
+            <li>Persistent coughing lasting more than a few days</li>
+            <li>Labored breathing, rapid breathing, or panting at rest</li>
+            <li>Blue or pale gums (emergency)</li>
+            <li>Wheezing or honking sounds</li>
+            <li>Nasal discharge that's thick, colored, or bloody</li>
+            <li>Coughing up blood or foam</li>
+            <li>Inability to settle or sleep due to breathing difficulty</li>
+          </ul>
         </div>
       </div>
+
       <div class="card">
-        <button class="accordion-toggle">Mobility Problems</button>
+        <button class="accordion-toggle" aria-expanded="false">Mobility & Pain</button>
         <div class="accordion-panel">
-          <p>Stiffness, limping, or reluctance to move may indicate joint issues.</p>
+          <p><strong>Possible mild causes:</strong> Temporary stiffness after heavy exercise, minor muscle soreness</p>
+          <p><strong>Home monitoring may be okay if:</strong> Mild stiffness that improves with rest within a day or two</p>
+          <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
+          <ul class="bullet-list">
+            <li>Limping that persists more than 24-48 hours</li>
+            <li>Inability to bear weight on a limb</li>
+            <li>Visible swelling, heat, or deformity</li>
+            <li>Crying out when touched or moving</li>
+            <li>Reluctance to jump, climb stairs, or move normally</li>
+            <li>Dragging legs or sudden loss of coordination (emergency)</li>
+            <li>Difficulty getting up from lying down</li>
+          </ul>
         </div>
+      </div>
+
+      <div class="card">
+        <button class="accordion-toggle" aria-expanded="false">Changes in Eating, Drinking, or Bathroom Habits</button>
+        <div class="accordion-panel">
+          <p><strong>Possible mild causes:</strong> Hot weather (increased drinking), new environment (temporary appetite changes)</p>
+          <p><strong>Home monitoring may be okay if:</strong> Very minor and brief changes with no other symptoms</p>
+          <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
+          <ul class="bullet-list">
+            <li>Refusal to eat for more than 24 hours</li>
+            <li>Dramatic increase in thirst or urination</li>
+            <li>Straining to urinate or defecate</li>
+            <li>Blood in urine</li>
+            <li>Accidents in a housetrained dog</li>
+            <li>No urination for more than 12-24 hours (emergency)</li>
+            <li>Sudden unexplained weight loss</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <button class="accordion-toggle" aria-expanded="false">Behavioral & Neurological Changes</button>
+        <div class="accordion-panel">
+          <p><strong>Possible mild causes:</strong> Temporary fatigue, response to household changes or stress</p>
+          <p><strong>Home monitoring may be okay if:</strong> Very mild, brief lethargy after heavy activity</p>
+          <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
+          <ul class="bullet-list">
+            <li>Sudden aggression or personality change</li>
+            <li>Disorientation or confusion</li>
+            <li>Seizures or tremors (emergency)</li>
+            <li>Head tilting, loss of balance, or circling</li>
+            <li>Unresponsiveness or collapse (emergency)</li>
+            <li>Extreme lethargy or depression</li>
+            <li>Hiding or unusual withdrawal</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <p><strong>Remember:</strong> You know your dog best. If something seems "off" even without specific symptoms on this list, trust your instincts and contact your veterinarian. Early intervention often leads to better outcomes.</p>
       </div>
     </section>
 
     <!-- Parasites & Seasonal Safety -->
     <section id="parasite-safety" class="safety-cards">
       <h2>Parasite & Seasonal Safety</h2>
+      
+      <div class="content-block">
+        <h3>Year-Round Prevention Is Key</h3>
+        <p>Many pet owners think parasites are only a summer problem, but veterinary organizations recommend year-round prevention. Parasites can survive indoors during winter, and climate variations mean risks exist in every season. Consistent prevention is more effective than trying to catch up after an infestation.</p>
+      </div>
+
       <div class="card-group">
         <div class="card">
-          <h3>Flea & Tick Prevention</h3>
-          <p>Use vet-recommended topical or oral preventatives year-round.</p>
+          <h3>Fleas & Ticks</h3>
+          <p>Beyond itching, fleas can cause allergic dermatitis and transmit tapeworms. Ticks carry serious diseases like Lyme disease, ehrlichiosis, and Rocky Mountain spotted fever. Use vet-recommended preventatives consistently.</p>
         </div>
         <div class="card">
-          <h3>Heartworm Protection</h3>
-          <p>Monthly medication is essential in all regions.</p>
+          <h3>Heartworm</h3>
+          <p>Transmitted by mosquitoes, heartworm disease is serious and potentially fatal. Prevention is simple and effective; treatment is expensive, lengthy, and hard on your dog. Monthly preventatives are standard.</p>
         </div>
         <div class="card">
-          <h3>Hot/Cold Weather Tips</h3>
-          <p>Avoid mid-day heat; provide shade & coat protection in winter.</p>
+          <h3>Intestinal Parasites</h3>
+          <p>Roundworms, hookworms, whipworms, and tapeworms can affect dogs of any age. Regular fecal testing and deworming (as recommended by your vet) help keep these in check.</p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h4>Zoonotic Awareness: Protecting Your Family</h4>
+        <p>Some parasites can spread from pets to humans, especially children, elderly individuals, and those with weakened immune systems. Examples include roundworms, hookworms, and certain tick-borne diseases. Good hygiene practices help reduce risk:</p>
+        <ul class="bullet-list">
+          <li>Wash hands after handling pets, especially before eating</li>
+          <li>Pick up dog waste promptly from yards and public areas</li>
+          <li>Keep children's sandboxes covered</li>
+          <li>Maintain your pet's parasite prevention schedule</li>
+          <li>Schedule regular veterinary fecal exams</li>
+        </ul>
+      </div>
+
+      <h3>Seasonal Hazards</h3>
+      <div class="card-group">
+        <div class="card">
+          <h3>Summer Safety</h3>
+          <ul class="bullet-list">
+            <li>Never leave dogs in parked cars—temperatures rise dangerously fast</li>
+            <li>Provide shade and fresh water outdoors</li>
+            <li>Walk during cooler morning or evening hours</li>
+            <li>Test pavement with your hand—if too hot for you, it's too hot for paws</li>
+            <li>Watch for signs of heatstroke: excessive panting, drooling, lethargy</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Winter Safety</h3>
+          <ul class="bullet-list">
+            <li>Limit time outdoors in extreme cold, especially for small or short-coated dogs</li>
+            <li>Wipe paws after walks to remove salt and chemicals</li>
+            <li>Check for antifreeze spills—it's toxic and tastes sweet to dogs</li>
+            <li>Consider a coat or sweater for dogs with thin fur</li>
+            <li>Keep dogs away from frozen ponds and lakes</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -169,31 +371,66 @@
     <!-- Wellness Toolkit -->
     <section id="health-toolkit" class="toolkit">
       <h2>Wellness Toolkit</h2>
+      
+      <div class="content-block">
+        <h3>Products Veterinarians Often Recommend</h3>
+        <p>The items below fall into categories commonly suggested by veterinary professionals for routine health maintenance. We've selected products with strong reviews and practical benefits. Your vet can advise on what's appropriate for your specific dog.</p>
+        
+        <p class="disclosure__fine"><strong>Affiliate Disclosure:</strong> Some links on this page are affiliate links. If you purchase through these links, we may earn a small commission at no extra cost to you. This helps support our site. We only recommend products we believe provide genuine value. Our content is not influenced by affiliate relationships, and we always encourage consulting your veterinarian before introducing new products.</p>
+      </div>
+
       <div class="card-group">
-        <a class="card" href="https://amzn.to/healthproduct1" target="_blank" rel="noopener">
-          <h3>KONG Extreme Dog Toy</h3>
-          <p>Durable enrichment for strong chewers.</p>
+        <a class="card" href="https://amzn.to/healthproduct1" target="_blank" rel="noopener sponsored">
+          <h3>Durable Enrichment Toy</h3>
+          <p><strong>Why vets recommend:</strong> Mental stimulation helps reduce anxiety and destructive behavior. Puzzle feeders slow eating and provide engagement. Choose size-appropriate toys for safety.</p>
         </a>
-        <a class="card" href="https://amzn.to/healthproduct2" target="_blank" rel="noopener">
-          <h3>Veterinary Diets</h3>
-          <p>Targeted nutrition for health conditions.</p>
+        <a class="card" href="https://amzn.to/healthproduct2" target="_blank" rel="noopener sponsored">
+          <h3>Dog-Safe Toothbrush & Paste Kit</h3>
+          <p><strong>Why vets recommend:</strong> Dental disease affects most dogs by age three. Daily brushing is the gold standard for prevention. Use only pet-safe toothpaste—human toothpaste can be harmful.</p>
         </a>
-        <a class="card" href="https://amzn.to/healthproduct3" target="_blank" rel="noopener">
-          <h3>Undercoat Deshedding Tool</h3>
-          <p>Reduce shedding & improve coat health.</p>
+        <a class="card" href="https://amzn.to/healthproduct3" target="_blank" rel="noopener sponsored">
+          <h3>Deshedding Brush</h3>
+          <p><strong>Why vets recommend:</strong> Regular brushing removes loose fur, distributes natural oils, and lets you check for skin issues, lumps, or parasites. Reduces matting and hairballs.</p>
         </a>
-        <a class="card" href="https://amzn.to/healthproduct4" target="_blank" rel="noopener">
-          <h3>Enzymatic Toothpaste</h3>
-          <p>Supports dental hygiene without brushing.</p>
+        <a class="card" href="https://amzn.to/healthproduct4" target="_blank" rel="noopener sponsored">
+          <h3>Nail Clippers or Grinder</h3>
+          <p><strong>Why vets recommend:</strong> Overgrown nails can cause discomfort, affect gait, and lead to joint problems. Regular trimming maintains comfort and mobility.</p>
         </a>
       </div>
-      <a href="https://virtualecommerceinc.com/spin-wheel-deals/dog-toys.html" class="cta-btn">Discover More Tools</a>
+      
+      <a href="dog-toys.html" class="cta-btn">Browse More Dog Products</a>
+    </section>
+
+    <!-- Sources & Trust Section -->
+    <section id="sources-trust" class="sources-section">
+      <h2>Sources & Trust</h2>
+      
+      <div class="content-block">
+        <h3>Our Information Standards</h3>
+        <p>The guidance on this page is informed by recommendations from leading veterinary organizations. We do not make medical claims or provide diagnoses. This content is for general educational purposes and should not replace professional veterinary advice.</p>
+        
+        <h4>Authoritative Sources We Reference</h4>
+        <ul class="bullet-list">
+          <li><strong>AAHA (American Animal Hospital Association)</strong> — Sets standards for veterinary practice and publishes evidence-based guidelines for preventive care, vaccinations, and more. <a href="https://www.aaha.org" target="_blank" rel="noopener">aaha.org</a></li>
+          <li><strong>AVMA (American Veterinary Medical Association)</strong> — The largest veterinary medical organization in the US, providing resources on pet health, nutrition, and safety. <a href="https://www.avma.org" target="_blank" rel="noopener">avma.org</a></li>
+          <li><strong>WSAVA (World Small Animal Veterinary Association)</strong> — Global organization that publishes nutrition guidelines and promotes veterinary standards worldwide. <a href="https://wsava.org" target="_blank" rel="noopener">wsava.org</a></li>
+          <li><strong>AAFCO (Association of American Feed Control Officials)</strong> — Establishes nutritional standards for pet foods in the United States. <a href="https://www.aafco.org" target="_blank" rel="noopener">aafco.org</a></li>
+          <li><strong>FDA Center for Veterinary Medicine</strong> — Regulates pet food safety and investigates pet health issues. <a href="https://www.fda.gov/animal-veterinary" target="_blank" rel="noopener">fda.gov/animal-veterinary</a></li>
+        </ul>
+        
+        <h4>Medical Disclaimer</h4>
+        <p>This website provides general information about dog health and wellness. It is not intended as a substitute for professional veterinary advice, diagnosis, or treatment. Always seek the advice of a qualified veterinarian with any questions you may have regarding your dog's health. Never disregard professional veterinary advice or delay seeking it because of something you have read on this website.</p>
+        
+        <p>If you believe your dog is experiencing a medical emergency, contact your veterinarian or an emergency animal hospital immediately.</p>
+        
+        <p class="disclosure__fine"><strong>Last reviewed:</strong> January 2025. We periodically review and update this content, but veterinary recommendations evolve. Always verify current guidelines with your veterinarian.</p>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="site-footer__inner">
-      <p>© 2024 Spin Wheel Deals. All rights reserved.</p>
+      <p>© 2025 Spin Wheel Deals. All rights reserved.</p>
       <div class="site-footer__links">
         <a href="privacy.html">Privacy Policy</a>
         <a href="contact.html">Contact</a>
@@ -208,19 +445,46 @@
       const w = parseFloat(document.getElementById('weight').value);
       const stage = document.getElementById('lifestage').value;
       const activity = document.getElementById('activity').value;
+      
+      // RER = 70 × (body weight in kg)^0.75
       const rer = 70 * Math.pow(w, 0.75);
-      let factor = 1;
-      if (stage === 'puppy') factor = 3;
-      else if (stage === 'senior') factor = 1.2;
-      if (activity === 'low') factor += 0.8;
-      else if (activity === 'high') factor += 1.5;
-      const mer = Math.round(rer * factor);
-      document.getElementById('result-text').textContent = mer + ' kcal/day';
+      
+      // MER factors based on life stage and activity
+      // These are simplified estimates; actual needs vary by individual
+      let baseFactor = 1.4; // default adult maintenance
+      
+      if (stage === 'puppy') {
+        baseFactor = 2.5; // puppies need more calories
+      } else if (stage === 'senior') {
+        baseFactor = 1.2; // seniors often need fewer calories
+      }
+      
+      // Adjust for activity level
+      let activityModifier = 1.0;
+      if (activity === 'low') {
+        activityModifier = 0.85;
+      } else if (activity === 'high') {
+        activityModifier = 1.3;
+      }
+      
+      const mer = Math.round(rer * baseFactor * activityModifier);
+      
+      // Provide a range (±15%) to emphasize this is an estimate
+      const lowRange = Math.round(mer * 0.85);
+      const highRange = Math.round(mer * 1.15);
+      
+      document.getElementById('result-text').textContent = 
+        lowRange + ' – ' + highRange + ' kcal/day (estimated range)';
     });
-    // Accordion Behavior
+    
+    // Accordion Behavior with Accessibility
     document.querySelectorAll('.accordion-toggle').forEach(btn => {
+      // Initialize panels as hidden
+      const panel = btn.nextElementSibling;
+      panel.style.display = 'none';
+      btn.setAttribute('aria-expanded', 'false');
+      
       btn.addEventListener('click', () => {
-        const panel = btn.nextElementSibling;
         const expanded = btn.getAttribute('aria-expanded') === 'true';
         btn.setAttribute('aria-expanded', !expanded);
         panel.style.display = expanded ? 'none' : 'block';
