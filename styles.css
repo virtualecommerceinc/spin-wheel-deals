@@ -211,9 +211,13 @@ a:focus-visible {
 }
 
 .bullet-list {
-  margin: 12px 0 0;
-  padding-left: 18px;
-  line-height: 1.5;
+  margin: 12px 0 16px;
+  padding-left: 20px;
+  line-height: 1.65;
+}
+
+.bullet-list li {
+  margin-bottom: 8px;
 }
 
 .section-heading {
@@ -463,6 +467,7 @@ a:focus-visible {
 .disclosure__fine {
   font-size: 11px;
   opacity: 0.78;
+  margin-top: 8px;
 }
 
 .site-footer {
@@ -509,15 +514,506 @@ a:focus-visible {
   }
 }
 
-/* Site-wide readability improvements */
-body {
+/* ============== CTA Button ============== */
+.cta-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ffd700, #ff8800);
   color: #1a1a1a;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-h1, h2, h3 {
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  text-decoration: none;
+}
+
+/* ============================================================
+   DOG HEALTH PAGE SPECIFIC STYLES
+   Light text on dark backgrounds, dark text on light cards
+   ============================================================ */
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px;
+  color: #fff;
+}
+
+.hero-section .eyebrow {
+  text-transform: uppercase;
+  opacity: 0.8;
+  letter-spacing: 1.5px;
+  font-size: 13px;
+  color: #fff;
+}
+
+.hero-section h1 {
+  margin: 12px 0;
+  font-size: clamp(32px, 4vw, 48px);
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+.hero-section .subtitle {
+  font-size: clamp(16px, 2.5vw, 20px);
+  opacity: 0.9;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.hero-section .cta-btn {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+/* Jump Navigation */
+.jump-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 32px 0;
+  padding: 0 16px;
+}
+
+.jump-nav a {
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  font-size: 14px;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+.jump-nav a:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+}
+
+/* Card Group - Generic grid for cards */
+.card-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+/* Card Styles - Light background with dark text for readability */
+.card {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #1a1a1a;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  display: block;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.card h3 {
+  margin: 0 0 12px 0;
+  color: #0f172a;
+  font-size: 1.2rem;
+}
+
+.card p {
+  margin: 0;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+/* Content Block - For explanatory text sections */
+.content-block {
+  width: min(800px, 90vw);
+  margin: 24px auto;
+  padding: 24px 28px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 16px;
+  color: #1a1a1a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.content-block h3 {
+  margin: 0 0 16px 0;
+  color: #0f172a;
+  font-size: 1.4rem;
+}
+
+.content-block h4 {
+  margin: 24px 0 12px 0;
+  color: #0f172a;
+  font-size: 1.15rem;
+}
+
+.content-block p {
+  margin: 0 0 16px 0;
+  line-height: 1.7;
+  color: #2d3748;
+}
+
+.content-block p:last-child {
+  margin-bottom: 0;
+}
+
+.content-block .bullet-list {
+  color: #2d3748;
+}
+
+.content-block .bullet-list li {
+  color: #2d3748;
+}
+
+.content-block a {
+  color: #2563eb;
+}
+
+.content-block a:hover {
+  color: #1d4ed8;
+}
+
+/* Section containers */
+.calculator,
+.checklist,
+.nutrition-cards,
+.accordion,
+.safety-cards,
+.toolkit {
+  width: min(800px, 90vw);
+  margin: 40px auto;
+}
+
+.calculator h2,
+.checklist h2,
+.nutrition-cards h2,
+.accordion h2,
+.safety-cards h2,
+.toolkit h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.checklist h3,
+.safety-cards h3 {
+  color: #fff;
+  margin: 32px 0 16px 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Calculator Form ===== */
+.calculator form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 28px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.calculator label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
   color: #0f172a;
 }
 
+.calculator input,
+.calculator select {
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+  background: #fff;
+  color: #1a1a1a;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.calculator input:focus,
+.calculator select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.calculator small {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 400;
+  margin-top: 4px;
+}
+
+.calculator .cta-btn {
+  grid-column: 1 / -1;
+  width: 100%;
+  justify-content: center;
+}
+
+.calculator .disclosure {
+  grid-column: 1 / -1;
+  background: rgba(240, 248, 255, 0.9);
+  border: 1px solid #bfdbfe;
+  color: #1a1a1a;
+}
+
+.calculator .disclosure__headline {
+  color: #0f172a;
+}
+
+.calculator .disclosure__text {
+  color: #1e40af;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.calculator .disclosure__fine {
+  color: #4b5563;
+}
+
+/* Calculator responsive */
+@media (max-width: 600px) {
+  .calculator form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Accordion Styles ===== */
+.accordion .card {
+  text-align: left;
+  margin-bottom: 12px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.accordion-toggle {
+  width: 100%;
+  text-align: left;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.accordion-toggle:hover {
+  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+}
+
+.accordion-toggle::after {
+  content: '+';
+  font-size: 22px;
+  font-weight: 400;
+  color: #64748b;
+  transition: transform 0.3s ease;
+}
+
+.accordion-toggle[aria-expanded="true"]::after {
+  content: '−';
+}
+
+.accordion-panel {
+  padding: 20px 24px;
+  background: #fff;
+  color: #1a1a1a;
+  border-top: 1px solid #e2e8f0;
+}
+
+.accordion-panel p {
+  margin: 0 0 12px 0;
+  line-height: 1.7;
+  color: #2d3748;
+}
+
+.accordion-panel .bullet-list {
+  color: #2d3748;
+  margin-bottom: 0;
+}
+
+/* ===== Warning Flag ===== */
+.warning-flag {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-left: 4px solid #f59e0b;
+  padding: 12px 16px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: #92400e;
+  font-weight: 600;
+}
+
+/* ===== Sources Section ===== */
+.sources-section {
+  width: min(800px, 90vw);
+  margin: 40px auto;
+}
+
+.sources-section h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 24px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.sources-section .content-block {
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.sources-section .content-block a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.sources-section .content-block a:hover {
+  color: #1d4ed8;
+}
+
+/* ===== Toolkit Section ===== */
+.toolkit .card-group {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.toolkit .card {
+  text-align: left;
+}
+
+.toolkit .card h3 {
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.toolkit .card p {
+  text-align: left;
+  font-size: 0.95rem;
+}
+
+.toolkit .cta-btn {
+  display: block;
+  text-align: center;
+  max-width: 280px;
+  margin: 30px auto 0;
+}
+
+/* ===== Nutrition & Safety Cards ===== */
+.nutrition-cards .card-group,
+.safety-cards .card-group {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.nutrition-cards .card,
+.safety-cards .card {
+  text-align: left;
+}
+
+.nutrition-cards .card h3,
+.safety-cards .card h3 {
+  text-align: left;
+  color: #0f172a;
+}
+
+.nutrition-cards .card p,
+.safety-cards .card p {
+  text-align: left;
+}
+
+.safety-cards .card .bullet-list {
+  margin-top: 12px;
+  padding-left: 18px;
+  color: #2d3748;
+}
+
+/* ===== Checklist bullet list refinement ===== */
+.checklist .bullet-list {
+  background: rgba(255, 255, 255, 0.92);
+  padding: 20px 20px 20px 40px;
+  border-radius: 12px;
+  margin: 16px 0 24px 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  color: #2d3748;
+}
+
+.checklist .bullet-list li {
+  margin-bottom: 10px;
+  color: #2d3748;
+}
+
+/* ===== Affiliate Disclosure in content blocks ===== */
+.content-block .disclosure__fine {
+  background: rgba(59, 130, 246, 0.08);
+  border-left: 3px solid #3b82f6;
+  padding: 12px 16px;
+  margin-top: 20px;
+  border-radius: 0 8px 8px 0;
+  font-size: 13px;
+  color: #1e40af;
+}
+
+/* ===== Mobile Responsive ===== */
+@media (max-width: 720px) {
+  .jump-nav {
+    gap: 8px;
+  }
+  
+  .jump-nav a {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .card-group {
+    grid-template-columns: 1fr;
+  }
+  
+  .content-block {
+    padding: 20px;
+  }
+  
+  .calculator form {
+    padding: 20px;
+  }
+  
+  .accordion-toggle {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+  
+  .accordion-panel {
+    padding: 16px 18px;
+  }
+  
+  .toolkit .card-group,
+  .nutrition-cards .card-group,
+  .safety-cards .card-group {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============== Legacy/Utility Classes ============== */
 .wheel-container {
   background: rgba(255,255,255,0.15);
   backdrop-filter: blur(4px);
@@ -537,297 +1033,13 @@ h1, h2, h3 {
   color: #1a1a1a;
 }
 
-button:hover, a:hover {
-  background-color: rgba(0,0,0,0.1);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-button:focus, a:focus {
-  outline: none;
-  border: 2px solid white;
-  box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+/* Focus states for accessibility */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.6);
+  outline-offset: 2px;
 }
 
 a {
   transition: all 0.2s ease;
 }
-
-/* ===== Dog Health Components ===== */
-.hero-section {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 40px;
-}
-.hero-section .eyebrow {
-  text-transform: uppercase;
-  opacity: 0.7;
-  letter-spacing: 1px;
-}
-.hero-section h1 {
-  margin: 12px 0;
-  font-size: clamp(32px, 4vw, 48px);
-}
-.hero-section .subtitle {
-  font-size: clamp(16px, 2.5vw, 20px);
-  opacity: 0.9;
-}
-.hero-section .cta-btn {
-  display: inline-block;
-  margin-top: 20px;
-}
-
-.jump-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  margin: 32px 0;
-}
-.jump-nav a {
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 999px;
-  font-size: 14px;
-}
-
-.card-group.features,
-.card-group .card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  margin-bottom: 40px;
-}
-.card {
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-.card:hover {
-  transform: translateY(-4px);
-}
-.card h3 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-.card p {
-  margin: 0;
-  opacity: 0.85;
-}
-
-.calculator,
-.checklist,
-.nutrition-cards,
-.accordion,
-.safety-cards,
-.toolkit {
-  width: min(800px, 90vw);
-  margin: 40px auto;
-}
-.calculator form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-  align-items: end;
-}
-.calculator label {
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-}
-.calculator input,
-.calculator select {
-  padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-.calculator .disclosure {
-  max-width: 400px;
-  margin-top: 20px;
-}
-
-.accordion .accordion-toggle {
-  width: 100%;
-  text-align: left;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  margin-top: 8px;
-  cursor: pointer;
-}
-.accordion .accordion-panel {
-  display: none;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
-}
-
-.toolkit .card-group {
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-}
-.toolkit .cta-btn {
-  display: block;
-  text-align: center;
-  margin: 30px auto 0;
-}
-
-.nutrition-cards .card-group,
-.safety-cards .card-group {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-}
-
-.cta-btn {
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #ffd700, #ff8800);
-  color: #1a1a1a;
-  border-radius: 6px;
-  font-weight: 600;
-}
-
-/* New reusable components for dog-health redesign */
-
-.content-surface {
-  max-width: 800px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 8px;
-  backdrop-filter: blur(4px);
-}
-
-.toc-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin: 2rem 0;
-}
-
-.toc-chips a {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.8);
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  text-decoration: none;
-  color: #0f172a;
-  font-size: 0.9rem;
-  transition: all 0.2s ease;
-}
-
-.toc-chips a:hover {
-  background: #fff;
-  border-color: #0f172a;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
-}
-
-.info-card {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 1.5rem;
-  backdrop-filter: blur(4px);
-  transition: all 0.2s ease;
-}
-
-.info-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.calculator-card {
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 2rem;
-  margin: 2rem 0;
-}
-
-.calculator-card input,
-.calculator-card select {
-  width: 100%;
-  padding: 0.75rem;
-  margin: 0.5rem 0 1rem 0;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.calculator-card label {
-  display: block;
-  margin: 1rem 0 0.5rem 0;
-  color: #0f172a;
-  font-weight: 600;
-}
-
-.calculator-output {
-  background: rgba(240, 248, 255, 0.6);
-  padding: 1.5rem;
-  border-radius: 4px;
-  margin: 1.5rem 0;
-  border-left: 4px solid #0f172a;
-}
-
-.calculator-disclaimer {
-  background: rgba(255, 200, 0, 0.1);
-  border-left: 3px solid #ffcc00;
-  padding: 1rem;
-  margin: 1rem 0;
-  font-size: 0.9rem;
-  color: #333;
-}
-
-.accordion-item {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  margin: 1rem 0;
-}
-
-.accordion-item summary {
-  padding: 1rem;
-  cursor: pointer;
-  font-weight: 600;
-  color: #0f172a;
-  user-select: none;
-}
-
-.accordion-item summary:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.accordion-item[open] summary {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.accordion-item p {
-  padding: 0 1rem 1rem 1rem;
-  margin: 0;
-  color: #1a1a1a;
-  line-height: 1.6;
-}
-
-.affiliate-disclosure {
-  background: rgba(100, 150, 255, 0.1);
-  border-left: 4px solid #3366ff;
-  border-radius: 4px;
-  padding: 1.25rem;
-  margin: 2rem 0;
-  font-size: 0.95rem;
-  color: #0f172a;
-}
-
-.affiliate-disclosure strong {
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
