@@ -11,6 +11,15 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Background (required on every page that should show the animated sky/clouds/trees/grass) -->
+  <div class="background" aria-hidden="true">
+    <div class="layer sky"></div>
+    <div class="layer clouds"></div>
+    <div class="layer trees"></div>
+    <div class="layer grass"></div>
+  </div>
+
   <header class="site-header">
     <div class="site-header__inner">
       <a class="site-logo" href="index.html">Spin Wheel Deals</a>
@@ -63,6 +72,17 @@
         <h2 class="card__title">Sources & Trust</h2>
         <p class="card__desc">Our information standards</p>
       </a>
+    </section>
+
+    <!-- Jump Nav -->
+    <nav class="jump-nav" aria-label="Quick Navigation">
+      <a href="#feeding-calculator">Feeding Calculator</a>
+      <a href="#preventive-care">Preventive Care</a>
+      <a href="#nutrition-tips">Nutrition Basics</a>
+      <a href="#warning-signs">Warning Signs</a>
+      <a href="#parasite-safety">Parasite &amp; Seasonal Safety</a>
+      <a href="#health-toolkit">Wellness Toolkit</a>
+      <a href="#sources-trust">Sources & Trust</a>
     </nav>
 
     <!-- Feeding Calculator Section -->
@@ -133,13 +153,14 @@
         <p>Regular preventive care helps catch health issues early when they're easier to treat. The American Animal Hospital Association (AAHA) recommends wellness exams at least once a year for adult dogs, and more frequently for puppies and seniors.</p>
       </div>
 
-      <h3 class="subsection-title">Weekly Care</h3>
-      <ul class="bullet-list bullet-list--boxed">
-        <li>Check ears for redness, odor, or discharge</li>
-        <li>Brush teeth (daily is ideal, but weekly at minimum)</li>
-        <li>Inspect coat and skin for lumps, bumps, or irritation</li>
-        <li>Monitor food and water intake</li>
-        <li>Observe energy levels and bathroom habits</li>
+      <h3>Weekly Care</h3>
+      <ul class="bullet-list">
+        <li>Annual vet exam &amp; vaccinations</li>
+        <li>Dental check &amp; clean as needed</li>
+        <li>Parasite prevention (fleas, ticks, heartworm)</li>
+        <li>Regular grooming &amp; nail trims</li>
+        <li>Weight monitoring every 3 months</li>
+        <li>Behavior &amp; mobility assessments</li>
       </ul>
 
       <h3 class="subsection-title">Monthly Care</h3>
@@ -194,6 +215,8 @@
         <div class="card card--info">
           <h3>Adults (1-7 Years)</h3>
           <p>Need food labeled for "adult maintenance." Focus on maintaining healthy weight. Adjust portions based on activity level and body condition.</p>
+          <h3>Portion Control</h3>
+          <p>Measure meals &amp; avoid free-feeding to prevent obesity.</p>
         </div>
         <div class="card card--info">
           <h3>Seniors (7+ Years)</h3>
@@ -221,59 +244,61 @@
         <p>Dogs can't tell us when something's wrong, so we need to watch for changes in behavior, appetite, and physical condition. Some symptoms are minor, while others require immediate veterinary attention. When in doubt, always call your vet—they'd rather hear from you early than late.</p>
       </div>
 
-      <div class="accordion-group">
-        <div class="card card--accordion">
-          <button class="accordion-toggle" id="acc-btn-1" aria-expanded="false" aria-controls="acc-panel-1">Digestive Issues (Vomiting & Diarrhea)</button>
-          <div class="accordion-panel" id="acc-panel-1" role="region" aria-labelledby="acc-btn-1">
-            <p><strong>Possible mild causes:</strong> Eating something unusual, dietary changes, minor stomach upset, stress</p>
-            <p><strong>Home monitoring may be okay if:</strong> Single episode, dog is otherwise alert and active, drinking water normally</p>
-            <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
-            <ul class="bullet-list">
-              <li>Vomiting or diarrhea persists more than 24 hours</li>
-              <li>Blood in vomit or stool</li>
-              <li>Signs of pain (whining, hunched posture, reluctance to move)</li>
-              <li>Lethargy, weakness, or collapse</li>
-              <li>Unable to keep water down</li>
-              <li>Bloated or distended abdomen (emergency—call immediately)</li>
-              <li>Known ingestion of toxins or foreign objects</li>
-            </ul>
-          </div>
+      <div class="card">
+        <button class="accordion-toggle" aria-expanded="false">Digestive Issues (Vomiting & Diarrhea)</button>
+      <h2>Warning Signs</h2>
+
+      <div class="card">
+        <button class="accordion-toggle" type="button">Digestive Issues</button>
+        <div class="accordion-panel">
+          <p><strong>Possible mild causes:</strong> Eating something unusual, dietary changes, minor stomach upset, stress</p>
+          <p><strong>Home monitoring may be okay if:</strong> Single episode, dog is otherwise alert and active, drinking water normally</p>
+          <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
+          <ul class="bullet-list">
+            <li>Vomiting or diarrhea persists more than 24 hours</li>
+            <li>Blood in vomit or stool</li>
+            <li>Signs of pain (whining, hunched posture, reluctance to move)</li>
+            <li>Lethargy, weakness, or collapse</li>
+            <li>Unable to keep water down</li>
+            <li>Bloated or distended abdomen (emergency—call immediately)</li>
+            <li>Known ingestion of toxins or foreign objects</li>
+          </ul>
         </div>
 
-        <div class="card card--accordion">
-          <button class="accordion-toggle" id="acc-btn-2" aria-expanded="false" aria-controls="acc-panel-2">Respiratory Symptoms (Coughing, Breathing Changes)</button>
-          <div class="accordion-panel" id="acc-panel-2" role="region" aria-labelledby="acc-btn-2">
-            <p><strong>Possible mild causes:</strong> Occasional cough from drinking too fast, mild allergies, brief excitement</p>
-            <p><strong>Home monitoring may be okay if:</strong> Rare, brief coughing episodes with no other symptoms</p>
-            <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
-            <ul class="bullet-list">
-              <li>Persistent coughing lasting more than a few days</li>
-              <li>Labored breathing, rapid breathing, or panting at rest</li>
-              <li>Blue or pale gums (emergency)</li>
-              <li>Wheezing or honking sounds</li>
-              <li>Nasal discharge that's thick, colored, or bloody</li>
-              <li>Coughing up blood or foam</li>
-              <li>Inability to settle or sleep due to breathing difficulty</li>
-            </ul>
-          </div>
+      <div class="card">
+        <button class="accordion-toggle" aria-expanded="false">Respiratory Symptoms (Coughing, Breathing Changes)</button>
+        <button class="accordion-toggle" type="button">Respiratory Symptoms</button>
+        <div class="accordion-panel">
+          <p><strong>Possible mild causes:</strong> Occasional cough from drinking too fast, mild allergies, brief excitement</p>
+          <p><strong>Home monitoring may be okay if:</strong> Rare, brief coughing episodes with no other symptoms</p>
+          <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
+          <ul class="bullet-list">
+            <li>Persistent coughing lasting more than a few days</li>
+            <li>Labored breathing, rapid breathing, or panting at rest</li>
+            <li>Blue or pale gums (emergency)</li>
+            <li>Wheezing or honking sounds</li>
+            <li>Nasal discharge that's thick, colored, or bloody</li>
+            <li>Coughing up blood or foam</li>
+            <li>Inability to settle or sleep due to breathing difficulty</li>
+          </ul>
         </div>
 
-        <div class="card card--accordion">
-          <button class="accordion-toggle" id="acc-btn-3" aria-expanded="false" aria-controls="acc-panel-3">Mobility & Pain</button>
-          <div class="accordion-panel" id="acc-panel-3" role="region" aria-labelledby="acc-btn-3">
-            <p><strong>Possible mild causes:</strong> Temporary stiffness after heavy exercise, minor muscle soreness</p>
-            <p><strong>Home monitoring may be okay if:</strong> Mild stiffness that improves with rest within a day or two</p>
-            <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
-            <ul class="bullet-list">
-              <li>Limping that persists more than 24-48 hours</li>
-              <li>Inability to bear weight on a limb</li>
-              <li>Visible swelling, heat, or deformity</li>
-              <li>Crying out when touched or moving</li>
-              <li>Reluctance to jump, climb stairs, or move normally</li>
-              <li>Dragging legs or sudden loss of coordination (emergency)</li>
-              <li>Difficulty getting up from lying down</li>
-            </ul>
-          </div>
+      <div class="card">
+        <button class="accordion-toggle" aria-expanded="false">Mobility & Pain</button>
+        <button class="accordion-toggle" type="button">Mobility Problems</button>
+        <div class="accordion-panel">
+          <p><strong>Possible mild causes:</strong> Temporary stiffness after heavy exercise, minor muscle soreness</p>
+          <p><strong>Home monitoring may be okay if:</strong> Mild stiffness that improves with rest within a day or two</p>
+          <p class="warning-flag"><strong>🚨 RED FLAGS — Contact your vet promptly if:</strong></p>
+          <ul class="bullet-list">
+            <li>Limping that persists more than 24-48 hours</li>
+            <li>Inability to bear weight on a limb</li>
+            <li>Visible swelling, heat, or deformity</li>
+            <li>Crying out when touched or moving</li>
+            <li>Reluctance to jump, climb stairs, or move normally</li>
+            <li>Dragging legs or sudden loss of coordination (emergency)</li>
+            <li>Difficulty getting up from lying down</li>
+          </ul>
         </div>
 
         <div class="card card--accordion">
@@ -335,6 +360,11 @@
         <div class="card card--info">
           <h3>Heartworm</h3>
           <p>Transmitted by mosquitoes, heartworm disease is serious and potentially fatal. Prevention is simple and effective; treatment is expensive, lengthy, and hard on your dog. Monthly preventatives are standard.</p>
+      <h2>Parasite &amp; Seasonal Safety</h2>
+      <div class="card-group">
+        <div class="card">
+          <h3>Flea &amp; Tick Prevention</h3>
+          <p>Use vet-recommended topical or oral preventatives year-round.</p>
         </div>
         <div class="card card--info">
           <h3>Intestinal Parasites</h3>
@@ -375,6 +405,8 @@
             <li>Consider a coat or sweater for dogs with thin fur</li>
             <li>Keep dogs away from frozen ponds and lakes</li>
           </ul>
+          <h3>Hot/Cold Weather Tips</h3>
+          <p>Avoid mid-day heat; provide shade &amp; coat protection in winter.</p>
         </div>
       </div>
     </section>
@@ -405,6 +437,9 @@
           <span class="visually-hidden">(opens in new tab)</span>
           <h3>Furminator Deshedding Brush</h3>
           <p><strong>Why vets recommend:</strong> Regular brushing removes loose fur, distributes natural oils, and lets you check for skin issues, lumps, or parasites. Reduces matting and hairballs.</p>
+        <a class="card" href="https://amzn.to/healthproduct3" target="_blank" rel="noopener">
+          <h3>Undercoat Deshedding Tool</h3>
+          <p>Reduce shedding &amp; improve coat health.</p>
         </a>
         <a class="card card--product" href="https://amzn.to/46qG5lR" target="_blank" rel="noopener sponsored">
           <span class="visually-hidden">(opens in new tab)</span>
@@ -440,6 +475,8 @@
         
         <p class="last-reviewed"><strong>Last reviewed:</strong> January 2025. We periodically review and update this content, but veterinary recommendations evolve. Always verify current guidelines with your veterinarian.</p>
       </div>
+
+      <a href="https://virtualecommerceinc.com/spin-wheel-deals/dog-toys.html" class="cta-btn">Discover More Tools</a>
     </section>
 
     <!-- Back to Top Button -->
@@ -502,7 +539,9 @@
       document.getElementById('calorie-result').classList.add('is-visible');
     });
     
-    // Accordion Behavior with Accessibility (Progressive Enhancement)
+    // Accordion Behavior with Accessibility
+
+    // Accordion Behavior
     document.querySelectorAll('.accordion-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
         const expanded = btn.getAttribute('aria-expanded') === 'true';
