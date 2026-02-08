@@ -506,3 +506,46 @@ a:focus-visible {
     padding: 18px;
   }
 }
+
+/* Site-wide readability improvements */
+body {
+  color: #1a1a1a;
+}
+
+h1, h2, h3 {
+  color: #0f172a;
+}
+
+.wheel-container {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+}
+
+.result {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(2px);
+}
+
+.toy-name {
+  color: #1a1a1a;
+  font-weight: bold;
+}
+
+.anticipation {
+  color: #1a1a1a;
+}
+
+button:hover, a:hover {
+  background-color: rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+button:focus, a:focus {
+  outline: none;
+  border: 2px solid white;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.5);
+}
+
+a {
+  transition: all 0.2s ease;
+}
