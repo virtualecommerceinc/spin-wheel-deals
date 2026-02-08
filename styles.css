@@ -593,7 +593,7 @@ a:focus-visible {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin: 18px 0 10px;
+  margin: 18px 0 16px;
   padding: 0 4px;
 }
 
@@ -614,9 +614,19 @@ a:focus-visible {
 .nutrition-cards,
 .accordion,
 .safety-cards,
-.toolkit{
+.toolkit,
+.sources-section{
   width: min(980px, 92vw);
-  margin: 18px auto;
+  margin: 32px auto;
+  padding: clamp(20px, 3vw, 32px) clamp(16px, 3vw, 28px);
+  background: var(--paper-soft);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(8px);
+  display: grid;
+  gap: 18px;
+  scroll-margin-top: 110px;
 }
 
 /* “card group” is the GRID WRAPPER */
@@ -655,17 +665,20 @@ a.card:hover,
 .nutrition-cards h2,
 .accordion h2,
 .safety-cards h2,
-.toolkit h2{
-  margin: 0 0 12px;
+.toolkit h2,
+.sources-section h2{
+  margin: 0;
   font-size: clamp(22px, 3vw, 30px);
   color: #fff;
   text-shadow: 0 10px 22px rgba(0,0,0,0.30);
   text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
 }
 
 /* calculator surface */
 .calculator form{
-  width: min(980px, 92vw);
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -703,7 +716,7 @@ a.card:hover,
 
 /* result box for calculator (light, readable) */
 #calorie-result.disclosure{
-  width: min(980px, 92vw);
+  width: 100%;
   margin: 14px auto 0;
   background: rgba(255,255,255,0.88);
   border: 1px solid rgba(15,23,42,0.10);
@@ -727,7 +740,7 @@ a.card:hover,
 
 /* checklist on a light surface */
 .checklist .bullet-list{
-  width: min(980px, 92vw);
+  width: 100%;
   margin: 0 auto;
   padding: 16px 26px 18px;
   border-radius: var(--radius-lg);
@@ -737,6 +750,12 @@ a.card:hover,
   backdrop-filter: blur(8px);
 }
 .checklist .bullet-list li{ color: var(--ink-soft); }
+
+.nutrition-cards .card-group,
+.safety-cards .card-group,
+.toolkit .card-group{
+  width: 100%;
+}
 
 /* accordion (your current HTML uses buttons + panels) */
 .accordion .card{
@@ -768,7 +787,7 @@ a.card:hover,
 
 /* affiliate disclosure (inside light surface) */
 .affiliate-disclosure{
-  width: min(980px, 92vw);
+  width: 100%;
   margin: 14px auto 0;
   background: rgba(255,255,255,0.90);
   border-left: 4px solid #3366ff;
