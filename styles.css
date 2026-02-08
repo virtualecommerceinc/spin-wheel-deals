@@ -687,3 +687,147 @@ a {
   border-radius: 6px;
   font-weight: 600;
 }
+
+/* New reusable components for dog-health redesign */
+
+.content-surface {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+}
+
+.toc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 2rem 0;
+}
+
+.toc-chips a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #0f172a;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.toc-chips a:hover {
+  background: #fff;
+  border-color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+}
+
+.info-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+
+.calculator-card input,
+.calculator-card select {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.calculator-card label {
+  display: block;
+  margin: 1rem 0 0.5rem 0;
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.calculator-output {
+  background: rgba(240, 248, 255, 0.6);
+  padding: 1.5rem;
+  border-radius: 4px;
+  margin: 1.5rem 0;
+  border-left: 4px solid #0f172a;
+}
+
+.calculator-disclaimer {
+  background: rgba(255, 200, 0, 0.1);
+  border-left: 3px solid #ffcc00;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.accordion-item {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.accordion-item summary {
+  padding: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #0f172a;
+  user-select: none;
+}
+
+.accordion-item summary:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.accordion-item[open] summary {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.accordion-item p {
+  padding: 0 1rem 1rem 1rem;
+  margin: 0;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+.affiliate-disclosure {
+  background: rgba(100, 150, 255, 0.1);
+  border-left: 4px solid #3366ff;
+  border-radius: 4px;
+  padding: 1.25rem;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+  color: #0f172a;
+}
+
+.affiliate-disclosure strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
