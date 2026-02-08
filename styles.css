@@ -4,7 +4,7 @@ html, body { height: 100%; }
 
 :root{
   --ink: #0f172a;
-  --ink-soft: rgba(15, 23, 42, 0.85);
+  --ink-soft: rgba(15, 23, 42, 0.92);
   --paper: rgba(255,255,255,0.90);
   --paper-soft: rgba(255,255,255,0.82);
   --glass-dark: rgba(5, 15, 28, 0.75);
@@ -757,6 +757,29 @@ a.card:hover,
   width: 100%;
 }
 
+/* Readability upgrades for guide pages */
+.calculator p, .checklist p, .nutrition-cards p, .accordion p, .safety-cards p, .toolkit p {
+  line-height: 1.65;
+}
+
+.calculator .content-block p, .checklist .content-block p, .nutrition-cards .content-block p,
+.accordion .accordion-panel p, .safety-cards .content-block p, .toolkit .content-block p {
+  margin: 0 0 10px;
+}
+
+.accordion .accordion-panel p:last-child {
+  margin-bottom: 0;
+}
+
+.calculator .bullet-list li, .checklist .bullet-list li, .nutrition-cards .bullet-list li,
+.accordion .bullet-list li, .safety-cards .bullet-list li, .toolkit .bullet-list li {
+  line-height: 1.6;
+}
+
+.accordion .accordion-panel .bullet-list {
+  margin-top: 10px;
+}
+
 /* accordion (your current HTML uses buttons + panels) */
 .accordion .card{
   text-align: left;
@@ -780,9 +803,7 @@ a.card:hover,
   background: rgba(255,255,255,0.92);
 }
 .accordion .accordion-panel p{
-  margin: 0;
   color: var(--ink-soft);
-  line-height: 1.6;
 }
 
 /* affiliate disclosure (inside light surface) */
