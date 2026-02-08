@@ -11,6 +11,15 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Background (required on every page that should show the animated sky/clouds/trees/grass) -->
+  <div class="background" aria-hidden="true">
+    <div class="layer sky"></div>
+    <div class="layer clouds"></div>
+    <div class="layer trees"></div>
+    <div class="layer grass"></div>
+  </div>
+
   <header class="site-header">
     <div class="site-header__inner">
       <a class="site-logo" href="index.html">Spin Wheel Deals</a>
@@ -55,7 +64,7 @@
       <a href="#preventive-care">Preventive Care</a>
       <a href="#nutrition-tips">Nutrition Tips</a>
       <a href="#warning-signs">Warning Signs</a>
-      <a href="#parasite-safety">Parasite & Seasonal Safety</a>
+      <a href="#parasite-safety">Parasite &amp; Seasonal Safety</a>
       <a href="#health-toolkit">Wellness Toolkit</a>
     </nav>
 
@@ -96,12 +105,12 @@
     <section id="preventive-care" class="checklist">
       <h2>Preventive Care Checklist</h2>
       <ul class="bullet-list">
-        <li>Annual vet exam & vaccinations</li>
-        <li>Dental check & clean as needed</li>
+        <li>Annual vet exam &amp; vaccinations</li>
+        <li>Dental check &amp; clean as needed</li>
         <li>Parasite prevention (fleas, ticks, heartworm)</li>
-        <li>Regular grooming & nail trims</li>
+        <li>Regular grooming &amp; nail trims</li>
         <li>Weight monitoring every 3 months</li>
-        <li>Behavior & mobility assessments</li>
+        <li>Behavior &amp; mobility assessments</li>
       </ul>
     </section>
 
@@ -115,7 +124,7 @@
         </div>
         <div class="card">
           <h3>Portion Control</h3>
-          <p>Measure meals & avoid free-feeding to prevent obesity.</p>
+          <p>Measure meals &amp; avoid free-feeding to prevent obesity.</p>
         </div>
         <div class="card">
           <h3>Fresh Water</h3>
@@ -127,20 +136,23 @@
     <!-- Warning Signs Accordion -->
     <section id="warning-signs" class="accordion">
       <h2>Warning Signs</h2>
+
       <div class="card">
-        <button class="accordion-toggle">Digestive Issues</button>
+        <button class="accordion-toggle" type="button">Digestive Issues</button>
         <div class="accordion-panel">
           <p>Persistent vomiting or diarrhea can signal infections or dietary issues.</p>
         </div>
       </div>
+
       <div class="card">
-        <button class="accordion-toggle">Respiratory Symptoms</button>
+        <button class="accordion-toggle" type="button">Respiratory Symptoms</button>
         <div class="accordion-panel">
           <p>Coughing, sneezing, or difficulty breathing needs prompt vet attention.</p>
         </div>
       </div>
+
       <div class="card">
-        <button class="accordion-toggle">Mobility Problems</button>
+        <button class="accordion-toggle" type="button">Mobility Problems</button>
         <div class="accordion-panel">
           <p>Stiffness, limping, or reluctance to move may indicate joint issues.</p>
         </div>
@@ -149,10 +161,10 @@
 
     <!-- Parasites & Seasonal Safety -->
     <section id="parasite-safety" class="safety-cards">
-      <h2>Parasite & Seasonal Safety</h2>
+      <h2>Parasite &amp; Seasonal Safety</h2>
       <div class="card-group">
         <div class="card">
-          <h3>Flea & Tick Prevention</h3>
+          <h3>Flea &amp; Tick Prevention</h3>
           <p>Use vet-recommended topical or oral preventatives year-round.</p>
         </div>
         <div class="card">
@@ -161,7 +173,7 @@
         </div>
         <div class="card">
           <h3>Hot/Cold Weather Tips</h3>
-          <p>Avoid mid-day heat; provide shade & coat protection in winter.</p>
+          <p>Avoid mid-day heat; provide shade &amp; coat protection in winter.</p>
         </div>
       </div>
     </section>
@@ -180,13 +192,14 @@
         </a>
         <a class="card" href="https://amzn.to/healthproduct3" target="_blank" rel="noopener">
           <h3>Undercoat Deshedding Tool</h3>
-          <p>Reduce shedding & improve coat health.</p>
+          <p>Reduce shedding &amp; improve coat health.</p>
         </a>
         <a class="card" href="https://amzn.to/healthproduct4" target="_blank" rel="noopener">
           <h3>Enzymatic Toothpaste</h3>
           <p>Supports dental hygiene without brushing.</p>
         </a>
       </div>
+
       <a href="https://virtualecommerceinc.com/spin-wheel-deals/dog-toys.html" class="cta-btn">Discover More Tools</a>
     </section>
   </main>
@@ -217,6 +230,7 @@
       const mer = Math.round(rer * factor);
       document.getElementById('result-text').textContent = mer + ' kcal/day';
     });
+
     // Accordion Behavior
     document.querySelectorAll('.accordion-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
