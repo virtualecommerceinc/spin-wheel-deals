@@ -11,6 +11,15 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Background (required on every page that should show the animated sky/clouds/trees/grass) -->
+  <div class="background" aria-hidden="true">
+    <div class="layer sky"></div>
+    <div class="layer clouds"></div>
+    <div class="layer trees"></div>
+    <div class="layer grass"></div>
+  </div>
+
   <header class="site-header">
     <div class="site-header__inner">
       <a class="site-logo" href="index.html">Spin Wheel Deals</a>
@@ -55,7 +64,7 @@
       <a href="#preventive-care">Preventive Care</a>
       <a href="#nutrition-tips">Nutrition Basics</a>
       <a href="#warning-signs">Warning Signs</a>
-      <a href="#parasite-safety">Parasite & Seasonal Safety</a>
+      <a href="#parasite-safety">Parasite &amp; Seasonal Safety</a>
       <a href="#health-toolkit">Wellness Toolkit</a>
       <a href="#sources-trust">Sources & Trust</a>
     </nav>
@@ -126,11 +135,12 @@
 
       <h3>Weekly Care</h3>
       <ul class="bullet-list">
-        <li>Check ears for redness, odor, or discharge</li>
-        <li>Brush teeth (daily is ideal, but weekly at minimum)</li>
-        <li>Inspect coat and skin for lumps, bumps, or irritation</li>
-        <li>Monitor food and water intake</li>
-        <li>Observe energy levels and bathroom habits</li>
+        <li>Annual vet exam &amp; vaccinations</li>
+        <li>Dental check &amp; clean as needed</li>
+        <li>Parasite prevention (fleas, ticks, heartworm)</li>
+        <li>Regular grooming &amp; nail trims</li>
+        <li>Weight monitoring every 3 months</li>
+        <li>Behavior &amp; mobility assessments</li>
       </ul>
 
       <h3>Monthly Care</h3>
@@ -185,6 +195,8 @@
         <div class="card">
           <h3>Adults (1-7 Years)</h3>
           <p>Need food labeled for "adult maintenance." Focus on maintaining healthy weight. Adjust portions based on activity level and body condition.</p>
+          <h3>Portion Control</h3>
+          <p>Measure meals &amp; avoid free-feeding to prevent obesity.</p>
         </div>
         <div class="card">
           <h3>Seniors (7+ Years)</h3>
@@ -214,6 +226,10 @@
 
       <div class="card">
         <button class="accordion-toggle" aria-expanded="false">Digestive Issues (Vomiting & Diarrhea)</button>
+      <h2>Warning Signs</h2>
+
+      <div class="card">
+        <button class="accordion-toggle" type="button">Digestive Issues</button>
         <div class="accordion-panel">
           <p><strong>Possible mild causes:</strong> Eating something unusual, dietary changes, minor stomach upset, stress</p>
           <p><strong>Home monitoring may be okay if:</strong> Single episode, dog is otherwise alert and active, drinking water normally</p>
@@ -232,6 +248,7 @@
 
       <div class="card">
         <button class="accordion-toggle" aria-expanded="false">Respiratory Symptoms (Coughing, Breathing Changes)</button>
+        <button class="accordion-toggle" type="button">Respiratory Symptoms</button>
         <div class="accordion-panel">
           <p><strong>Possible mild causes:</strong> Occasional cough from drinking too fast, mild allergies, brief excitement</p>
           <p><strong>Home monitoring may be okay if:</strong> Rare, brief coughing episodes with no other symptoms</p>
@@ -250,6 +267,7 @@
 
       <div class="card">
         <button class="accordion-toggle" aria-expanded="false">Mobility & Pain</button>
+        <button class="accordion-toggle" type="button">Mobility Problems</button>
         <div class="accordion-panel">
           <p><strong>Possible mild causes:</strong> Temporary stiffness after heavy exercise, minor muscle soreness</p>
           <p><strong>Home monitoring may be okay if:</strong> Mild stiffness that improves with rest within a day or two</p>
@@ -324,6 +342,11 @@
         <div class="card">
           <h3>Heartworm</h3>
           <p>Transmitted by mosquitoes, heartworm disease is serious and potentially fatal. Prevention is simple and effective; treatment is expensive, lengthy, and hard on your dog. Monthly preventatives are standard.</p>
+      <h2>Parasite &amp; Seasonal Safety</h2>
+      <div class="card-group">
+        <div class="card">
+          <h3>Flea &amp; Tick Prevention</h3>
+          <p>Use vet-recommended topical or oral preventatives year-round.</p>
         </div>
         <div class="card">
           <h3>Intestinal Parasites</h3>
@@ -364,6 +387,8 @@
             <li>Consider a coat or sweater for dogs with thin fur</li>
             <li>Keep dogs away from frozen ponds and lakes</li>
           </ul>
+          <h3>Hot/Cold Weather Tips</h3>
+          <p>Avoid mid-day heat; provide shade &amp; coat protection in winter.</p>
         </div>
       </div>
     </section>
@@ -391,6 +416,9 @@
         <a class="card" href="https://amzn.to/4tg2CMd" target="_blank" rel="noopener sponsored">
           <h3>Furminator Deshedding Brush</h3>
           <p><strong>Why vets recommend:</strong> Regular brushing removes loose fur, distributes natural oils, and lets you check for skin issues, lumps, or parasites. Reduces matting and hairballs.</p>
+        <a class="card" href="https://amzn.to/healthproduct3" target="_blank" rel="noopener">
+          <h3>Undercoat Deshedding Tool</h3>
+          <p>Reduce shedding &amp; improve coat health.</p>
         </a>
         <a class="card" href="https://amzn.to/46qG5lR" target="_blank" rel="noopener sponsored">
           <h3>Professional Nail Clippers</h3>
@@ -425,6 +453,8 @@
         
         <p class="disclosure__fine"><strong>Last reviewed:</strong> January 2025. We periodically review and update this content, but veterinary recommendations evolve. Always verify current guidelines with your veterinarian.</p>
       </div>
+
+      <a href="https://virtualecommerceinc.com/spin-wheel-deals/dog-toys.html" class="cta-btn">Discover More Tools</a>
     </section>
   </main>
 
@@ -478,6 +508,8 @@
     });
     
     // Accordion Behavior with Accessibility
+
+    // Accordion Behavior
     document.querySelectorAll('.accordion-toggle').forEach(btn => {
       // Initialize panels as hidden
       const panel = btn.nextElementSibling;

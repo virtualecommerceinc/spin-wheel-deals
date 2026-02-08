@@ -1,25 +1,47 @@
 /* ============== Base ============== */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
+
+:root{
+  --ink: #0f172a;
+  --ink-soft: rgba(15, 23, 42, 0.85);
+  --paper: rgba(255,255,255,0.90);
+  --paper-soft: rgba(255,255,255,0.82);
+  --glass-dark: rgba(5, 15, 28, 0.75);
+  --border-light: rgba(255, 255, 255, 0.12);
+  --accent1: #ffd34d;
+  --accent2: #ffb400;
+
+  /* extra tokens */
+  --shadow-lg: 0 18px 45px rgba(0,0,0,0.18);
+  --shadow-md: 0 12px 30px rgba(0,0,0,0.12);
+  --radius-lg: 20px;
+  --radius-md: 14px;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  color: #fff;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  color: var(--ink);
   overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus-visible {
-  text-decoration: underline;
-}
+a { color: inherit; text-decoration: none; }
+a:hover, a:focus-visible { text-decoration: underline; }
 
 .skip-link {
   position: absolute;
@@ -31,10 +53,7 @@ a:focus-visible {
   border-radius: 999px;
   z-index: 20;
 }
-
-.skip-link:focus {
-  left: 16px;
-}
+.skip-link:focus { left: 16px; }
 
 /* ============== Background ============== */
 .background {
@@ -51,9 +70,7 @@ a:focus-visible {
   left: 0;
   animation: move 60s linear infinite;
 }
-.layer.sky {
-  background: linear-gradient(to bottom, #7ad3ff 0%, #9ef0c8 100%);
-}
+.layer.sky { background: linear-gradient(to bottom, #7ad3ff 0%, #9ef0c8 100%); }
 .layer.clouds {
   background:
     radial-gradient(circle at 25% 30%, rgba(255,255,255,0.85) 18%, transparent 19%),
@@ -87,8 +104,9 @@ a:focus-visible {
   top: 0;
   z-index: 10;
   backdrop-filter: blur(10px);
-  background: rgba(5, 15, 28, 0.75);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--glass-dark);
+  border-bottom: 1px solid var(--border-light);
+  color: rgba(255,255,255,0.92);
 }
 
 .site-header__inner {
@@ -99,31 +117,94 @@ a:focus-visible {
   padding: 16px clamp(16px, 4vw, 40px);
 }
 
+/* ===== Header Logo CTA (CSS-only, no HTML changes) ===== */
 .site-logo {
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
   font-size: 18px;
   letter-spacing: 0.4px;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
 }
 
+/* Small wheel icon */
+.site-logo::before{
+  content:"";
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  flex: 0 0 22px;
+  background:
+    conic-gradient(from 0deg,
+      #ffd34d 0 12.5%,
+      rgba(255,255,255,0.18) 12.5% 25%,
+      #ffb400 25% 37.5%,
+      rgba(255,255,255,0.18) 37.5% 50%,
+      #ffd34d 50% 62.5%,
+      rgba(255,255,255,0.18) 62.5% 75%,
+      #ffb400 75% 87.5%,
+      rgba(255,255,255,0.18) 87.5% 100%);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.28),
+    inset 0 0 0 2px rgba(0,0,0,0.12);
+}
+
+/* CTA text + bouncing arrow */
+.site-logo::after{
+  content:"\2192  Let your pup pick!";
+  color: rgba(255,255,255,0.92);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  margin-left: 2px;
+  white-space: nowrap;
+  opacity: 0.95;
+  animation: logo-nudge 1.9s ease-in-out infinite;
+}
+@keyframes logo-nudge{
+  0%,100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
+}
+
+.site-logo:hover{
+  text-decoration: none;
+  border-color: rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.10);
+}
+.site-logo:focus-visible{
+  outline: 3px solid rgba(255,255,255,0.55);
+  outline-offset: 3px;
+}
+@media (max-width: 520px){
+  .site-logo::after{ content:""; }
+}
+
+/* ===== Nav ===== */
 .site-nav {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   font-size: 14px;
 }
-
 .site-nav__link {
   padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid transparent;
   background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.92);
 }
-
+.site-nav__link:hover { background: rgba(255,255,255,0.14); text-decoration: none; }
 .site-nav__link.is-active {
-  border-color: rgba(255, 255, 255, 0.7);
-  background: rgba(255, 255, 255, 0.2);
-  font-weight: 600;
+  border-color: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.20);
+  font-weight: 700;
   color: #fff;
 }
 
@@ -136,112 +217,106 @@ a:focus-visible {
   gap: 24px;
 }
 
-.game-area {
-  display: grid;
-  place-items: center;
-  width: 100%;
-  gap: 18px;
-}
+/* ============== Generic typography helpers ============== */
+.hero { text-align: center; margin-bottom: 14px; }
 
-.hero {
-  text-align: center;
-  margin-bottom: 14px;
-}
+/* Keep hero text bright over busy background */
 #title {
   margin: 0;
   font-size: clamp(28px, 4.5vw, 44px);
   letter-spacing: 0.2px;
+  color: #fff;
   text-shadow: 0 8px 24px rgba(0,0,0,0.35);
 }
+
 .subtitle {
   margin: 10px 0 0;
   opacity: 0.95;
   font-size: clamp(14px, 2.2vw, 18px);
+  color: rgba(255,255,255,0.94);
   text-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
+
 .eyebrow {
   margin: 0 0 8px;
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1.2px;
-  opacity: 0.78;
-}
-
-.page-hero {
-  max-width: 800px;
-  text-align: center;
-  padding: 12px 12px 0;
-}
-
-.page-hero h1 {
-  margin: 0 0 10px;
-  font-size: clamp(28px, 4vw, 40px);
-}
-
-.page-subtitle {
-  margin: 0;
-  font-size: clamp(15px, 2.4vw, 18px);
-  opacity: 0.9;
+  opacity: 0.85;
+  color: rgba(255,255,255,0.9);
   text-shadow: 0 6px 18px rgba(0,0,0,0.35);
 }
 
+.page-hero {
+  max-width: 900px;
+  text-align: center;
+  padding: 12px 12px 0;
+  color: var(--ink);
+}
+.page-hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--ink);
+}
+.page-subtitle {
+  margin: 0;
+  font-size: clamp(15px, 2.4vw, 18px);
+  color: var(--ink-soft);
+}
+
+/* ============== Blog actions ============== */
 .blog-actions {
   width: min(960px, 92vw);
   display: flex;
   justify-content: center;
   margin: 18px 0 4px;
 }
+.blog-actions__link { text-decoration: none; }
 
-.blog-actions__link {
-  text-decoration: none;
-}
-
+/* ============== Readable content containers ============== */
 .content-card {
-  width: min(720px, 92vw);
+  width: min(760px, 92vw);
   padding: 20px 22px;
-  border-radius: 20px;
-  background: rgba(0,0,0,0.25);
-  border: 1px solid rgba(255,255,255,0.16);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.28);
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  border: 1px solid rgba(15,23,42,0.10);
+  box-shadow: var(--shadow-lg);
   backdrop-filter: blur(8px);
+  color: var(--ink);
 }
-
-.content-card h2 {
-  margin-top: 0;
-}
+.content-card h1, .content-card h2, .content-card h3 { color: var(--ink); }
+.content-card p, .content-card li { color: var(--ink-soft); }
 
 .bullet-list {
-  margin: 12px 0 16px;
-  padding-left: 20px;
-  line-height: 1.65;
-}
-
-.bullet-list li {
-  margin-bottom: 8px;
+  margin: 12px 0 0;
+  padding-left: 18px;
+  line-height: 1.55;
 }
 
 .section-heading {
   width: min(960px, 92vw);
   margin: 8px 0 0;
   text-align: left;
+  background: var(--paper-soft);
+  border: 1px solid rgba(15,23,42,0.08);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-md);
 }
-
 .section-heading h2 {
   margin: 0 0 6px;
   font-size: clamp(22px, 3vw, 28px);
+  color: var(--ink);
 }
-
-.section-heading p {
-  margin: 0;
-  opacity: 0.85;
-}
+.section-heading p { margin: 0; color: var(--ink-soft); }
 
 .post-meta {
   margin: 0 0 6px;
   font-size: 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  opacity: 0.7;
+  opacity: 0.85;
+  color: rgba(15,23,42,0.65);
 }
 
 /* ============== Product Grid ============== */
@@ -256,17 +331,17 @@ a:focus-visible {
   display: grid;
   gap: 16px;
   padding: 20px;
-  border-radius: 20px;
-  background: rgba(0,0,0,0.2);
-  border: 1px solid rgba(255,255,255,0.16);
-  box-shadow: 0 18px 45px rgba(0,0,0,0.28);
+  border-radius: var(--radius-lg);
+  background: var(--paper-soft);
+  border: 1px solid rgba(15,23,42,0.10);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.16);
   backdrop-filter: blur(8px);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--ink);
 }
-
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 22px 50px rgba(0,0,0,0.35);
+  box-shadow: 0 22px 50px rgba(0,0,0,0.22);
 }
 
 .product-card__media {
@@ -274,36 +349,25 @@ a:focus-visible {
   width: 100%;
   aspect-ratio: 1 / 1;
   border-radius: 18px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(15,23,42,0.05);
   display: grid;
   place-items: center;
   overflow: hidden;
 }
+.product-card__media img { width: 100%; height: 100%; object-fit: cover; }
 
-.product-card__media img {
+.product-card__body h2 { margin: 0 0 8px; font-size: 20px; color: var(--ink); }
+.product-card__body p { margin: 0; line-height: 1.55; color: var(--ink-soft); }
+.product-card__cta { margin-top: 14px; text-decoration: none; text-align: center; }
+
+/* ============== Wheel Card + Game Area ============== */
+.game-area {
+  display: grid;
+  place-items: center;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  gap: 18px;
 }
 
-.product-card__body h2 {
-  margin: 0 0 8px;
-  font-size: 20px;
-}
-
-.product-card__body p {
-  margin: 0;
-  line-height: 1.5;
-  opacity: 0.9;
-}
-
-.product-card__cta {
-  margin-top: 14px;
-  text-decoration: none;
-  text-align: center;
-}
-
-/* ============== Card ============== */
 .wheel-card {
   width: min(520px, 92vw);
   padding: 18px 16px 16px;
@@ -312,6 +376,7 @@ a:focus-visible {
   border: 1px solid rgba(255,255,255,0.14);
   box-shadow: 0 18px 55px rgba(0,0,0,0.30);
   backdrop-filter: blur(8px);
+  color: #fff;
 }
 
 /* ============== Wheel Area ============== */
@@ -324,15 +389,12 @@ a:focus-visible {
   place-items: center;
 }
 
-/* Make it obvious the wheel is clickable */
 .wheel-tap-zone {
   cursor: pointer;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
-.wheel-tap-zone:focus {
-  outline: none;
-}
+.wheel-tap-zone:focus { outline: none; }
 .wheel-tap-zone:focus-visible {
   outline: 3px solid rgba(255,255,255,0.65);
   outline-offset: 6px;
@@ -368,40 +430,29 @@ a:focus-visible {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Cpath fill='%23ffffff' d='M40 54c-8 0-15-10-15-22S32 10 40 10s15 10 15 22-7 22-15 22Zm48 0c-8 0-15-10-15-22S80 10 88 10s15 10 15 22-7 22-15 22ZM22 78c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15Zm84 0c-7 0-12-7-12-15s5-15 12-15 12 7 12 15-5 15-12 15ZM64 118c-16 0-34-10-34-26 0-14 12-22 22-26 4-2 8-3 12-3s8 1 12 3c10 4 22 12 22 26 0 16-18 26-34 26Z'/%3E%3C/svg%3E");
 }
 
-/* ============== Dog Nose Pointer (moved to 3 o'clock) ============== */
+/* ============== Dog Nose Pointer (3 o'clock) ============== */
 .pointer {
   position: absolute;
   top: 50%;
   right: -26px;
   left: auto;
-
-  /* CHANGED: rotate -270deg instead of -90deg (adds 180° flip) */
   transform: translateY(-50%) rotate(-270deg);
-
   width: 86px;
   height: 86px;
   z-index: 4;
   pointer-events: none;
-
-  /* little bounce so it's playful but not distracting */
   animation: pointer-bob 2.2s ease-in-out infinite;
-
-  /* Dog head badge as inline SVG (static-safe) */
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-
-  /* SVG: tan dog face + dark nose "point" at bottom center */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'%3E%3Cdefs%3E%3Cfilter id='s' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeDropShadow dx='0' dy='6' stdDeviation='6' flood-color='rgba(0,0,0,0.35)'/%3E%3C/filter%3E%3C/defs%3E%3Cg filter='url(%23s)'%3E%3Cpath d='M24 62c0-22 16-40 46-40s46 18 46 40c0 32-18 56-46 56S24 94 24 62Z' fill='%23F4C28B'/%3E%3Cpath d='M34 54c-10-8-14-20-6-30 10-12 26 0 30 8' fill='%23C9925C'/%3E%3Cpath d='M106 54c10-8 14-20 6-30-10-12-26 0-30 8' fill='%23C9925C'/%3E%3Ccircle cx='54' cy='66' r='6' fill='%232B1B00' opacity='0.55'/%3E%3Ccircle cx='86' cy='66' r='6' fill='%232B1B00' opacity='0.55'/%3E%3Cpath d='M58 84c6 6 18 6 24 0' stroke='%232B1B00' stroke-width='6' stroke-linecap='round' opacity='0.35'/%3E%3Cpath d='M70 96l-14 16h28l-14-16Z' fill='%232B1B00'/%3E%3Ccircle cx='70' cy='92' r='10' fill='%232B1B00'/%3E%3Ccircle cx='67' cy='89' r='3' fill='white' opacity='0.25'/%3E%3C/g%3E%3C/svg%3E");
 }
-
 @keyframes pointer-bob {
-  /* CHANGED: keep the same -270deg rotation throughout the bob */
   0%, 100% { transform: translateY(-50%) translateX(0) rotate(-270deg); }
   50% { transform: translateY(-50%) translateX(2px) rotate(-270deg); }
 }
 
-/* ============== Paw Button ============== */
+/* ============== Paw Button (game) ============== */
 .paw-btn {
   width: 100%;
   margin-top: 10px;
@@ -413,8 +464,7 @@ a:focus-visible {
   gap: 12px;
   align-items: center;
   justify-content: center;
-
-  background: linear-gradient(135deg, #ffd34d, #ffb400);
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
   color: #2b1b00;
   font-weight: 800;
   font-size: 18px;
@@ -423,32 +473,29 @@ a:focus-visible {
   transition: transform 0.12s ease, filter 0.12s ease, opacity 0.12s ease;
 }
 .paw-btn svg { fill: #2b1b00; }
-.paw-btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.paw-btn:hover { filter: brightness(1.05); transform: translateY(-1px); text-decoration: none; }
 .paw-btn:active { transform: translateY(1px) scale(0.99); }
-.paw-btn:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-  transform: none;
-  filter: none;
-}
+.paw-btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; filter: none; }
 .paw-btn__text { line-height: 1.1; }
 
-/* ============== Message / Result ============== */
+/* ============== Message / Result (game) ============== */
 #message {
   margin-top: 14px;
   text-align: center;
   font-size: 16px;
   line-height: 1.45;
+  color: rgba(255,255,255,0.95);
   text-shadow: 0 6px 16px rgba(0,0,0,0.32);
 }
 
-/* ============== Disclosure (tighter + smaller) ============== */
+/* ============== Disclosure (game) ============== */
 .disclosure {
   margin-top: 14px;
   padding: 10px 10px 8px;
   border-radius: 14px;
   background: rgba(0,0,0,0.16);
   border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.92);
 }
 .disclosure__headline {
   margin: 0 0 6px;
@@ -464,18 +511,15 @@ a:focus-visible {
   line-height: 1.35;
   opacity: 0.88;
 }
-.disclosure__fine {
-  font-size: 11px;
-  opacity: 0.78;
-  margin-top: 8px;
-}
+.disclosure__fine { font-size: 11px; opacity: 0.78; }
 
+/* ============== Footer ============== */
 .site-footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(5, 15, 28, 0.75);
+  border-top: 1px solid var(--border-light);
+  background: var(--glass-dark);
   backdrop-filter: blur(10px);
+  color: rgba(255,255,255,0.92);
 }
-
 .site-footer__inner {
   display: flex;
   flex-wrap: wrap;
@@ -485,13 +529,267 @@ a:focus-visible {
   padding: 18px clamp(16px, 4vw, 40px);
   font-size: 13px;
 }
+.site-footer__links { display: flex; gap: 16px; }
 
-.site-footer__links {
-  display: flex;
-  gap: 16px;
+/* ===== Focus styles (accessible, but not ugly) ===== */
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(255,255,255,0.55);
+  outline-offset: 3px;
 }
 
-/* Slightly roomier desktop */
+/* =========================================================
+   Dog Health / Dog Training “Guide Page” System (fixed)
+   Key fix: DO NOT turn every .card into a grid container.
+   Only .card-group becomes the grid wrapper.
+   ========================================================= */
+
+/* hero on guide pages needs readable contrast */
+.hero-section {
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto 18px;
+  padding: 10px 8px 0;
+  color: #fff;
+}
+.hero-section h1{
+  margin: 12px 0 10px;
+  font-size: clamp(32px, 4vw, 52px);
+  color: #fff;
+  text-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+.hero-section .subtitle{
+  margin: 0 auto;
+  max-width: 62ch;
+  font-size: clamp(16px, 2.4vw, 20px);
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 8px 22px rgba(0,0,0,0.32);
+}
+
+/* primary CTA style (used across pages) */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 14px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffd700, #ff8800);
+  color: #1a1a1a;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.20);
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+.cta-btn:hover { text-decoration: none; filter: brightness(1.03); transform: translateY(-1px); }
+.cta-btn:active { transform: translateY(1px); }
+
+/* quick jump nav (chips) */
+.jump-nav {
+  width: min(980px, 92vw);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px 0 10px;
+  padding: 0 4px;
+}
+
+.jump-nav a {
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(15,23,42,0.12);
+  font-size: 13px;
+  color: var(--ink);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+}
+.jump-nav a:hover { text-decoration: none; background: #fff; }
+
+/* section wrapper used by guide pages */
+.calculator,
+.checklist,
+.nutrition-cards,
+.accordion,
+.safety-cards,
+.toolkit{
+  width: min(980px, 92vw);
+  margin: 18px auto;
+}
+
+/* “card group” is the GRID WRAPPER */
+.card-group{
+  width: min(980px, 92vw);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin: 18px auto;
+}
+
+/* the actual card */
+.card{
+  padding: 18px 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.10);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  color: var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+a.card:hover,
+.card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(0,0,0,0.16);
+  text-decoration: none;
+}
+.card h3{ margin: 0 0 8px; color: var(--ink); }
+.card p{ margin: 0; color: var(--ink-soft); line-height: 1.5; }
+
+/* calculator styling on light surface */
+.calculator h2,
+.checklist h2,
+.nutrition-cards h2,
+.accordion h2,
+.safety-cards h2,
+.toolkit h2{
+  margin: 0 0 12px;
+  font-size: clamp(22px, 3vw, 30px);
+  color: #fff;
+  text-shadow: 0 10px 22px rgba(0,0,0,0.30);
+  text-align: center;
+}
+
+/* calculator surface */
+.calculator form{
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  align-items: end;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.10);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+}
+
+.calculator label{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.calculator input,
+.calculator select{
+  padding: 10px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(15,23,42,0.18);
+  font-size: 14px;
+}
+
+.calculator .cta-btn{
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* result box for calculator (light, readable) */
+#calorie-result.disclosure{
+  width: min(980px, 92vw);
+  margin: 14px auto 0;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.10);
+  color: var(--ink);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+}
+#calorie-result .disclosure__headline{
+  color: rgba(15,23,42,0.85);
+  opacity: 1;
+}
+#calorie-result .disclosure__text{
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--ink);
+  opacity: 1;
+}
+#calorie-result .disclosure__fine{
+  color: rgba(15,23,42,0.70);
+  opacity: 1;
+}
+
+/* checklist on a light surface */
+.checklist .bullet-list{
+  width: min(980px, 92vw);
+  margin: 0 auto;
+  padding: 16px 26px 18px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.10);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+}
+.checklist .bullet-list li{ color: var(--ink-soft); }
+
+/* accordion (your current HTML uses buttons + panels) */
+.accordion .card{
+  text-align: left;
+  padding: 0;
+  overflow: hidden;
+}
+.accordion .accordion-toggle{
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  background: rgba(15,23,42,0.06);
+  border: none;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  color: var(--ink);
+}
+.accordion .accordion-panel{
+  display: none;
+  padding: 14px 16px 16px;
+  background: rgba(255,255,255,0.92);
+}
+.accordion .accordion-panel p{
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* affiliate disclosure (inside light surface) */
+.affiliate-disclosure{
+  width: min(980px, 92vw);
+  margin: 14px auto 0;
+  background: rgba(255,255,255,0.90);
+  border-left: 4px solid #3366ff;
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--ink);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+}
+.affiliate-disclosure strong{
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* toolkit CTA at bottom */
+.toolkit .cta-btn{
+  display: flex;
+  width: min(420px, 92vw);
+  margin: 12px auto 0;
+}
+
+/* ============== Responsive refinements ============== */
 @media (min-width: 900px) {
   .wheel-card { padding: 22px 20px 18px; }
   #message { font-size: 17px; }
@@ -499,547 +797,10 @@ a:focus-visible {
 }
 
 @media (min-width: 1100px) {
-  .product-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+  .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 720px) {
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .product-card {
-    padding: 18px;
-  }
-}
-
-/* ============== CTA Button ============== */
-.cta-btn {
-  display: inline-block;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #ffd700, #ff8800);
-  color: #1a1a1a;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cta-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-  text-decoration: none;
-}
-
-/* ============================================================
-   DOG HEALTH PAGE SPECIFIC STYLES
-   Light text on dark backgrounds, dark text on light cards
-   ============================================================ */
-
-/* Hero Section */
-.hero-section {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 40px;
-  color: #fff;
-}
-
-.hero-section .eyebrow {
-  text-transform: uppercase;
-  opacity: 0.8;
-  letter-spacing: 1.5px;
-  font-size: 13px;
-  color: #fff;
-}
-
-.hero-section h1 {
-  margin: 12px 0;
-  font-size: clamp(32px, 4vw, 48px);
-  color: #fff;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.4);
-}
-
-.hero-section .subtitle {
-  font-size: clamp(16px, 2.5vw, 20px);
-  opacity: 0.9;
-  color: #fff;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
-
-.hero-section .cta-btn {
-  display: inline-block;
-  margin-top: 20px;
-}
-
-/* Jump Navigation */
-.jump-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin: 32px 0;
-  padding: 0 16px;
-}
-
-.jump-nav a {
-  padding: 10px 16px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 999px;
-  font-size: 14px;
-  color: #fff;
-  transition: all 0.2s ease;
-}
-
-.jump-nav a:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.4);
-  text-decoration: none;
-}
-
-/* Card Group - Generic grid for cards */
-.card-group {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-  margin-bottom: 40px;
-}
-
-/* Card Styles - Light background with dark text for readability */
-.card {
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 16px;
-  text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  color: #1a1a1a;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  text-decoration: none;
-  display: block;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  text-decoration: none;
-}
-
-.card h3 {
-  margin: 0 0 12px 0;
-  color: #0f172a;
-  font-size: 1.2rem;
-}
-
-.card p {
-  margin: 0;
-  color: #4a5568;
-  line-height: 1.6;
-}
-
-/* Content Block - For explanatory text sections */
-.content-block {
-  width: min(800px, 90vw);
-  margin: 24px auto;
-  padding: 24px 28px;
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 16px;
-  color: #1a1a1a;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.content-block h3 {
-  margin: 0 0 16px 0;
-  color: #0f172a;
-  font-size: 1.4rem;
-}
-
-.content-block h4 {
-  margin: 24px 0 12px 0;
-  color: #0f172a;
-  font-size: 1.15rem;
-}
-
-.content-block p {
-  margin: 0 0 16px 0;
-  line-height: 1.7;
-  color: #2d3748;
-}
-
-.content-block p:last-child {
-  margin-bottom: 0;
-}
-
-.content-block .bullet-list {
-  color: #2d3748;
-}
-
-.content-block .bullet-list li {
-  color: #2d3748;
-}
-
-.content-block a {
-  color: #2563eb;
-}
-
-.content-block a:hover {
-  color: #1d4ed8;
-}
-
-/* Section containers */
-.calculator,
-.checklist,
-.nutrition-cards,
-.accordion,
-.safety-cards,
-.toolkit {
-  width: min(800px, 90vw);
-  margin: 40px auto;
-}
-
-.calculator h2,
-.checklist h2,
-.nutrition-cards h2,
-.accordion h2,
-.safety-cards h2,
-.toolkit h2 {
-  color: #fff;
-  text-align: center;
-  margin-bottom: 24px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.checklist h3,
-.safety-cards h3 {
-  color: #fff;
-  margin: 32px 0 16px 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-/* ===== Calculator Form ===== */
-.calculator form {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  padding: 28px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.calculator label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #0f172a;
-}
-
-.calculator input,
-.calculator select {
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 15px;
-  background: #fff;
-  color: #1a1a1a;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.calculator input:focus,
-.calculator select:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-}
-
-.calculator small {
-  font-size: 12px;
-  color: #6b7280;
-  font-weight: 400;
-  margin-top: 4px;
-}
-
-.calculator .cta-btn {
-  grid-column: 1 / -1;
-  width: 100%;
-  justify-content: center;
-}
-
-.calculator .disclosure {
-  grid-column: 1 / -1;
-  background: rgba(240, 248, 255, 0.9);
-  border: 1px solid #bfdbfe;
-  color: #1a1a1a;
-}
-
-.calculator .disclosure__headline {
-  color: #0f172a;
-}
-
-.calculator .disclosure__text {
-  color: #1e40af;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.calculator .disclosure__fine {
-  color: #4b5563;
-}
-
-/* Calculator responsive */
-@media (max-width: 600px) {
-  .calculator form {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ===== Accordion Styles ===== */
-.accordion .card {
-  text-align: left;
-  margin-bottom: 12px;
-  padding: 0;
-  overflow: hidden;
-}
-
-.accordion-toggle {
-  width: 100%;
-  text-align: left;
-  padding: 18px 20px;
-  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-  border: none;
-  font-size: 16px;
-  font-weight: 600;
-  color: #0f172a;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background 0.2s ease;
-}
-
-.accordion-toggle:hover {
-  background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
-}
-
-.accordion-toggle::after {
-  content: '+';
-  font-size: 22px;
-  font-weight: 400;
-  color: #64748b;
-  transition: transform 0.3s ease;
-}
-
-.accordion-toggle[aria-expanded="true"]::after {
-  content: '−';
-}
-
-.accordion-panel {
-  padding: 20px 24px;
-  background: #fff;
-  color: #1a1a1a;
-  border-top: 1px solid #e2e8f0;
-}
-
-.accordion-panel p {
-  margin: 0 0 12px 0;
-  line-height: 1.7;
-  color: #2d3748;
-}
-
-.accordion-panel .bullet-list {
-  color: #2d3748;
-  margin-bottom: 0;
-}
-
-/* ===== Warning Flag ===== */
-.warning-flag {
-  background: linear-gradient(135deg, #fef3c7, #fde68a);
-  border-left: 4px solid #f59e0b;
-  padding: 12px 16px;
-  margin: 16px 0;
-  border-radius: 0 8px 8px 0;
-  color: #92400e;
-  font-weight: 600;
-}
-
-/* ===== Sources Section ===== */
-.sources-section {
-  width: min(800px, 90vw);
-  margin: 40px auto;
-}
-
-.sources-section h2 {
-  color: #fff;
-  text-align: center;
-  margin-bottom: 24px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-
-.sources-section .content-block {
-  background: rgba(255, 255, 255, 0.95);
-}
-
-.sources-section .content-block a {
-  color: #2563eb;
-  text-decoration: underline;
-}
-
-.sources-section .content-block a:hover {
-  color: #1d4ed8;
-}
-
-/* ===== Toolkit Section ===== */
-.toolkit .card-group {
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-.toolkit .card {
-  text-align: left;
-}
-
-.toolkit .card h3 {
-  text-align: left;
-  margin-bottom: 8px;
-}
-
-.toolkit .card p {
-  text-align: left;
-  font-size: 0.95rem;
-}
-
-.toolkit .cta-btn {
-  display: block;
-  text-align: center;
-  max-width: 280px;
-  margin: 30px auto 0;
-}
-
-/* ===== Nutrition & Safety Cards ===== */
-.nutrition-cards .card-group,
-.safety-cards .card-group {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
-}
-
-.nutrition-cards .card,
-.safety-cards .card {
-  text-align: left;
-}
-
-.nutrition-cards .card h3,
-.safety-cards .card h3 {
-  text-align: left;
-  color: #0f172a;
-}
-
-.nutrition-cards .card p,
-.safety-cards .card p {
-  text-align: left;
-}
-
-.safety-cards .card .bullet-list {
-  margin-top: 12px;
-  padding-left: 18px;
-  color: #2d3748;
-}
-
-/* ===== Checklist bullet list refinement ===== */
-.checklist .bullet-list {
-  background: rgba(255, 255, 255, 0.92);
-  padding: 20px 20px 20px 40px;
-  border-radius: 12px;
-  margin: 16px 0 24px 0;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-  color: #2d3748;
-}
-
-.checklist .bullet-list li {
-  margin-bottom: 10px;
-  color: #2d3748;
-}
-
-/* ===== Affiliate Disclosure in content blocks ===== */
-.content-block .disclosure__fine {
-  background: rgba(59, 130, 246, 0.08);
-  border-left: 3px solid #3b82f6;
-  padding: 12px 16px;
-  margin-top: 20px;
-  border-radius: 0 8px 8px 0;
-  font-size: 13px;
-  color: #1e40af;
-}
-
-/* ===== Mobile Responsive ===== */
-@media (max-width: 720px) {
-  .jump-nav {
-    gap: 8px;
-  }
-  
-  .jump-nav a {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-  
-  .card-group {
-    grid-template-columns: 1fr;
-  }
-  
-  .content-block {
-    padding: 20px;
-  }
-  
-  .calculator form {
-    padding: 20px;
-  }
-  
-  .accordion-toggle {
-    padding: 14px 16px;
-    font-size: 15px;
-  }
-  
-  .accordion-panel {
-    padding: 16px 18px;
-  }
-  
-  .toolkit .card-group,
-  .nutrition-cards .card-group,
-  .safety-cards .card-group {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ============== Legacy/Utility Classes ============== */
-.wheel-container {
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(4px);
-}
-
-.result {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(2px);
-}
-
-.toy-name {
-  color: #1a1a1a;
-  font-weight: bold;
-}
-
-.anticipation {
-  color: #1a1a1a;
-}
-
-/* Focus states for accessibility */
-button:focus-visible,
-a:focus-visible {
-  outline: 3px solid rgba(59, 130, 246, 0.6);
-  outline-offset: 2px;
-}
-
-a {
-  transition: all 0.2s ease;
+  .product-grid { grid-template-columns: 1fr; }
+  .product-card { padding: 18px; }
 }
