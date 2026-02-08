@@ -669,11 +669,11 @@ a.card:hover,
 .sources-section h2{
   margin: 0;
   font-size: clamp(22px, 3vw, 30px);
-  color: #fff;
-  text-shadow: 0 10px 22px rgba(0,0,0,0.30);
+  color: var(--ink);
+  text-shadow: none;
   text-align: center;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--border-light);
+  border-bottom: 1px solid rgba(15,23,42,0.10);
 }
 
 /* calculator surface */
@@ -699,6 +699,13 @@ a.card:hover,
   font-size: 13px;
   font-weight: 700;
   color: var(--ink);
+}
+
+.calculator label small{
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(15,23,42,0.70);
 }
 
 .calculator input,
@@ -757,6 +764,26 @@ a.card:hover,
   width: 100%;
 }
 
+.content-block{
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.10);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+  padding: 16px 18px;
+}
+
+.content-block p{
+  margin: 0 0 12px;
+  color: var(--ink-soft);
+}
+
+.content-block p:last-child{
+  margin-bottom: 0;
+}
+
 /* Readability upgrades for guide pages */
 .calculator p, .checklist p, .nutrition-cards p, .accordion p, .safety-cards p, .toolkit p {
   line-height: 1.65;
@@ -769,6 +796,15 @@ a.card:hover,
 
 .accordion .accordion-panel p:last-child {
   margin-bottom: 0;
+}
+
+.warning-flag{
+  background: rgba(255, 59, 48, 0.10);
+  border-left: 4px solid rgba(255, 59, 48, 0.85);
+  padding: 10px 12px;
+  border-radius: 12px;
+  color: var(--ink);
+  margin: 10px 0 8px;
 }
 
 .calculator .bullet-list li, .checklist .bullet-list li, .nutrition-cards .bullet-list li,
