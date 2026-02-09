@@ -8,6 +8,39 @@
   <link rel="canonical" href="https://virtualecommerceinc.com/spin-wheel-deals/dog-health.html" />
   <meta name="robots" content="index,follow" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Page-specific override: move results BELOW the calculator and make it horizontal -->
+  <style>
+    /* Force the tool area to be a single column so nothing can overlap */
+    #feeding-calculator .calculator-tool__grid{
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+    }
+
+    /* Results now live under the form button */
+    #feeding-calculator .calculator-tool__results--below{
+      position: static !important;      /* kills sticky overlay behavior */
+      top: auto !important;
+      margin-top: 10px !important;
+      width: 100% !important;
+    }
+
+    /* Make the KPI boxes flow horizontally and wrap nicely */
+    #feeding-calculator .calculator-tool__results--below .calculator-tool__kpis{
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
+      gap: 10px !important;
+    }
+
+    /* Keep the top value + headline tidy */
+    #feeding-calculator .calculator-tool__results--below .calculator-tool__results-value{
+      margin-bottom: 10px !important;
+    }
+
+    /* Feeding output + disclaimer should sit cleanly under KPIs */
+    #feeding-calculator .calculator-tool__results--below .calculator-tool__feeding{
+      margin-bottom: 10px !important;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -74,19 +107,19 @@
     <!-- ============================== -->
     <section id="feeding-calculator" class="calculator">
       <h2>Feeding Calculator</h2>
-      
+
       <div class="feeding-layout">
         <div class="feeding-layout__text">
           <div class="content-block">
             <h3>Understanding Your Dog's Calorie Needs</h3>
             <p>Every dog has unique nutritional requirements based on their size, age, activity level, and individual metabolism. Veterinarians use standardized formulas to estimate calorie needs, but these are starting points—not exact prescriptions.</p>
-            
+
             <h4>How Veterinarians Calculate Calorie Needs</h4>
             <ul class="bullet-list">
               <li><strong>RER (Resting Energy Requirement)</strong> — The baseline calories your dog needs at complete rest. This is calculated using the formula: 70 × (body weight in kg)<sup>0.75</sup></li>
               <li><strong>MER (Maintenance Energy Requirement)</strong> — RER multiplied by a factor that accounts for life stage, activity level, and other variables. This represents daily caloric needs.</li>
             </ul>
-            
+
             <p>The multiplier varies widely: puppies may need 2-3× RER, typical adults need 1.4-1.8× RER, and seniors often need 1.2-1.4× RER. Working dogs, pregnant/nursing dogs, and dogs recovering from illness have different requirements.</p>
 
             <h4>Common Feeding Mistakes to Avoid</h4>
@@ -113,17 +146,21 @@
                 <p class="calculator-tool__subtitle">Adjust the inputs to see live calorie guidance and optional feeding outputs.</p>
               </div>
             </div>
+
+            <!-- Single-column grid: Inputs first -->
             <div class="calculator-tool__grid">
               <div class="calculator-tool__inputs" role="group" aria-label="Calculator inputs">
                 <div class="calculator-tool__toggle" role="group" aria-label="Weight unit">
                   <button type="button" id="unit-kg" class="calculator-tool__toggle-btn is-active" aria-pressed="true">Kg</button>
                   <button type="button" id="unit-lb" class="calculator-tool__toggle-btn" aria-pressed="false">Lb</button>
                 </div>
+
                 <label class="calculator-tool__field">
                   Weight <span id="weight-unit-label">(kg)</span>
                   <input type="number" id="weight" name="weight" min="1" max="220" step="0.1" inputmode="decimal" required aria-describedby="weight-help" />
                   <small id="weight-help" class="calculator-tool__help">Enter your dog's current weight in kilograms (1 lb ≈ 0.45 kg).</small>
                 </label>
+
                 <label class="calculator-tool__field">
                   Life Stage
                   <select id="lifestage" name="lifestage" aria-describedby="stage-help">
@@ -133,6 +170,7 @@
                   </select>
                   <small id="stage-help" class="calculator-tool__help">Puppies: under 1-2 years (varies by breed). Seniors: typically 7+ years.</small>
                 </label>
+
                 <label class="calculator-tool__field">
                   Activity Level
                   <select id="activity" name="activity">
@@ -141,47 +179,56 @@
                     <option value="high">High (working dogs, intense daily exercise)</option>
                   </select>
                 </label>
+
                 <label class="calculator-tool__field">
                   Food calories per cup (optional)
                   <input type="number" id="caloriesPerCup" name="caloriesPerCup" min="1" step="1" placeholder="350" inputmode="numeric" />
                   <small class="calculator-tool__help">Adds cups per day and per meal to the results.</small>
                 </label>
+
                 <label class="calculator-tool__field">
                   Meals per day
                   <input type="number" id="mealsPerDay" name="mealsPerDay" min="1" max="6" step="1" value="2" inputmode="numeric" />
                 </label>
+
                 <button type="submit" class="cta-btn calculator-tool__cta">Calculate Estimate</button>
                 <p class="calculator-tool__note">Updates automatically as you edit.</p>
+
+                <!-- RESULTS MOVED HERE (below the button + note) -->
+                <aside class="calculator-tool__results calculator-tool__results--below" aria-label="Calculator results">
+                  <p class="calculator-tool__results-eyebrow">Estimated Daily Calories</p>
+                  <p class="calculator-tool__results-value" id="result-text" aria-live="polite">-- kcal/day</p>
+
+                  <div class="calculator-tool__kpis">
+                    <div class="calculator-tool__kpi">
+                      <span>RER</span>
+                      <strong id="rer-text">--</strong>
+                      <small>kcal/day</small>
+                    </div>
+                    <div class="calculator-tool__kpi">
+                      <span>MER (center)</span>
+                      <strong id="mer-text">--</strong>
+                      <small>kcal/day</small>
+                    </div>
+                    <div class="calculator-tool__kpi">
+                      <span>Selected factors</span>
+                      <strong id="factor-text">--</strong>
+                    </div>
+                  </div>
+
+                  <div class="calculator-tool__feeding" id="feeding-output" hidden>
+                    <h4>Feeding Output</h4>
+                    <p><strong id="cups-text">--</strong> cups per day</p>
+                    <p><strong id="cups-meal-text">--</strong> cups per meal</p>
+                  </div>
+
+                  <details class="calculator-tool__disclaimer">
+                    <summary><strong>Important:</strong> General estimate only (tap to expand)</summary>
+                    <p class="disclosure__fine"><strong>Important:</strong> This calculator provides a general estimate only. Individual dogs vary significantly based on breed, metabolism, health status, spay/neuter status, and other factors. Your veterinarian is the best source for personalized feeding recommendations. If your dog is gaining or losing weight unexpectedly, consult your vet.</p>
+                  </details>
+                </aside>
+                <!-- END results -->
               </div>
-              <aside class="calculator-tool__results" aria-label="Calculator results">
-                <p class="calculator-tool__results-eyebrow">Estimated Daily Calories</p>
-                <p class="calculator-tool__results-value" id="result-text" aria-live="polite">-- kcal/day</p>
-                <div class="calculator-tool__kpis">
-                  <div class="calculator-tool__kpi">
-                    <span>RER</span>
-                    <strong id="rer-text">--</strong>
-                    <small>kcal/day</small>
-                  </div>
-                  <div class="calculator-tool__kpi">
-                    <span>MER (center)</span>
-                    <strong id="mer-text">--</strong>
-                    <small>kcal/day</small>
-                  </div>
-                  <div class="calculator-tool__kpi">
-                    <span>Selected factors</span>
-                    <strong id="factor-text">--</strong>
-                  </div>
-                </div>
-                <div class="calculator-tool__feeding" id="feeding-output" hidden>
-                  <h4>Feeding Output</h4>
-                  <p><strong id="cups-text">--</strong> cups per day</p>
-                  <p><strong id="cups-meal-text">--</strong> cups per meal</p>
-                </div>
-                <details class="calculator-tool__disclaimer">
-                  <summary><strong>Important:</strong> General estimate only (tap to expand)</summary>
-                  <p class="disclosure__fine"><strong>Important:</strong> This calculator provides a general estimate only. Individual dogs vary significantly based on breed, metabolism, health status, spay/neuter status, and other factors. Your veterinarian is the best source for personalized feeding recommendations. If your dog is gaining or losing weight unexpectedly, consult your vet.</p>
-                </details>
-              </aside>
             </div>
           </form>
         </div>
@@ -193,7 +240,7 @@
     <!-- ============================== -->
     <section id="preventive-care" class="checklist">
       <h2>Preventive Care Checklist</h2>
-      
+
       <div class="content-block">
         <p>Regular preventive care is one of the most important investments you can make in your dog's health. According to the American Animal Hospital Association (AAHA), catching problems early—before symptoms appear—often means simpler treatment, better outcomes, and lower costs.</p>
         <p>Dogs age faster than humans, with each year roughly equivalent to 5-7 human years depending on size. This means health conditions can develop and progress quickly. A wellness exam every 6-12 months helps ensure nothing goes undetected.</p>
@@ -246,14 +293,14 @@
     <!-- ============================== -->
     <section id="nutrition-tips" class="nutrition-cards">
       <h2>Nutrition Basics</h2>
-      
+
       <div class="content-block">
         <h3>Choosing Quality Dog Food</h3>
         <p>With thousands of dog food options available, selecting the right one can feel overwhelming. The good news: you don't need the most expensive food—you need one that's nutritionally complete and appropriate for your dog's life stage.</p>
-        
+
         <h4>Look for the AAFCO Statement</h4>
         <p>The <strong>Association of American Feed Control Officials (AAFCO)</strong> establishes nutritional standards for pet foods. Look for a statement on the label indicating the food is "complete and balanced" for a specific life stage (growth, adult maintenance, or all life stages). This means the food meets established minimum nutritional requirements.</p>
-        
+
         <h4>WSAVA Guidelines for Selecting Pet Food</h4>
         <p>The World Small Animal Veterinary Association (WSAVA) recommends asking manufacturers these questions:</p>
         <ul class="bullet-list">
@@ -338,7 +385,7 @@
     <!-- ============================== -->
     <section id="warning-signs" class="accordion">
       <h2>Warning Signs: When to Call the Vet</h2>
-      
+
       <div class="content-block">
         <p>Dogs can't tell us when something's wrong, so we rely on observing changes in behavior, appetite, and physical condition. Some symptoms are minor and resolve on their own, while others require immediate veterinary attention.</p>
         <p><strong>The general rule:</strong> When in doubt, call your vet. They'd rather hear from you early—when problems are easier to treat—than after a condition has progressed. Many clinics offer nurse advice lines for quick guidance on whether a visit is warranted.</p>
@@ -477,7 +524,7 @@
     <!-- ============================== -->
     <section id="parasite-safety" class="safety-cards">
       <h2>Parasite &amp; Seasonal Safety</h2>
-      
+
       <div class="content-block">
         <h3>Year-Round Prevention Is Key</h3>
         <p>Many pet owners think parasites are only a summer problem, but veterinary organizations—including the American Heartworm Society and the Companion Animal Parasite Council—recommend year-round prevention. Here's why:</p>
@@ -602,11 +649,11 @@
     <!-- ============================== -->
     <section id="health-toolkit" class="toolkit">
       <h2>Wellness Toolkit</h2>
-      
+
       <div class="content-block">
         <h3>Products Veterinarians Often Recommend</h3>
         <p>The items below represent categories of products commonly suggested by veterinary professionals for routine health maintenance. We've selected options with strong reviews and practical benefits to help you get started. Your veterinarian can advise on what's most appropriate for your specific dog's needs.</p>
-        
+
         <p class="disclosure__fine"><strong>Affiliate Disclosure:</strong> Some links on this page are affiliate links. If you purchase through these links, we may earn a small commission at no extra cost to you. This helps support our site and allows us to continue providing free educational content. We only recommend products we believe provide genuine value. Our recommendations are not influenced by affiliate relationships, and we always encourage consulting your veterinarian before introducing new products to your dog's routine.</p>
       </div>
 
@@ -642,7 +689,7 @@
           <li><strong>ASPCA Poison Control number</strong> — (888) 426-4435</li>
         </ul>
       </div>
-      
+
       <a href="dog-toys.html" class="cta-btn">Browse More Dog Products</a>
     </section>
 
@@ -651,13 +698,13 @@
     <!-- ============================== -->
     <section id="sources-trust" class="sources-section">
       <h2>Sources &amp; Trust</h2>
-      
+
       <div class="content-block">
         <h3>Our Information Standards</h3>
         <p>The guidance on this page is informed by recommendations from leading veterinary organizations and published research. We are committed to providing accurate, helpful information while being clear about what we are and aren't: <strong>we are not veterinarians, and this content is for general educational purposes only.</strong></p>
-        
+
         <p>We do not make medical diagnoses, prescribe treatments, or provide advice that replaces professional veterinary care. Our goal is to help you be an informed, proactive pet owner who works effectively with your veterinary team.</p>
-        
+
         <h4>Authoritative Sources We Reference</h4>
         <ul class="bullet-list">
           <li><strong>AAHA (American Animal Hospital Association)</strong> — Sets standards for veterinary practice and publishes evidence-based guidelines for preventive care, vaccinations, dental health, and more. <a href="https://www.aaha.org" target="_blank" rel="noopener">aaha.org</a></li>
@@ -668,14 +715,14 @@
           <li><strong>CAPC (Companion Animal Parasite Council)</strong> — Provides evidence-based parasite prevention guidelines and regional parasite prevalence maps. <a href="https://capcvet.org" target="_blank" rel="noopener">capcvet.org</a></li>
           <li><strong>American Heartworm Society</strong> — Dedicated to heartworm research, prevention, diagnosis, and treatment guidelines. <a href="https://www.heartwormsociety.org" target="_blank" rel="noopener">heartwormsociety.org</a></li>
         </ul>
-        
+
         <h4>Medical Disclaimer</h4>
         <p>This website provides general information about dog health and wellness. It is <strong>not intended as a substitute for professional veterinary advice, diagnosis, or treatment</strong>. Always seek the advice of a qualified veterinarian with any questions you may have regarding your dog's health. Never disregard professional veterinary advice or delay seeking it because of something you have read on this website.</p>
-        
+
         <p>If you believe your dog is experiencing a medical emergency, <strong>contact your veterinarian or an emergency animal hospital immediately</strong>. In the U.S., the ASPCA Animal Poison Control Center can be reached at (888) 426-4435 (fees may apply).</p>
-        
+
         <p>Individual dogs vary significantly, and what's appropriate for one dog may not be appropriate for another. Factors including breed, age, size, health status, and individual medical history all affect care recommendations.</p>
-        
+
         <p class="disclosure__fine"><strong>Last reviewed:</strong> January 2025. We periodically review and update this content to reflect current veterinary recommendations, but guidelines evolve as new research emerges. Always verify current guidelines with your veterinarian for your specific pet.</p>
       </div>
 
@@ -729,9 +776,8 @@
       };
 
       const setUnit = (unit) => {
-        if (unit === currentUnit) {
-          return;
-        }
+        if (unit === currentUnit) return;
+
         const weightValue = parseFloat(weightInput.value);
         if (!Number.isNaN(weightValue) && weightValue > 0) {
           const converted = unit === 'lb'
@@ -739,6 +785,7 @@
             : weightValue / unitConversion;
           weightInput.value = converted.toFixed(1);
         }
+
         currentUnit = unit;
         const isKg = currentUnit === 'kg';
         unitKgButton.classList.toggle('is-active', isKg);
@@ -751,18 +798,14 @@
 
       const clampMeals = () => {
         const rawMeals = parseInt(mealsPerDayInput.value, 10);
-        if (Number.isNaN(rawMeals)) {
-          return 2;
-        }
+        if (Number.isNaN(rawMeals)) return 2;
         const clamped = Math.min(6, Math.max(1, rawMeals));
         mealsPerDayInput.value = clamped;
         return clamped;
       };
 
       const formatCups = (value) => {
-        if (value < 0.5) {
-          return value.toFixed(2);
-        }
+        if (value < 0.5) return value.toFixed(2);
         return value.toFixed(1);
       };
 
@@ -790,9 +833,7 @@
           const currentLow = Math.round(startLow + (low - startLow) * eased);
           const currentHigh = Math.round(startHigh + (high - startHigh) * eased);
           resultText.textContent = `${currentLow} – ${currentHigh} kcal/day`;
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          }
+          if (progress < 1) requestAnimationFrame(step);
         };
         requestAnimationFrame(step);
       };
@@ -812,28 +853,19 @@
         const rer = 70 * Math.pow(wKg, 0.75);
 
         let baseFactor = 1.4;
-        if (stage === 'puppy') {
-          baseFactor = 2.5;
-        } else if (stage === 'senior') {
-          baseFactor = 1.2;
-        }
+        if (stage === 'puppy') baseFactor = 2.5;
+        else if (stage === 'senior') baseFactor = 1.2;
 
         let activityModifier = 1.0;
-        if (activity === 'low') {
-          activityModifier = 0.85;
-        } else if (activity === 'high') {
-          activityModifier = 1.3;
-        }
+        if (activity === 'low') activityModifier = 0.85;
+        else if (activity === 'high') activityModifier = 1.3;
 
         const merCenter = rer * baseFactor * activityModifier;
         const lowRange = Math.round(merCenter * 0.85);
         const highRange = Math.round(merCenter * 1.15);
 
-        if (animate) {
-          animateRange(lowRange, highRange);
-        } else {
-          resultText.textContent = `${lowRange} – ${highRange} kcal/day`;
-        }
+        if (animate) animateRange(lowRange, highRange);
+        else resultText.textContent = `${lowRange} – ${highRange} kcal/day`;
 
         rerText.textContent = Math.round(rer).toString();
         merText.textContent = Math.round(merCenter).toString();
@@ -874,7 +906,7 @@
       updateWeightHelp();
       updateResults(false);
     })();
-    
+
     // Accordion Behavior with Accessibility
     document.querySelectorAll('.accordion-toggle').forEach(btn => {
       // Initialize panels as hidden
@@ -882,13 +914,13 @@
       if (panel && panel.classList.contains('accordion-panel')) {
         panel.style.display = 'none';
         btn.setAttribute('aria-expanded', 'false');
-        
+
         // Generate unique IDs for accessibility
         const id = 'accordion-panel-' + Math.random().toString(36).substr(2, 9);
         panel.id = id;
         btn.setAttribute('aria-controls', id);
       }
-      
+
       btn.addEventListener('click', () => {
         const panel = btn.nextElementSibling;
         if (panel && panel.classList.contains('accordion-panel')) {
