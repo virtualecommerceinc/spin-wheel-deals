@@ -97,35 +97,84 @@
         </ul>
       </div>
 
-      <form id="calorie-form">
-        <label>
-          Weight (kg):
-          <input type="number" id="weight" name="weight" min="1" max="100" step="0.1" required aria-describedby="weight-help" />
-          <small id="weight-help">Enter your dog's current weight in kilograms (1 lb ≈ 0.45 kg)</small>
-        </label>
-        <label>
-          Life Stage:
-          <select id="lifestage" name="lifestage" aria-describedby="stage-help">
-            <option value="adult">Adult (typical factor: 1.4-1.8×RER)</option>
-            <option value="puppy">Puppy (typical factor: 2-3×RER)</option>
-            <option value="senior">Senior (typical factor: 1.2-1.4×RER)</option>
-          </select>
-          <small id="stage-help">Puppies: under 1-2 years (varies by breed). Seniors: typically 7+ years.</small>
-        </label>
-        <label>
-          Activity Level:
-          <select id="activity" name="activity">
-            <option value="low">Low (mostly resting, short walks)</option>
-            <option value="moderate" selected>Moderate (regular walks, some play)</option>
-            <option value="high">High (working dogs, intense daily exercise)</option>
-          </select>
-        </label>
-        <button type="submit" class="cta-btn">Calculate Estimate</button>
-      
-        <div id="calorie-result" class="disclosure">
-          <p class="disclosure__headline">Estimated Daily Calories</p>
-          <p class="disclosure__text" id="result-text">-- kcal/day</p>
-          <p class="disclosure__fine"><strong>Important:</strong> This calculator provides a general estimate only. Individual dogs vary significantly based on breed, metabolism, health status, spay/neuter status, and other factors. Your veterinarian is the best source for personalized feeding recommendations. If your dog is gaining or losing weight unexpectedly, consult your vet.</p>
+      <form id="calorie-form" class="calculator-tool" novalidate>
+        <div class="calculator-tool__header">
+          <span class="calculator-tool__icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
+              <path d="M18 26c-3.3 0-6 2.8-6 6.3 0 3.5 2.7 6.3 6 6.3s6-2.8 6-6.3c0-3.5-2.7-6.3-6-6.3zm28 0c-3.3 0-6 2.8-6 6.3 0 3.5 2.7 6.3 6 6.3s6-2.8 6-6.3c0-3.5-2.7-6.3-6-6.3zM32 12c-3.1 0-5.6 2.6-5.6 5.9S28.9 24 32 24s5.6-2.6 5.6-6.1S35.1 12 32 12zm-14 2c-3 0-5.4 2.4-5.4 5.5S15 25 18 25s5.4-2.4 5.4-5.5S21 14 18 14zm28 0c-3 0-5.4 2.4-5.4 5.5S43 25 46 25s5.4-2.4 5.4-5.5S49 14 46 14zM21 41c-6.6 0-12 5.3-12 11.8 0 2.5 2 4.5 4.5 4.5h37c2.5 0 4.5-2 4.5-4.5 0-6.5-5.4-11.8-12-11.8H21z" />
+            </svg>
+          </span>
+          <div>
+            <p class="calculator-tool__title">Interactive Feeding Estimate</p>
+            <p class="calculator-tool__subtitle">Adjust the inputs to see live calorie guidance and optional feeding outputs.</p>
+          </div>
+        </div>
+        <div class="calculator-tool__grid">
+          <div class="calculator-tool__inputs" role="group" aria-label="Calculator inputs">
+            <div class="calculator-tool__toggle" role="group" aria-label="Weight unit">
+              <button type="button" id="unit-kg" class="calculator-tool__toggle-btn is-active" aria-pressed="true">Kg</button>
+              <button type="button" id="unit-lb" class="calculator-tool__toggle-btn" aria-pressed="false">Lb</button>
+            </div>
+            <label class="calculator-tool__field">
+              Weight <span id="weight-unit-label">(kg)</span>
+              <input type="number" id="weight" name="weight" min="1" max="220" step="0.1" inputmode="decimal" required aria-describedby="weight-help" />
+              <small id="weight-help" class="calculator-tool__help">Enter your dog's current weight in kilograms (1 lb ≈ 0.45 kg).</small>
+            </label>
+            <label class="calculator-tool__field">
+              Life Stage
+              <select id="lifestage" name="lifestage" aria-describedby="stage-help">
+                <option value="adult">Adult (typical factor: 1.4-1.8×RER)</option>
+                <option value="puppy">Puppy (typical factor: 2-3×RER)</option>
+                <option value="senior">Senior (typical factor: 1.2-1.4×RER)</option>
+              </select>
+              <small id="stage-help" class="calculator-tool__help">Puppies: under 1-2 years (varies by breed). Seniors: typically 7+ years.</small>
+            </label>
+            <label class="calculator-tool__field">
+              Activity Level
+              <select id="activity" name="activity">
+                <option value="low">Low (mostly resting, short walks)</option>
+                <option value="moderate" selected>Moderate (regular walks, some play)</option>
+                <option value="high">High (working dogs, intense daily exercise)</option>
+              </select>
+            </label>
+            <label class="calculator-tool__field">
+              Food calories per cup (optional)
+              <input type="number" id="caloriesPerCup" name="caloriesPerCup" min="1" step="1" placeholder="350" inputmode="numeric" />
+              <small class="calculator-tool__help">Adds cups per day and per meal to the results.</small>
+            </label>
+            <label class="calculator-tool__field">
+              Meals per day
+              <input type="number" id="mealsPerDay" name="mealsPerDay" min="1" max="6" step="1" value="2" inputmode="numeric" />
+            </label>
+            <button type="submit" class="cta-btn calculator-tool__cta">Calculate Estimate</button>
+            <p class="calculator-tool__note">Updates automatically as you edit.</p>
+          </div>
+          <aside class="calculator-tool__results" aria-label="Calculator results">
+            <p class="calculator-tool__results-eyebrow">Estimated Daily Calories</p>
+            <p class="calculator-tool__results-value" id="result-text" aria-live="polite">-- kcal/day</p>
+            <div class="calculator-tool__kpis">
+              <div class="calculator-tool__kpi">
+                <span>RER</span>
+                <strong id="rer-text">--</strong>
+                <small>kcal/day</small>
+              </div>
+              <div class="calculator-tool__kpi">
+                <span>MER (center)</span>
+                <strong id="mer-text">--</strong>
+                <small>kcal/day</small>
+              </div>
+              <div class="calculator-tool__kpi">
+                <span>Selected factors</span>
+                <strong id="factor-text">--</strong>
+              </div>
+            </div>
+            <div class="calculator-tool__feeding" id="feeding-output" hidden>
+              <h4>Feeding Output</h4>
+              <p><strong id="cups-text">--</strong> cups per day</p>
+              <p><strong id="cups-meal-text">--</strong> cups per meal</p>
+            </div>
+            <p class="disclosure__fine"><strong>Important:</strong> This calculator provides a general estimate only. Individual dogs vary significantly based on breed, metabolism, health status, spay/neuter status, and other factors. Your veterinarian is the best source for personalized feeding recommendations. If your dog is gaining or losing weight unexpectedly, consult your vet.</p>
+          </aside>
         </div>
       </form>
     </section>
@@ -637,42 +686,185 @@
 
   <script>
     // Feeding Calculator Script
-    document.getElementById('calorie-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const w = parseFloat(document.getElementById('weight').value);
-      const stage = document.getElementById('lifestage').value;
-      const activity = document.getElementById('activity').value;
-      
-      // RER = 70 × (body weight in kg)^0.75
-      const rer = 70 * Math.pow(w, 0.75);
-      
-      // MER factors based on life stage and activity
-      // These are simplified estimates; actual needs vary by individual
-      let baseFactor = 1.4; // default adult maintenance
-      
-      if (stage === 'puppy') {
-        baseFactor = 2.5; // puppies need more calories
-      } else if (stage === 'senior') {
-        baseFactor = 1.2; // seniors often need fewer calories
-      }
-      
-      // Adjust for activity level
-      let activityModifier = 1.0;
-      if (activity === 'low') {
-        activityModifier = 0.85;
-      } else if (activity === 'high') {
-        activityModifier = 1.3;
-      }
-      
-      const mer = Math.round(rer * baseFactor * activityModifier);
-      
-      // Provide a range (±15%) to emphasize this is an estimate
-      const lowRange = Math.round(mer * 0.85);
-      const highRange = Math.round(mer * 1.15);
-      
-      document.getElementById('result-text').textContent = 
-        lowRange + ' – ' + highRange + ' kcal/day (estimated range)';
-    });
+    (() => {
+      const form = document.getElementById('calorie-form');
+      const weightInput = document.getElementById('weight');
+      const lifestageInput = document.getElementById('lifestage');
+      const activityInput = document.getElementById('activity');
+      const caloriesPerCupInput = document.getElementById('caloriesPerCup');
+      const mealsPerDayInput = document.getElementById('mealsPerDay');
+      const resultText = document.getElementById('result-text');
+      const rerText = document.getElementById('rer-text');
+      const merText = document.getElementById('mer-text');
+      const factorText = document.getElementById('factor-text');
+      const cupsText = document.getElementById('cups-text');
+      const cupsMealText = document.getElementById('cups-meal-text');
+      const feedingOutput = document.getElementById('feeding-output');
+      const unitKgButton = document.getElementById('unit-kg');
+      const unitLbButton = document.getElementById('unit-lb');
+      const weightHelp = document.getElementById('weight-help');
+      const weightUnitLabel = document.getElementById('weight-unit-label');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const unitConversion = 2.2046226218;
+      let currentUnit = 'kg';
+      let lastRange = { low: 0, high: 0 };
+
+      const updateWeightHelp = () => {
+        if (currentUnit === 'kg') {
+          weightHelp.textContent = "Enter your dog's current weight in kilograms (1 lb ≈ 0.45 kg).";
+          weightUnitLabel.textContent = '(kg)';
+        } else {
+          weightHelp.textContent = "Enter your dog's current weight in pounds (1 kg ≈ 2.2 lb).";
+          weightUnitLabel.textContent = '(lb)';
+        }
+      };
+
+      const setUnit = (unit) => {
+        if (unit === currentUnit) {
+          return;
+        }
+        const weightValue = parseFloat(weightInput.value);
+        if (!Number.isNaN(weightValue) && weightValue > 0) {
+          const converted = unit === 'lb'
+            ? weightValue * unitConversion
+            : weightValue / unitConversion;
+          weightInput.value = converted.toFixed(1);
+        }
+        currentUnit = unit;
+        const isKg = currentUnit === 'kg';
+        unitKgButton.classList.toggle('is-active', isKg);
+        unitLbButton.classList.toggle('is-active', !isKg);
+        unitKgButton.setAttribute('aria-pressed', isKg.toString());
+        unitLbButton.setAttribute('aria-pressed', (!isKg).toString());
+        updateWeightHelp();
+        updateResults(true);
+      };
+
+      const clampMeals = () => {
+        const rawMeals = parseInt(mealsPerDayInput.value, 10);
+        if (Number.isNaN(rawMeals)) {
+          return 2;
+        }
+        const clamped = Math.min(6, Math.max(1, rawMeals));
+        mealsPerDayInput.value = clamped;
+        return clamped;
+      };
+
+      const formatCups = (value) => {
+        if (value < 0.5) {
+          return value.toFixed(2);
+        }
+        return value.toFixed(1);
+      };
+
+      const setEmptyResults = () => {
+        resultText.textContent = '-- kcal/day';
+        rerText.textContent = '--';
+        merText.textContent = '--';
+        factorText.textContent = '--';
+        feedingOutput.hidden = true;
+      };
+
+      const animateRange = (low, high) => {
+        if (prefersReducedMotion.matches) {
+          resultText.textContent = `${low} – ${high} kcal/day`;
+          return;
+        }
+        const startLow = lastRange.low || low;
+        const startHigh = lastRange.high || high;
+        const duration = 450;
+        const start = performance.now();
+
+        const step = (now) => {
+          const progress = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const currentLow = Math.round(startLow + (low - startLow) * eased);
+          const currentHigh = Math.round(startHigh + (high - startHigh) * eased);
+          resultText.textContent = `${currentLow} – ${currentHigh} kcal/day`;
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        };
+        requestAnimationFrame(step);
+      };
+
+      const updateResults = (animate = false) => {
+        const weightValue = parseFloat(weightInput.value);
+        if (Number.isNaN(weightValue) || weightValue <= 0) {
+          setEmptyResults();
+          return;
+        }
+
+        const wKg = currentUnit === 'kg' ? weightValue : weightValue / unitConversion;
+        const stage = lifestageInput.value;
+        const activity = activityInput.value;
+
+        // RER = 70 × (body weight in kg)^0.75
+        const rer = 70 * Math.pow(wKg, 0.75);
+
+        let baseFactor = 1.4;
+        if (stage === 'puppy') {
+          baseFactor = 2.5;
+        } else if (stage === 'senior') {
+          baseFactor = 1.2;
+        }
+
+        let activityModifier = 1.0;
+        if (activity === 'low') {
+          activityModifier = 0.85;
+        } else if (activity === 'high') {
+          activityModifier = 1.3;
+        }
+
+        const merCenter = rer * baseFactor * activityModifier;
+        const lowRange = Math.round(merCenter * 0.85);
+        const highRange = Math.round(merCenter * 1.15);
+
+        if (animate) {
+          animateRange(lowRange, highRange);
+        } else {
+          resultText.textContent = `${lowRange} – ${highRange} kcal/day`;
+        }
+
+        rerText.textContent = Math.round(rer).toString();
+        merText.textContent = Math.round(merCenter).toString();
+        factorText.textContent = `${stage.charAt(0).toUpperCase() + stage.slice(1)} · ${activity.charAt(0).toUpperCase() + activity.slice(1)}`;
+
+        const caloriesPerCup = parseFloat(caloriesPerCupInput.value);
+        const mealsPerDay = clampMeals();
+        if (!Number.isNaN(caloriesPerCup) && caloriesPerCup > 0) {
+          const cupsPerDay = merCenter / caloriesPerCup;
+          const cupsPerMeal = cupsPerDay / mealsPerDay;
+          cupsText.textContent = formatCups(cupsPerDay);
+          cupsMealText.textContent = formatCups(cupsPerMeal);
+          feedingOutput.hidden = false;
+        } else {
+          feedingOutput.hidden = true;
+        }
+
+        lastRange = { low: lowRange, high: highRange };
+      };
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        updateResults(true);
+      });
+
+      unitKgButton.addEventListener('click', () => setUnit('kg'));
+      unitLbButton.addEventListener('click', () => setUnit('lb'));
+
+      [weightInput, caloriesPerCupInput, mealsPerDayInput].forEach((input) => {
+        input.addEventListener('input', () => updateResults(true));
+        input.addEventListener('change', () => updateResults(true));
+      });
+
+      [lifestageInput, activityInput].forEach((select) => {
+        select.addEventListener('change', () => updateResults(true));
+      });
+
+      updateWeightHelp();
+      updateResults(false);
+    })();
     
     // Accordion Behavior with Accessibility
     document.querySelectorAll('.accordion-toggle').forEach(btn => {
