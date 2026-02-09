@@ -745,6 +745,242 @@ a.card:hover,
   opacity: 1;
 }
 
+/* ===================================== */
+/* Feeding Calculator V2 (dog-health)    */
+/* ===================================== */
+#feeding-calculator .calculator-tool{
+  display: grid;
+  gap: 18px;
+  padding: clamp(16px, 2.5vw, 22px);
+  border-radius: calc(var(--radius-lg) + 6px);
+  border: 1px solid rgba(15,23,42,0.12);
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(236,245,255,0.9));
+  box-shadow: 0 18px 40px rgba(15,23,42,0.12);
+  position: relative;
+  overflow: hidden;
+}
+#feeding-calculator .calculator-tool::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(15,23,42,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,23,42,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  opacity: 0.35;
+  pointer-events: none;
+}
+#feeding-calculator .calculator-tool > *{
+  position: relative;
+  z-index: 1;
+}
+#feeding-calculator .calculator-tool__header{
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(15,23,42,0.08);
+  box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+}
+#feeding-calculator .calculator-tool__icon{
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(74,144,226,0.2), rgba(97,218,251,0.18));
+  border: 1px solid rgba(74,144,226,0.3);
+  color: var(--ink);
+}
+#feeding-calculator .calculator-tool__icon svg{
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+#feeding-calculator .calculator-tool__title{
+  margin: 0;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--ink);
+}
+#feeding-calculator .calculator-tool__subtitle{
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+#feeding-calculator .calculator-tool__grid{
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 16px;
+  align-items: start;
+}
+#feeding-calculator .calculator-tool__inputs{
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(15,23,42,0.12);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+  box-shadow: 0 16px 32px rgba(15,23,42,0.12);
+}
+#feeding-calculator .calculator-tool__toggle{
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,0.16);
+  background: rgba(15,23,42,0.04);
+  width: fit-content;
+  gap: 4px;
+}
+#feeding-calculator .calculator-tool__toggle-btn{
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+#feeding-calculator .calculator-tool__toggle-btn.is-active{
+  background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(74,144,226,0.28);
+}
+#feeding-calculator .calculator-tool__field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink);
+}
+#feeding-calculator .calculator-tool__field:focus-within{
+  box-shadow: 0 0 0 3px rgba(74,144,226,0.16);
+  border-radius: 12px;
+  padding: 6px;
+  margin: -6px;
+}
+#feeding-calculator .calculator-tool__help{
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(15,23,42,0.7);
+}
+#feeding-calculator .calculator-tool input,
+#feeding-calculator .calculator-tool select{
+  padding: 11px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(15,23,42,0.2);
+  background: #fff;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#feeding-calculator .calculator-tool input:focus-visible,
+#feeding-calculator .calculator-tool select:focus-visible{
+  outline: none;
+  border-color: rgba(74,144,226,0.7);
+  box-shadow: 0 0 0 3px rgba(74,144,226,0.2);
+}
+#feeding-calculator .calculator-tool__cta{
+  width: 100%;
+  border-radius: 14px;
+  box-shadow: 0 12px 24px rgba(15,23,42,0.16);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+#feeding-calculator .calculator-tool__cta:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px rgba(15,23,42,0.2);
+}
+#feeding-calculator .calculator-tool__cta:active{
+  transform: translateY(0);
+}
+#feeding-calculator .calculator-tool__note{
+  margin: 0;
+  font-size: 12px;
+  color: var(--ink-soft);
+}
+#feeding-calculator .calculator-tool__results{
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(236,244,255,0.9));
+  border: 1px solid rgba(74,144,226,0.2);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: 0 18px 36px rgba(15,23,42,0.14);
+  position: sticky;
+  top: 18px;
+}
+#feeding-calculator .calculator-tool__results-eyebrow{
+  margin: 0 0 6px;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(15,23,42,0.6);
+}
+#feeding-calculator .calculator-tool__results-value{
+  margin: 0 0 14px;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+  color: var(--ink);
+}
+#feeding-calculator .calculator-tool__kpis{
+  display: grid;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+#feeding-calculator .calculator-tool__kpi{
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(15,23,42,0.1);
+  background: rgba(255,255,255,0.82);
+}
+#feeding-calculator .calculator-tool__kpi span{
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(15,23,42,0.6);
+}
+#feeding-calculator .calculator-tool__kpi strong{
+  font-size: 18px;
+  color: var(--ink);
+}
+#feeding-calculator .calculator-tool__kpi small{
+  font-size: 11px;
+  color: rgba(15,23,42,0.6);
+}
+#feeding-calculator .calculator-tool__feeding{
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(74,144,226,0.08);
+  border: 1px solid rgba(74,144,226,0.2);
+  margin-bottom: 12px;
+}
+#feeding-calculator .calculator-tool__feeding h4{
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+#feeding-calculator .calculator-tool__feeding p{
+  margin: 4px 0;
+  font-size: 13px;
+}
+#feeding-calculator .calculator-tool__feeding strong{
+  font-size: 16px;
+}
+#feeding-calculator .calculator-tool [hidden]{
+  display: none !important;
+}
+@media (max-width: 820px){
+  #feeding-calculator .calculator-tool__grid{
+    grid-template-columns: 1fr;
+  }
+  #feeding-calculator .calculator-tool__results{
+    position: static;
+  }
+}
+
 /* checklist on a light surface */
 .checklist .bullet-list{
   width: 100%;
