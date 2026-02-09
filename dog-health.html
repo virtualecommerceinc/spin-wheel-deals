@@ -75,108 +75,117 @@
     <section id="feeding-calculator" class="calculator">
       <h2>Feeding Calculator</h2>
       
-      <div class="content-block">
-        <h3>Understanding Your Dog's Calorie Needs</h3>
-        <p>Every dog has unique nutritional requirements based on their size, age, activity level, and individual metabolism. Veterinarians use standardized formulas to estimate calorie needs, but these are starting points—not exact prescriptions.</p>
-        
-        <h4>How Veterinarians Calculate Calorie Needs</h4>
-        <ul class="bullet-list">
-          <li><strong>RER (Resting Energy Requirement)</strong> — The baseline calories your dog needs at complete rest. This is calculated using the formula: 70 × (body weight in kg)<sup>0.75</sup></li>
-          <li><strong>MER (Maintenance Energy Requirement)</strong> — RER multiplied by a factor that accounts for life stage, activity level, and other variables. This represents daily caloric needs.</li>
-        </ul>
-        
-        <p>The multiplier varies widely: puppies may need 2-3× RER, typical adults need 1.4-1.8× RER, and seniors often need 1.2-1.4× RER. Working dogs, pregnant/nursing dogs, and dogs recovering from illness have different requirements.</p>
+      <div class="feeding-layout">
+        <div class="feeding-layout__text">
+          <div class="content-block">
+            <h3>Understanding Your Dog's Calorie Needs</h3>
+            <p>Every dog has unique nutritional requirements based on their size, age, activity level, and individual metabolism. Veterinarians use standardized formulas to estimate calorie needs, but these are starting points—not exact prescriptions.</p>
+            
+            <h4>How Veterinarians Calculate Calorie Needs</h4>
+            <ul class="bullet-list">
+              <li><strong>RER (Resting Energy Requirement)</strong> — The baseline calories your dog needs at complete rest. This is calculated using the formula: 70 × (body weight in kg)<sup>0.75</sup></li>
+              <li><strong>MER (Maintenance Energy Requirement)</strong> — RER multiplied by a factor that accounts for life stage, activity level, and other variables. This represents daily caloric needs.</li>
+            </ul>
+            
+            <p>The multiplier varies widely: puppies may need 2-3× RER, typical adults need 1.4-1.8× RER, and seniors often need 1.2-1.4× RER. Working dogs, pregnant/nursing dogs, and dogs recovering from illness have different requirements.</p>
 
-        <h4>Common Feeding Mistakes to Avoid</h4>
-        <ul class="bullet-list">
-          <li><strong>Eyeballing portions</strong> — Use a measuring cup or kitchen scale for accuracy. "A scoop" varies widely and leads to over or underfeeding.</li>
-          <li><strong>Forgetting treats</strong> — Treats should make up no more than 10% of daily calories. A few training treats add up fast!</li>
-          <li><strong>Ignoring body condition</strong> — A healthy dog has a visible waist when viewed from above and ribs you can feel (but not prominently see).</li>
-          <li><strong>Same food for all life stages</strong> — Puppies, adults, and seniors have different nutritional requirements. Always match food to life stage.</li>
-          <li><strong>Free-feeding dry food</strong> — Leaving food out all day makes portion control difficult and can contribute to obesity.</li>
-        </ul>
+            <h4>Common Feeding Mistakes to Avoid</h4>
+            <ul class="bullet-list">
+              <li><strong>Eyeballing portions</strong> — Use a measuring cup or kitchen scale for accuracy. "A scoop" varies widely and leads to over or underfeeding.</li>
+              <li><strong>Forgetting treats</strong> — Treats should make up no more than 10% of daily calories. A few training treats add up fast!</li>
+              <li><strong>Ignoring body condition</strong> — A healthy dog has a visible waist when viewed from above and ribs you can feel (but not prominently see).</li>
+              <li><strong>Same food for all life stages</strong> — Puppies, adults, and seniors have different nutritional requirements. Always match food to life stage.</li>
+              <li><strong>Free-feeding dry food</strong> — Leaving food out all day makes portion control difficult and can contribute to obesity.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="feeding-layout__tool">
+          <form id="calorie-form" class="calculator-tool" novalidate>
+            <div class="calculator-tool__header">
+              <span class="calculator-tool__icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
+                  <path d="M18 26c-3.3 0-6 2.8-6 6.3 0 3.5 2.7 6.3 6 6.3s6-2.8 6-6.3c0-3.5-2.7-6.3-6-6.3zm28 0c-3.3 0-6 2.8-6 6.3 0 3.5 2.7 6.3 6 6.3s6-2.8 6-6.3c0-3.5-2.7-6.3-6-6.3zM32 12c-3.1 0-5.6 2.6-5.6 5.9S28.9 24 32 24s5.6-2.6 5.6-6.1S35.1 12 32 12zm-14 2c-3 0-5.4 2.4-5.4 5.5S15 25 18 25s5.4-2.4 5.4-5.5S21 14 18 14zm28 0c-3 0-5.4 2.4-5.4 5.5S43 25 46 25s5.4-2.4 5.4-5.5S49 14 46 14zM21 41c-6.6 0-12 5.3-12 11.8 0 2.5 2 4.5 4.5 4.5h37c2.5 0 4.5-2 4.5-4.5 0-6.5-5.4-11.8-12-11.8H21z" />
+                </svg>
+              </span>
+              <div>
+                <p class="calculator-tool__title">Interactive Feeding Estimate</p>
+                <p class="calculator-tool__subtitle">Adjust the inputs to see live calorie guidance and optional feeding outputs.</p>
+              </div>
+            </div>
+            <div class="calculator-tool__grid">
+              <div class="calculator-tool__inputs" role="group" aria-label="Calculator inputs">
+                <div class="calculator-tool__toggle" role="group" aria-label="Weight unit">
+                  <button type="button" id="unit-kg" class="calculator-tool__toggle-btn is-active" aria-pressed="true">Kg</button>
+                  <button type="button" id="unit-lb" class="calculator-tool__toggle-btn" aria-pressed="false">Lb</button>
+                </div>
+                <label class="calculator-tool__field">
+                  Weight <span id="weight-unit-label">(kg)</span>
+                  <input type="number" id="weight" name="weight" min="1" max="220" step="0.1" inputmode="decimal" required aria-describedby="weight-help" />
+                  <small id="weight-help" class="calculator-tool__help">Enter your dog's current weight in kilograms (1 lb ≈ 0.45 kg).</small>
+                </label>
+                <label class="calculator-tool__field">
+                  Life Stage
+                  <select id="lifestage" name="lifestage" aria-describedby="stage-help">
+                    <option value="adult">Adult (typical factor: 1.4-1.8×RER)</option>
+                    <option value="puppy">Puppy (typical factor: 2-3×RER)</option>
+                    <option value="senior">Senior (typical factor: 1.2-1.4×RER)</option>
+                  </select>
+                  <small id="stage-help" class="calculator-tool__help">Puppies: under 1-2 years (varies by breed). Seniors: typically 7+ years.</small>
+                </label>
+                <label class="calculator-tool__field">
+                  Activity Level
+                  <select id="activity" name="activity">
+                    <option value="low">Low (mostly resting, short walks)</option>
+                    <option value="moderate" selected>Moderate (regular walks, some play)</option>
+                    <option value="high">High (working dogs, intense daily exercise)</option>
+                  </select>
+                </label>
+                <label class="calculator-tool__field">
+                  Food calories per cup (optional)
+                  <input type="number" id="caloriesPerCup" name="caloriesPerCup" min="1" step="1" placeholder="350" inputmode="numeric" />
+                  <small class="calculator-tool__help">Adds cups per day and per meal to the results.</small>
+                </label>
+                <label class="calculator-tool__field">
+                  Meals per day
+                  <input type="number" id="mealsPerDay" name="mealsPerDay" min="1" max="6" step="1" value="2" inputmode="numeric" />
+                </label>
+                <button type="submit" class="cta-btn calculator-tool__cta">Calculate Estimate</button>
+                <p class="calculator-tool__note">Updates automatically as you edit.</p>
+              </div>
+              <aside class="calculator-tool__results" aria-label="Calculator results">
+                <p class="calculator-tool__results-eyebrow">Estimated Daily Calories</p>
+                <p class="calculator-tool__results-value" id="result-text" aria-live="polite">-- kcal/day</p>
+                <div class="calculator-tool__kpis">
+                  <div class="calculator-tool__kpi">
+                    <span>RER</span>
+                    <strong id="rer-text">--</strong>
+                    <small>kcal/day</small>
+                  </div>
+                  <div class="calculator-tool__kpi">
+                    <span>MER (center)</span>
+                    <strong id="mer-text">--</strong>
+                    <small>kcal/day</small>
+                  </div>
+                  <div class="calculator-tool__kpi">
+                    <span>Selected factors</span>
+                    <strong id="factor-text">--</strong>
+                  </div>
+                </div>
+                <div class="calculator-tool__feeding" id="feeding-output" hidden>
+                  <h4>Feeding Output</h4>
+                  <p><strong id="cups-text">--</strong> cups per day</p>
+                  <p><strong id="cups-meal-text">--</strong> cups per meal</p>
+                </div>
+                <details class="calculator-tool__disclaimer">
+                  <summary><strong>Important:</strong> General estimate only (tap to expand)</summary>
+                  <p class="disclosure__fine"><strong>Important:</strong> This calculator provides a general estimate only. Individual dogs vary significantly based on breed, metabolism, health status, spay/neuter status, and other factors. Your veterinarian is the best source for personalized feeding recommendations. If your dog is gaining or losing weight unexpectedly, consult your vet.</p>
+                </details>
+              </aside>
+            </div>
+          </form>
+        </div>
       </div>
-
-      <form id="calorie-form" class="calculator-tool" novalidate>
-        <div class="calculator-tool__header">
-          <span class="calculator-tool__icon" aria-hidden="true">
-            <svg viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
-              <path d="M18 26c-3.3 0-6 2.8-6 6.3 0 3.5 2.7 6.3 6 6.3s6-2.8 6-6.3c0-3.5-2.7-6.3-6-6.3zm28 0c-3.3 0-6 2.8-6 6.3 0 3.5 2.7 6.3 6 6.3s6-2.8 6-6.3c0-3.5-2.7-6.3-6-6.3zM32 12c-3.1 0-5.6 2.6-5.6 5.9S28.9 24 32 24s5.6-2.6 5.6-6.1S35.1 12 32 12zm-14 2c-3 0-5.4 2.4-5.4 5.5S15 25 18 25s5.4-2.4 5.4-5.5S21 14 18 14zm28 0c-3 0-5.4 2.4-5.4 5.5S43 25 46 25s5.4-2.4 5.4-5.5S49 14 46 14zM21 41c-6.6 0-12 5.3-12 11.8 0 2.5 2 4.5 4.5 4.5h37c2.5 0 4.5-2 4.5-4.5 0-6.5-5.4-11.8-12-11.8H21z" />
-            </svg>
-          </span>
-          <div>
-            <p class="calculator-tool__title">Interactive Feeding Estimate</p>
-            <p class="calculator-tool__subtitle">Adjust the inputs to see live calorie guidance and optional feeding outputs.</p>
-          </div>
-        </div>
-        <div class="calculator-tool__grid">
-          <div class="calculator-tool__inputs" role="group" aria-label="Calculator inputs">
-            <div class="calculator-tool__toggle" role="group" aria-label="Weight unit">
-              <button type="button" id="unit-kg" class="calculator-tool__toggle-btn is-active" aria-pressed="true">Kg</button>
-              <button type="button" id="unit-lb" class="calculator-tool__toggle-btn" aria-pressed="false">Lb</button>
-            </div>
-            <label class="calculator-tool__field">
-              Weight <span id="weight-unit-label">(kg)</span>
-              <input type="number" id="weight" name="weight" min="1" max="220" step="0.1" inputmode="decimal" required aria-describedby="weight-help" />
-              <small id="weight-help" class="calculator-tool__help">Enter your dog's current weight in kilograms (1 lb ≈ 0.45 kg).</small>
-            </label>
-            <label class="calculator-tool__field">
-              Life Stage
-              <select id="lifestage" name="lifestage" aria-describedby="stage-help">
-                <option value="adult">Adult (typical factor: 1.4-1.8×RER)</option>
-                <option value="puppy">Puppy (typical factor: 2-3×RER)</option>
-                <option value="senior">Senior (typical factor: 1.2-1.4×RER)</option>
-              </select>
-              <small id="stage-help" class="calculator-tool__help">Puppies: under 1-2 years (varies by breed). Seniors: typically 7+ years.</small>
-            </label>
-            <label class="calculator-tool__field">
-              Activity Level
-              <select id="activity" name="activity">
-                <option value="low">Low (mostly resting, short walks)</option>
-                <option value="moderate" selected>Moderate (regular walks, some play)</option>
-                <option value="high">High (working dogs, intense daily exercise)</option>
-              </select>
-            </label>
-            <label class="calculator-tool__field">
-              Food calories per cup (optional)
-              <input type="number" id="caloriesPerCup" name="caloriesPerCup" min="1" step="1" placeholder="350" inputmode="numeric" />
-              <small class="calculator-tool__help">Adds cups per day and per meal to the results.</small>
-            </label>
-            <label class="calculator-tool__field">
-              Meals per day
-              <input type="number" id="mealsPerDay" name="mealsPerDay" min="1" max="6" step="1" value="2" inputmode="numeric" />
-            </label>
-            <button type="submit" class="cta-btn calculator-tool__cta">Calculate Estimate</button>
-            <p class="calculator-tool__note">Updates automatically as you edit.</p>
-          </div>
-          <aside class="calculator-tool__results" aria-label="Calculator results">
-            <p class="calculator-tool__results-eyebrow">Estimated Daily Calories</p>
-            <p class="calculator-tool__results-value" id="result-text" aria-live="polite">-- kcal/day</p>
-            <div class="calculator-tool__kpis">
-              <div class="calculator-tool__kpi">
-                <span>RER</span>
-                <strong id="rer-text">--</strong>
-                <small>kcal/day</small>
-              </div>
-              <div class="calculator-tool__kpi">
-                <span>MER (center)</span>
-                <strong id="mer-text">--</strong>
-                <small>kcal/day</small>
-              </div>
-              <div class="calculator-tool__kpi">
-                <span>Selected factors</span>
-                <strong id="factor-text">--</strong>
-              </div>
-            </div>
-            <div class="calculator-tool__feeding" id="feeding-output" hidden>
-              <h4>Feeding Output</h4>
-              <p><strong id="cups-text">--</strong> cups per day</p>
-              <p><strong id="cups-meal-text">--</strong> cups per meal</p>
-            </div>
-            <p class="disclosure__fine"><strong>Important:</strong> This calculator provides a general estimate only. Individual dogs vary significantly based on breed, metabolism, health status, spay/neuter status, and other factors. Your veterinarian is the best source for personalized feeding recommendations. If your dog is gaining or losing weight unexpectedly, consult your vet.</p>
-          </aside>
-        </div>
-      </form>
     </section>
 
     <!-- ============================== -->
