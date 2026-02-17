@@ -10,7 +10,8 @@
   <meta name="theme-color" content="#0b1a2b" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+
+<body class="contact-page">
   <div class="background" aria-hidden="true">
     <div class="layer sky"></div>
     <div class="layer clouds"></div>
@@ -34,29 +35,41 @@
   </header>
 
   <main id="main" class="site-main">
-    <article class="content-card">
-      <h1>Contact</h1>
-      <p>
-        Thanks for visiting Spin Wheel Deals. We appreciate hearing from readers and fellow dog lovers.
-      </p>
+    <article class="content-card contact-card">
+      <header class="contact-header">
+        <h1>Contact</h1>
+        <p>
+          Thanks for visiting Spin Wheel Deals. We appreciate hearing from readers and fellow dog lovers.
+        </p>
+      </header>
 
-      <h2>Send Us a Message</h2>
-      <p>
-        Use the form below to draft your message. This demo form does not submit to a backend, but it helps outline
-        what information to include when reaching out.
-      </p>
+      <section class="contact-body" aria-labelledby="contact-form-title">
+        <h2 id="contact-form-title">Send Us a Message</h2>
+        <p class="contact-lead">
+          Use the form below to draft your message. This demo form does not submit to a backend, but it helps outline
+          what information to include when reaching out.
+        </p>
 
-      <form class="calculator-form" action="#" method="post" onsubmit="return false;" aria-label="Contact form">
-        <label for="contact-name">Name</label>
-        <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name" />
+        <form class="contact-form" action="#" method="post" onsubmit="return false;" aria-label="Contact form">
+          <div class="contact-field">
+            <label for="contact-name">Name</label>
+            <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name" />
+          </div>
 
-        <label for="contact-message">Message</label>
-        <textarea id="contact-message" name="message" rows="5" placeholder="Share your question or feedback"></textarea>
+          <div class="contact-field">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" rows="7" placeholder="Share your question or feedback"></textarea>
+          </div>
 
-        <button class="paw-btn" type="submit">Send Message</button>
-      </form>
+          <div class="contact-actions">
+            <button class="paw-btn contact-btn" type="submit">Send Message</button>
+          </div>
 
-      <p class="post-meta">Affiliate questions / feedback / corrections welcome.</p>
+          <p class="contact-note">
+            Affiliate questions / feedback / corrections welcome.
+          </p>
+        </form>
+      </section>
     </article>
   </main>
 
@@ -65,7 +78,7 @@
       <p>© 2024 Spin Wheel Deals. All rights reserved.</p>
       <div class="site-footer__links">
         <a href="privacy.html">Privacy Policy</a>
-        <a href="contact.html">Contact</a>
+        <a href="contact.html" aria-current="page">Contact</a>
       </div>
     </div>
   </footer>
