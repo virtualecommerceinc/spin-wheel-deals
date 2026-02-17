@@ -10,6 +10,35 @@
   <link rel="stylesheet" href="styles.css" />
 
   <style>
+    /* ==========================================================
+       FIX: Keep ALL content blocks/cards from stretching too wide
+       (Matches the “min(980px, 92vw)” pattern used elsewhere)
+       ========================================================== */
+    :root { --page-max: 980px; --page-pad: 92vw; }
+
+    /* Constrain every main section + jump nav to a sane reading width.
+       (Hero stays as-is; it already reads fine in your design.) */
+    main.site-main > nav.jump-nav,
+    main.site-main > section:not(.hero-section) {
+      width: min(var(--page-max), var(--page-pad)) !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    /* If any nested card groups were being forced full-width by other rules,
+       this guarantees they stay constrained too. */
+    .card-group,
+    .content-block,
+    .accordion,
+    .calculator,
+    .toolkit,
+    .professional,
+    .sources-section {
+      max-width: var(--page-max) !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
     /* Training timeline calculator styles */
     #training-timeline .calculator-tool__grid {
       grid-template-columns: 1fr !important;
@@ -779,7 +808,7 @@
     function calculateTimeline() {
       const age = document.getElementById('dog-age').value;
       const experience = document.getElementById('experience').value;
-      const frequency = parseInt(document.getElementById('frequency').value);
+      const frequency = parseInt(document.getElementById('frequency').value, 10);
       const command = document.getElementById('command').value;
 
       let [min, max] = timelines[command][age].split('-').map(Number);
@@ -811,7 +840,11 @@
       timelineText.textContent = min + ' - ' + max + ' weeks';
       rangeText.textContent = min + '-' + max + ' weeks';
       sessionsText.textContent = sessions;
-      planText.textContent = 'Practice ' + commandName + ' ' + frequency + '-6 times per week in ' + (frequency === 1 ? 'one longer' : 'multiple short') + ' sessions. Most dogs master this in ' + min + '-' + max + ' weeks with consistent practice. Remember: every dog is unique—be patient and celebrate small progress!';
+      planText.textContent =
+        'Practice ' + commandName + ' ' + frequency + '-6 times per week in ' +
+        (frequency === 1 ? 'one longer' : 'multiple short') +
+        ' sessions. Most dogs master this in ' + min + '-' + max +
+        ' weeks with consistent practice. Remember: every dog is unique—be patient and celebrate small progress!';
 
       timelineOutput.hidden = false;
     }
@@ -826,7 +859,7 @@
     document.querySelectorAll('.accordion-toggle').forEach(button => {
       button.addEventListener('click', function() {
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        this.setAttribute('aria-expanded', !isExpanded);
+        this.setAttribute('aria-expanded', String(!isExpanded));
         this.nextElementSibling.hidden = isExpanded;
       });
     });
