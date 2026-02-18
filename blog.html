@@ -16,6 +16,18 @@
   <meta name="twitter:title" content="Spin the Wheel Blog — Dog Toy Reviews &amp; Tips" />
   <meta name="twitter:description" content="Read dog toy tips, guides, and reviews. New posts weekly. Let your dog choose their next toy!" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Scoped fixes for Featured Post layout only -->
+  <style>
+    /* Make the Featured Post card span full width (instead of half-width in a 2-col grid) */
+    #featured-post.product-grid { grid-template-columns: 1fr; }
+
+    /* Optional: make featured image feel more “hero” than a square thumbnail */
+    #featured-post .product-card__media { aspect-ratio: 16 / 9; }
+
+    /* Optional: keep the featured text from feeling cramped */
+    #featured-post .product-card__body h2 { font-size: 22px; }
+  </style>
 </head>
 <body>
   <div class="background" aria-hidden="true">
@@ -145,7 +157,10 @@
             return new Date(post.date + 'T00:00:00') <= today;
           }) || sorted[0];
 
-          featuredRoot.innerHTML = featured ? card(featured) : '<article class="product-card"><div class="product-card__body"><p>No featured post found.</p></div></article>';
+          featuredRoot.innerHTML = featured
+            ? card(featured)
+            : '<article class="product-card"><div class="product-card__body"><p>No featured post found.</p></div></article>';
+
           latestRoot.innerHTML = sorted.slice(0, 6).map(card).join('');
 
           const items = sorted.map(function (post) {
