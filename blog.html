@@ -53,40 +53,47 @@
       <a class="paw-btn blog-actions__link" href="index.html">Back to Spinner</a>
     </section>
 
+    <section class="section-heading" aria-label="Featured post">
+      <h2>This Week’s Featured Post</h2>
+      <p>The most recent scheduled post for this week.</p>
+    </section>
+
+    <section id="featured-post" class="product-grid" aria-label="Featured blog post">
+      <article class="product-card">
+        <div class="product-card__body">
+          <p>Loading featured post…</p>
+        </div>
+      </article>
+    </section>
+
     <section class="section-heading" aria-label="Latest posts">
       <h2>Latest Posts</h2>
       <p>Fresh tips and buying guides for playful pups and their humans.</p>
     </section>
 
-    <section class="product-grid" aria-label="Dog toy tips and pet parent picks">
+    <section id="latest-posts" class="product-grid" aria-label="Latest blog posts">
       <article class="product-card">
-        <figure class="product-card__media">
-          <img src="assets/blog-1.jpg" alt="Durable dog toy" loading="lazy" />
-        </figure>
         <div class="product-card__body">
-          <p class="post-meta">Published: January 15, 2026</p>
-          <h2>5 Ways to Make Dog Toys Last Longer</h2>
-          <p>
-            Tired of toys falling apart in days? Here are 5 ways to make your dog’s toys last longer.
-          </p>
-          <a class="paw-btn product-card__cta" href="blog/post-1.html">Read More</a>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <figure class="product-card__media">
-          <img src="assets/chew-rope.svg" alt="Rope chew toy illustration" loading="lazy" />
-        </figure>
-        <div class="product-card__body">
-          <p class="post-meta">Published: January 2026</p>
-          <h2>How to Choose the Perfect Toy for Your Dog’s Size and Age</h2>
-          <p>
-            Not all toys are created equal. Learn what works best for puppies, adult dogs, and heavy chewers so your pup stays safe and satisfied.
-          </p>
-          <a class="paw-btn product-card__cta" href="blog/post-2.html">Read More</a>
+          <p>Loading latest posts…</p>
         </div>
       </article>
     </section>
+
+    <section class="section-heading" aria-label="All posts">
+      <h2>All Posts</h2>
+      <p>Browse the complete weekly archive.</p>
+    </section>
+
+    <section id="all-posts" class="content-card" aria-label="All blog posts list">
+      <p>Loading full archive…</p>
+    </section>
+
+    <noscript>
+      <section class="content-card" aria-label="Blog fallback">
+        <p>Blog listings require JavaScript to load the full weekly archive.</p>
+        <p>Quick links: <a href="blog/week-01.html">Week 01</a> and <a href="blog/week-02.html">Week 02</a>.</p>
+      </section>
+    </noscript>
   </main>
 
   <footer class="site-footer">
@@ -98,5 +105,60 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const featuredRoot = document.getElementById('featured-post');
+      const latestRoot = document.getElementById('latest-posts');
+      const allRoot = document.getElementById('all-posts');
+
+      function formatDate(dateStr) {
+        const d = new Date(dateStr + 'T00:00:00');
+        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      }
+
+      function postUrl(post) {
+        return 'blog/' + post.slug + '.html';
+      }
+
+      function card(post) {
+        return '<article class="product-card">' +
+          '<figure class="product-card__media"><img src="' + post.heroImage + '" alt="' + post.title + '" loading="lazy" /></figure>' +
+          '<div class="product-card__body">' +
+          '<p class="post-meta">Published: ' + formatDate(post.date) + ' • ' + post.category + '</p>' +
+          '<h2>' + post.title + '</h2>' +
+          '<p>' + post.excerpt + '</p>' +
+          '<a class="paw-btn product-card__cta" href="' + postUrl(post) + '">Read More</a>' +
+          '</div></article>';
+      }
+
+      fetch('blog/posts.json')
+        .then(function (res) { return res.json(); })
+        .then(function (posts) {
+          const sorted = posts.slice().sort(function (a, b) {
+            return new Date(b.date) - new Date(a.date);
+          });
+
+          const now = new Date();
+          const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+          const featured = sorted.find(function (post) {
+            return new Date(post.date + 'T00:00:00') <= today;
+          }) || sorted[0];
+
+          featuredRoot.innerHTML = featured ? card(featured) : '<article class="product-card"><div class="product-card__body"><p>No featured post found.</p></div></article>';
+          latestRoot.innerHTML = sorted.slice(0, 6).map(card).join('');
+
+          const items = sorted.map(function (post) {
+            return '<li><a href="' + postUrl(post) + '">' + post.title + '</a> <span class="post-meta">(' + formatDate(post.date) + ' • ' + post.category + ')</span></li>';
+          }).join('');
+          allRoot.innerHTML = '<ul class="bullet-list">' + items + '</ul>';
+        })
+        .catch(function () {
+          featuredRoot.innerHTML = '<article class="product-card"><div class="product-card__body"><p>Could not load featured post. Please try again later.</p></div></article>';
+          latestRoot.innerHTML = '<article class="product-card"><div class="product-card__body"><p>Could not load latest posts. Visit <a href="blog/week-01.html">Week 01</a> or <a href="blog/week-02.html">Week 02</a>.</p></div></article>';
+          allRoot.innerHTML = '<p>Could not load full archive.</p>';
+        });
+    })();
+  </script>
 </body>
 </html>
