@@ -1357,3 +1357,116 @@ body.contact-page .contact-note{
   body.contact-page .contact-form{ padding: 14px; }
   body.contact-page .contact-btn{ font-size: 15px; }
 }
+
+
+/* =========================================================
+   Amazon Picks (blog cards)
+   ========================================================= */
+.amazon-picks {
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: calc(var(--radius-lg) + 2px);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+}
+
+.amazon-picks__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.amazon-picks__title {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.amazon-picks__note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(15, 23, 42, 0.7);
+}
+
+.amazon-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.amazon-mini-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.amazon-mini-card__media {
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(11, 26, 43, 0.03);
+}
+
+.amazon-mini-card__media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  display: block;
+}
+
+.amazon-mini-card__title {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.35;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.amazon-mini-card__meta {
+  margin: 0;
+  font-size: 0.8rem;
+  color: rgba(15, 23, 42, 0.68);
+}
+
+.amazon-mini-card__cta {
+  margin-top: auto;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.84rem;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #0b1a2b;
+  background: linear-gradient(180deg, #ffe089 0%, #ffd34d 100%);
+  border: 1px solid rgba(11, 26, 43, 0.18);
+  box-shadow: 0 6px 14px rgba(11, 26, 43, 0.12);
+}
+
+.amazon-mini-card__cta:hover,
+.amazon-mini-card__cta:focus-visible {
+  filter: brightness(0.98);
+}
+
+.amazon-picks__fineprint {
+  margin: 12px 0 0;
+  font-size: 0.78rem;
+  color: rgba(15, 23, 42, 0.62);
+}
+
+@media (max-width: 880px) {
+  .amazon-mini-grid {
+    grid-template-columns: 1fr;
+  }
+}
