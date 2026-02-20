@@ -79,13 +79,13 @@ jobs:
           const pad2 = (n) => String(n).padStart(2, "0");
 
           function pickHeroImg($) {
-            // Try common patterns in order (safe + standard)
             const candidates = [
               "figure img",
               ".post-hero img",
               ".hero img",
               "header img",
-              "main img"
+              "main img",
+              "img"
             ];
             for (const sel of candidates) {
               const el = $(sel).first();
@@ -94,33 +94,141 @@ jobs:
             return null;
           }
 
-          function getTitleAndExcerpt($) {
-            const title =
+          function getTitle($) {
+            return (
               ($("h1").first().text() || "").trim() ||
               ($("title").text() || "").trim() ||
-              "Dog Training Blog";
+              `Spin Wheel Deals Blog`
+            );
+          }
 
-            // Prefer meta description, else first paragraph
-            const metaDesc = ($('meta[name="description"]').attr("content") || "").trim();
-            let excerpt = metaDesc;
+          function getMetaDescription($) {
+            return ($('meta[name="description"]').attr("content") || "").trim();
+          }
 
-            if (!excerpt) {
-              excerpt = ($("main p").first().text() || $("p").first().text() || "").trim();
+          function extractMainText($) {
+            // Remove noisy elements
+            $("script, style, noscript, nav, footer, header, aside").remove();
+
+            // Prefer main/article content if present
+            let text = "";
+            const main = $("main").first();
+            const article = $("article").first();
+
+            if (article && article.length) {
+              text = article.text();
+            } else if (main && main.length) {
+              text = main.text();
+            } else {
+              text = $("body").text();
             }
 
-            // Keep excerpt short for prompting
-            if (excerpt.length > 240) excerpt = excerpt.slice(0, 240).trim() + "…";
+            // Normalize whitespace
+            text = String(text || "")
+              .replace(/\s+/g, " ")
+              .trim();
 
-            return { title, excerpt };
+            // Keep enough for theme understanding but not huge
+            // (We do NOT print/log this content.)
+            const MAX = 3500;
+            if (text.length > MAX) text = text.slice(0, MAX).trim() + "…";
+            return text;
           }
 
           async function sleep(ms) {
             return new Promise((r) => setTimeout(r, ms));
           }
 
+          function safeJsonParse(s) {
+            try {
+              return JSON.parse(s);
+            } catch (e) {
+              return null;
+            }
+          }
+
+          async function createVisualBrief({ title, metaDesc, bodyText }) {
+            // Ask a text model to extract a structured “visual brief” + keywords from the blog.
+            // We keep this short, consistent, and machine-parsable.
+            const prompt = `
+You are generating a visual brief for a blog hero image.
+
+Return ONLY valid JSON with these keys:
+{
+  "visual_concept": "1 sentence describing what the image should show",
+  "subjects": ["short list of key subjects/objects"],
+  "setting": "short setting description",
+  "mood": "short mood words",
+  "palette": "short color palette guidance",
+  "keywords": ["5-12 keywords"],
+  "alt": "accessibility alt text describing the image"
+}
+
+Rules:
+- No brand names, no logos, no text in the image.
+- Keep it evergreen and dog-related.
+- Prefer items that match the post topic.
+- Be specific enough for an image model.
+
+BLOG TITLE:
+${title}
+
+META DESCRIPTION (if any):
+${metaDesc || "(none)"}
+
+BLOG BODY (truncated):
+${bodyText}
+`.trim();
+
+            const resp = await client.chat.completions.create({
+              model: "gpt-4o-mini",
+              temperature: 0.4,
+              messages: [
+                { role: "system", content: "You are a careful JSON-only generator." },
+                { role: "user", content: prompt }
+              ]
+            });
+
+            const raw = resp?.choices?.[0]?.message?.content || "";
+            const json = safeJsonParse(raw);
+
+            if (json && json.visual_concept && json.keywords && json.alt) {
+              return json;
+            }
+
+            // Fallback: if parsing fails, fall back to a simple brief
+            return {
+              visual_concept: `A friendly, modern illustration that fits the topic: ${title}`,
+              subjects: ["dog", "toy"],
+              setting: "clean studio-like background with soft gradients",
+              mood: "friendly, upbeat, trustworthy",
+              palette: "cool blues/teals with subtle warm accents",
+              keywords: [title].filter(Boolean),
+              alt: `Illustration for blog post: ${title}`
+            };
+          }
+
+          function buildImagePromptFromBrief(brief) {
+            const subjects = Array.isArray(brief.subjects) ? brief.subjects.join(", ") : "";
+            const keywords = Array.isArray(brief.keywords) ? brief.keywords.join(", ") : "";
+
+            return [
+              "Create a clean, modern hero image for a blog post about dogs and dog toys/training/health.",
+              "Style: friendly, semi-realistic illustration (not a photo), soft lighting, smooth gradients, high clarity.",
+              "No text, no letters, no watermarks, no logos, no brand marks.",
+              "Keep it evergreen and family-friendly.",
+              brief.visual_concept ? `Visual concept: ${brief.visual_concept}` : "",
+              subjects ? `Include these subjects: ${subjects}` : "",
+              brief.setting ? `Setting: ${brief.setting}` : "",
+              brief.mood ? `Mood: ${brief.mood}` : "",
+              brief.palette ? `Color palette: ${brief.palette}` : "",
+              keywords ? `Topic keywords: ${keywords}` : "",
+              "Composition: centered subject with generous negative space, suitable as a wide header image.",
+              "Avoid: frightening imagery, aggressive dogs, gore, harsh neon, busy clutter."
+            ].filter(Boolean).join("\n");
+          }
+
           async function generateHeroPng(prompt) {
-            // Uses GPT Image endpoint (v1/images/generations). Returns base64 image data.
-            // Docs: GPT image models return b64_json by default. :contentReference[oaicite:0]{index=0}
             const res = await client.images.generate({
               model: "gpt-image-1-mini",
               prompt,
@@ -132,24 +240,12 @@ jobs:
             return Buffer.from(b64, "base64");
           }
 
-          function buildPrompt(title, excerpt) {
-            // Keep prompt focused + consistent style across weeks
-            return [
-              "Create a clean, modern hero image for a blog post about dogs.",
-              "Style: friendly, semi-realistic illustration (not a photo), soft lighting, smooth gradients, high clarity.",
-              "No text, no letters, no watermarks, no logos.",
-              "Subject must match this blog topic:",
-              `Title: ${title}`,
-              excerpt ? `Context: ${excerpt}` : "",
-              "Composition: centered subject with generous negative space, suitable as a wide header image.",
-              "Color palette: cool blues/teals with subtle warmth; avoid harsh neon."
-            ].filter(Boolean).join("\n");
-          }
-
           function toWebpPadded(inputPngBuffer, width, height) {
-            // Fit inside exact dimensions without cropping by padding
             return sharp(inputPngBuffer)
-              .resize(width, height, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+              .resize(width, height, {
+                fit: "contain",
+                background: { r: 0, g: 0, b: 0, alpha: 0 }
+              })
               .webp({ quality: 82 })
               .toBuffer();
           }
@@ -170,27 +266,34 @@ jobs:
               const html = fs.readFileSync(blogPath, "utf8");
               const $ = cheerio.load(html);
 
-              const { title, excerpt } = getTitleAndExcerpt($);
+              const title = getTitle($);
+              const metaDesc = getMetaDescription($);
+              const bodyText = extractMainText($);
 
               const outName = `week-${pad2(week)}.webp`;
               const outPath = path.join(outDir, outName);
 
+              let brief = null;
+
               if (!overwrite && fs.existsSync(outPath)) {
-                console.log(`Exists (skip): assets/blog-hero/${outName}`);
+                console.log(`Exists (skip image gen): assets/blog-hero/${outName}`);
               } else {
-                const prompt = buildPrompt(title, excerpt);
+                // 1) Ask OpenAI to extract keywords + a visual brief from the BLOG TEXT
+                console.log(`Brief: week-${pad2(week)} (extract keywords/theme)`);
+                brief = await createVisualBrief({ title, metaDesc, bodyText });
+
+                // 2) Use that brief to generate an image prompt
+                const imgPrompt = buildImagePromptFromBrief(brief);
+
                 console.log(`Generate: week-${pad2(week)} → ${outName}`);
+                const pngBuf = await generateHeroPng(imgPrompt);
 
-                // Generate image
-                const pngBuf = await generateHeroPng(prompt);
-
-                // Convert to a more web-friendly hero size (wide) without breaking layout
-                // 1200x700 is a good "big hero" that’s still lighter than 1536x1024.
+                // Convert to web-friendly hero size
                 const webpBuf = await toWebpPadded(pngBuf, 1200, 700);
                 fs.writeFileSync(outPath, webpBuf);
 
-                // Gentle pacing to reduce accidental bursts (still much less than Amazon’s limits)
-                await sleep(800);
+                // Gentle pacing
+                await sleep(900);
               }
 
               // Update the blog HTML to point at the generated file (relative from /blog/)
@@ -201,24 +304,29 @@ jobs:
                 heroImg.attr("src", relSrc);
                 heroImg.attr("loading", "lazy");
                 heroImg.attr("decoding", "async");
-                heroImg.attr("alt", title || `Week ${pad2(week)} blog hero image`);
+
+                // If we generated a brief, use its alt; otherwise keep title-based alt
+                const alt = (brief && brief.alt) ? String(brief.alt).trim() : (title || `Week ${pad2(week)} blog hero image`);
+                heroImg.attr("alt", alt);
+
                 const updated = $.html();
                 if (updated !== html) {
                   fs.writeFileSync(blogPath, updated, "utf8");
                   changedFiles.push(`blog/${file}`);
                 }
               } else {
-                console.warn(`No <img> found to update in ${file} (image was still generated)`);
+                console.warn(`No <img> found to update in ${file} (image may still exist at assets/blog-hero/${outName})`);
               }
 
               changedFiles.push(`assets/blog-hero/${outName}`);
             }
 
-            if (!changedFiles.length) {
+            const unique = [...new Set(changedFiles)];
+            if (!unique.length) {
               console.log("No changes made.");
             } else {
-              console.log(`Changed files (count=${new Set(changedFiles).size}):`);
-              for (const f of [...new Set(changedFiles)]) console.log(` - ${f}`);
+              console.log(`Changed files (count=${unique.length}):`);
+              for (const f of unique) console.log(` - ${f}`);
             }
           })().catch((err) => {
             console.error(err);
@@ -236,6 +344,8 @@ jobs:
           body: |
             Automated hero-image generation for weekly blog posts.
 
-            - Generates images into `assets/blog-hero/week-XX.webp`
+            - Reads each blog post to extract topic keywords + a visual brief (OpenAI text model)
+            - Generates images into `assets/blog-hero/week-XX.webp` (OpenAI image model)
             - Updates each blog post to reference its corresponding hero image
             - Uses `OPENAI_API_KEY` from repo secrets
+            - No secrets are logged
