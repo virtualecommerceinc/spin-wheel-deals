@@ -1,0 +1,76 @@
+name: Generate Blog Hero Images
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-images:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick jq
+
+      - name: Create assets/blog folder
+        run: mkdir -p assets/blog
+
+      - name: Generate images for 52 weeks
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          for file in blog/week-*.html; do
+            week=$(basename "$file" .html)
+
+            echo "Processing $week..."
+
+            title=$(grep -oP '(?<=<title>).*?(?=</title>)' "$file" | head -n 1)
+
+            prompt="Professional clean modern illustration of a dog training scene related to: $title. No text. Wide composition. Soft lighting. Blog hero image."
+
+            response=$(curl -s https://api.openai.com/v1/images/generations \
+              -H "Authorization: Bearer $OPENAI_API_KEY" \
+              -H "Content-Type: application/json" \
+              -d "{
+                \"model\": \"gpt-image-1-mini\",
+                \"prompt\": \"$prompt\",
+                \"size\": \"1024x1024\"
+              }")
+
+            image_base64=$(echo "$response" | jq -r '.data[0].b64_json')
+
+            if [ "$image_base64" != "null" ]; then
+              echo "$image_base64" | base64 --decode > temp.png
+
+              convert temp.png -resize 1600x900^ -gravity center -extent 1600x900 -quality 75 assets/blog/$week.webp
+
+              rm temp.png
+            else
+              echo "Image generation failed for $week"
+            fi
+          done
+
+      - name: Commit and create PR
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          branch="blog-image-generation-$(date +%s)"
+          git checkout -b $branch
+
+          git add assets/blog
+          git commit -m "feat: auto-generate 52 blog hero images"
+
+          git push origin $branch
+
+          gh pr create \
+            --title "Auto-generated blog hero images" \
+            --body "Generated hero images for all 52 weekly blog posts." \
+            --base main \
+            --head $branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
