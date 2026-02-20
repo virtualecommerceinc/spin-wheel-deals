@@ -124,38 +124,54 @@
       const latestRoot = document.getElementById('latest-posts');
       const allRoot = document.getElementById('all-posts');
 
-      function formatDate(dateStr) {
-        const d = new Date(dateStr + 'T00:00:00');
-        return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
       }
 
-      function postUrl(post) {
-        return 'blog/' + post.slug + '.html';
+      function postDate(post) {
+        return (post.datePublished && (post.datePublished.display || post.datePublished.iso)) || '';
       }
 
       function card(post) {
+        const title = escapeHtml(post.title || 'Untitled');
+        const imageAlt = escapeHtml(post.imageAlt || post.title || 'Blog post image');
+        const excerpt = escapeHtml(post.excerpt || '');
+        const dateText = escapeHtml(postDate(post));
+        const url = escapeHtml(post.url || '#');
+        const imageUrl = escapeHtml(post.imageUrl || 'assets/chew-rope.svg');
+
         return '<article class="product-card">' +
-          '<figure class="product-card__media"><img src="' + post.heroImage + '" alt="' + post.title + '" loading="lazy" /></figure>' +
+          '<figure class="product-card__media"><img src="' + imageUrl + '" alt="' + imageAlt + '" loading="lazy" /></figure>' +
           '<div class="product-card__body">' +
-          '<p class="post-meta">Published: ' + formatDate(post.date) + ' • ' + post.category + '</p>' +
-          '<h2>' + post.title + '</h2>' +
-          '<p>' + post.excerpt + '</p>' +
-          '<a class="paw-btn product-card__cta" href="' + postUrl(post) + '">Read More</a>' +
+          '<p class="post-meta">Published: ' + dateText + ' • Week ' + String(post.weekNumber || '').padStart(2, '0') + '</p>' +
+          '<h2>' + title + '</h2>' +
+          '<p>' + excerpt + '</p>' +
+          '<a class="paw-btn product-card__cta" href="' + url + '">Read More</a>' +
           '</div></article>';
       }
 
       fetch('blog/posts.json')
-        .then(function (res) { return res.json(); })
+        .then(function (res) {
+          if (!res.ok) {
+            throw new Error('Unable to load blog/posts.json');
+          }
+          return res.json();
+        })
         .then(function (posts) {
-          const sorted = posts.slice().sort(function (a, b) {
-            return new Date(b.date) - new Date(a.date);
+          const weeklyPosts = posts.filter(function (post) {
+            return typeof post.weekNumber === 'number' && post.weekNumber >= 1 && post.weekNumber <= 52;
           });
 
-          const now = new Date();
-          const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-          const featured = sorted.find(function (post) {
-            return new Date(post.date + 'T00:00:00') <= today;
-          }) || sorted[0];
+          const sorted = weeklyPosts.slice().sort(function (a, b) {
+            return new Date((b.datePublished && b.datePublished.iso) || 0) - new Date((a.datePublished && a.datePublished.iso) || 0);
+          });
+
+          const featured = sorted.find(function (post) { return post.featured; }) || sorted[0];
 
           featuredRoot.innerHTML = featured
             ? card(featured)
@@ -164,13 +180,17 @@
           latestRoot.innerHTML = sorted.slice(0, 6).map(card).join('');
 
           const items = sorted.map(function (post) {
-            return '<li><a href="' + postUrl(post) + '">' + post.title + '</a> <span class="post-meta">(' + formatDate(post.date) + ' • ' + post.category + ')</span></li>';
+            const week = String(post.weekNumber || '').padStart(2, '0');
+            const title = escapeHtml(post.title || 'Untitled');
+            const url = escapeHtml(post.url || '#');
+            const date = escapeHtml(postDate(post));
+            return '<li><a href="' + url + '">Week ' + week + ': ' + title + '</a> <span class="post-meta">(' + date + ')</span></li>';
           }).join('');
           allRoot.innerHTML = '<ul class="bullet-list">' + items + '</ul>';
         })
         .catch(function () {
           featuredRoot.innerHTML = '<article class="product-card"><div class="product-card__body"><p>Could not load featured post. Please try again later.</p></div></article>';
-          latestRoot.innerHTML = '<article class="product-card"><div class="product-card__body"><p>Could not load latest posts. Visit <a href="blog/week-01.html">Week 01</a> or <a href="blog/week-02.html">Week 02</a>.</p></div></article>';
+          latestRoot.innerHTML = '<article class="product-card"><div class="product-card__body"><p>Could not load latest posts. Visit <a href="blog/week-01.html">Week 01</a>.</p></div></article>';
           allRoot.innerHTML = '<p>Could not load full archive.</p>';
         });
     })();

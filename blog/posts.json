@@ -1,434 +1,678 @@
 [
   {
-    "slug": "week-01",
+    "weekNumber": 1,
     "title": "Best Indestructible Fetch Toys for Power Chewers in 2026",
-    "date": "2026-01-05",
+    "datePublished": {
+      "iso": "2026-01-05",
+      "display": "January 5, 2026"
+    },
     "excerpt": "Our hands-on checklist helps you choose fetch toys that survive daily use and still excite high-energy dogs.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-01.html",
+    "imageUrl": "assets/blog-hero/week-01.webp",
+    "imageAlt": "Best Indestructible Fetch Toys for Power Chewers in 2026",
+    "featured": false
   },
   {
-    "slug": "week-02",
+    "weekNumber": 2,
     "title": "Loose-Leash Walking with Reward Toys: A 14-Day Plan",
-    "date": "2026-01-12",
+    "datePublished": {
+      "iso": "2026-01-12",
+      "display": "January 12, 2026"
+    },
     "excerpt": "Turn toy rewards into better leash manners with a step-by-step two-week walking routine.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-02.html",
+    "imageUrl": "assets/blog-hero/week-02.webp",
+    "imageAlt": "Loose-Leash Walking with Reward Toys: A 14-Day Plan",
+    "featured": false
   },
   {
-    "slug": "week-03",
+    "weekNumber": 3,
     "title": "How Often Should You Replace Dog Toys for Hygiene?",
-    "date": "2026-01-19",
+    "datePublished": {
+      "iso": "2026-01-19",
+      "display": "January 19, 2026"
+    },
     "excerpt": "Learn clear replacement timelines for plush, rubber, and rope toys to reduce germs at home.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-03.html",
+    "imageUrl": "assets/blog-hero/week-03.webp",
+    "imageAlt": "How Often Should You Replace Dog Toys for Hygiene?",
+    "featured": false
   },
   {
-    "slug": "week-04",
+    "weekNumber": 4,
     "title": "Made-in-USA Dog Chews and Toys Worth Buying This Week",
-    "date": "2026-01-26",
+    "datePublished": {
+      "iso": "2026-01-26",
+      "display": "January 26, 2026"
+    },
     "excerpt": "Compare material quality, durability, and value when shopping American-made dog products.",
-    "category": "Made in USA",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-04.html",
+    "imageUrl": "assets/blog-hero/week-04.webp",
+    "imageAlt": "Made-in-USA Dog Chews and Toys Worth Buying This Week",
+    "featured": false
   },
   {
-    "slug": "week-05",
+    "weekNumber": 5,
     "title": "Top Tug Toys That Protect Teeth During Intense Play",
-    "date": "2026-02-02",
+    "datePublished": {
+      "iso": "2026-02-02",
+      "display": "February 2, 2026"
+    },
     "excerpt": "These tug toy features help reduce dental stress while keeping competitive pups fully engaged.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-05.html",
+    "imageUrl": "assets/blog-hero/week-05.webp",
+    "imageAlt": "Top Tug Toys That Protect Teeth During Intense Play",
+    "featured": false
   },
   {
-    "slug": "week-06",
+    "weekNumber": 6,
     "title": "Crate Calmness Games Using Puzzle Toys",
-    "date": "2026-02-09",
+    "datePublished": {
+      "iso": "2026-02-09",
+      "display": "February 9, 2026"
+    },
     "excerpt": "Use enrichment toys in and around the crate to build positive routines and less whining.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-06.html",
+    "imageUrl": "assets/blog-hero/week-06.webp",
+    "imageAlt": "Crate Calmness Games Using Puzzle Toys",
+    "featured": false
   },
   {
-    "slug": "week-07",
+    "weekNumber": 7,
     "title": "Safe Toy Sizes by Breed Weight: Quick Reference Guide",
-    "date": "2026-02-16",
-    "excerpt": "Prevent choking and jaw strain with a fast toy-sizing system based on your dog\u2019s weight.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "datePublished": {
+      "iso": "2026-02-16",
+      "display": "February 16, 2026"
+    },
+    "excerpt": "Prevent choking and jaw strain with a fast toy-sizing system based on your dog’s weight.",
+    "url": "blog/week-07.html",
+    "imageUrl": "assets/blog-hero/week-07.webp",
+    "imageAlt": "Safe Toy Sizes by Breed Weight: Quick Reference Guide",
+    "featured": false
   },
   {
-    "slug": "week-08",
+    "weekNumber": 8,
     "title": "Budget-Friendly Dog Toy Rotation Under $40",
-    "date": "2026-02-23",
+    "datePublished": {
+      "iso": "2026-02-23",
+      "display": "February 23, 2026"
+    },
     "excerpt": "Build a four-week toy rotation that fights boredom without overspending.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-08.html",
+    "imageUrl": "assets/blog-hero/week-08.webp",
+    "imageAlt": "Budget-Friendly Dog Toy Rotation Under $40",
+    "featured": false
   },
   {
-    "slug": "week-09",
+    "weekNumber": 9,
     "title": "Impulse Control Drills with Tug and Treat Toys",
-    "date": "2026-03-02",
-    "excerpt": "Teach \u2018wait,\u2019 \u2018drop,\u2019 and \u2018leave it\u2019 faster by pairing cues with structured toy play.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "datePublished": {
+      "iso": "2026-03-02",
+      "display": "March 2, 2026"
+    },
+    "excerpt": "Teach ‘wait,’ ‘drop,’ and ‘leave it’ faster by pairing cues with structured toy play.",
+    "url": "blog/week-09.html",
+    "imageUrl": "assets/blog-hero/week-09.webp",
+    "imageAlt": "Impulse Control Drills with Tug and Treat Toys",
+    "featured": false
   },
   {
-    "slug": "week-10",
+    "weekNumber": 10,
     "title": "Allergy-Friendly Dog Toy Materials to Try First",
-    "date": "2026-03-09",
+    "datePublished": {
+      "iso": "2026-03-09",
+      "display": "March 9, 2026"
+    },
     "excerpt": "If your dog has sensitive skin, start with these low-irritation toy materials and cleaning habits.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-10.html",
+    "imageUrl": "assets/blog-hero/week-10.webp",
+    "imageAlt": "Allergy-Friendly Dog Toy Materials to Try First",
+    "featured": false
   },
   {
-    "slug": "week-11",
+    "weekNumber": 11,
     "title": "Best Squeaky Toys for Small Dogs Who Love Chase",
-    "date": "2026-03-16",
+    "datePublished": {
+      "iso": "2026-03-16",
+      "display": "March 16, 2026"
+    },
     "excerpt": "Find compact squeaky toys that are easier to carry, safer to bite, and more durable.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-11.html",
+    "imageUrl": "assets/blog-hero/week-11.webp",
+    "imageAlt": "Best Squeaky Toys for Small Dogs Who Love Chase",
+    "featured": false
   },
   {
-    "slug": "week-12",
+    "weekNumber": 12,
     "title": "Small-Batch USA Dog Toy Brands with Durable Stitching",
-    "date": "2026-03-23",
+    "datePublished": {
+      "iso": "2026-03-23",
+      "display": "March 23, 2026"
+    },
     "excerpt": "Spot trustworthy domestic toy makers by checking seams, fabrics, and return policies.",
-    "category": "Made in USA",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-12.html",
+    "imageUrl": "assets/blog-hero/week-12.webp",
+    "imageAlt": "Small-Batch USA Dog Toy Brands with Durable Stitching",
+    "featured": false
   },
   {
-    "slug": "week-13",
+    "weekNumber": 13,
     "title": "Fetch Recall Games That Actually Work in Busy Parks",
-    "date": "2026-03-30",
+    "datePublished": {
+      "iso": "2026-03-30",
+      "display": "March 30, 2026"
+    },
     "excerpt": "Improve reliability around distractions with toy-based recall progressions you can track weekly.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-13.html",
+    "imageUrl": "assets/blog-hero/week-13.webp",
+    "imageAlt": "Fetch Recall Games That Actually Work in Busy Parks",
+    "featured": false
   },
   {
-    "slug": "week-14",
+    "weekNumber": 14,
     "title": "Can Rope Toys Hurt Teeth? Vet-Informed Care Tips",
-    "date": "2026-04-06",
-    "excerpt": "Rope toys can be safe when used correctly\u2014here\u2019s how to inspect wear and protect enamel.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "datePublished": {
+      "iso": "2026-04-06",
+      "display": "April 6, 2026"
+    },
+    "excerpt": "Rope toys can be safe when used correctly—here’s how to inspect wear and protect enamel.",
+    "url": "blog/week-14.html",
+    "imageUrl": "assets/blog-hero/week-14.webp",
+    "imageAlt": "Can Rope Toys Hurt Teeth? Vet-Informed Care Tips",
+    "featured": false
   },
   {
-    "slug": "week-15",
+    "weekNumber": 15,
     "title": "Interactive Treat Toys for Rainy-Day Energy Burn",
-    "date": "2026-04-13",
+    "datePublished": {
+      "iso": "2026-04-13",
+      "display": "April 13, 2026"
+    },
     "excerpt": "Keep indoor days fun with puzzle toys that channel energy into problem-solving play.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-15.html",
+    "imageUrl": "assets/blog-hero/week-15.webp",
+    "imageAlt": "Interactive Treat Toys for Rainy-Day Energy Burn",
+    "featured": false
   },
   {
-    "slug": "week-16",
+    "weekNumber": 16,
     "title": "Puppy Teething Redirection with Frozen Toy Routines",
-    "date": "2026-04-20",
+    "datePublished": {
+      "iso": "2026-04-20",
+      "display": "April 20, 2026"
+    },
     "excerpt": "Redirect nipping and furniture chewing with age-appropriate frozen chew options.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-16.html",
+    "imageUrl": "assets/blog-hero/week-16.webp",
+    "imageAlt": "Puppy Teething Redirection with Frozen Toy Routines",
+    "featured": false
   },
   {
-    "slug": "week-17",
+    "weekNumber": 17,
     "title": "Toy Sanitation Routine: Weekly, Monthly, Seasonal Tasks",
-    "date": "2026-04-27",
+    "datePublished": {
+      "iso": "2026-04-27",
+      "display": "April 27, 2026"
+    },
     "excerpt": "Use this simple cleaning calendar to keep toys fresh and reduce odor buildup.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-17.html",
+    "imageUrl": "assets/blog-hero/week-17.webp",
+    "imageAlt": "Toy Sanitation Routine: Weekly, Monthly, Seasonal Tasks",
+    "featured": false
   },
   {
-    "slug": "week-18",
+    "weekNumber": 18,
     "title": "Best Ball Launch Toys for Apartment-Friendly Exercise",
-    "date": "2026-05-04",
+    "datePublished": {
+      "iso": "2026-05-04",
+      "display": "May 4, 2026"
+    },
     "excerpt": "Short-space fetch is possible with the right bounce profile, grip texture, and launch size.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-18.html",
+    "imageUrl": "assets/blog-hero/week-18.webp",
+    "imageAlt": "Best Ball Launch Toys for Apartment-Friendly Exercise",
+    "featured": false
   },
   {
-    "slug": "week-19",
+    "weekNumber": 19,
     "title": "Clicker Training with Toy Rewards Instead of Treats",
-    "date": "2026-05-11",
+    "datePublished": {
+      "iso": "2026-05-11",
+      "display": "May 11, 2026"
+    },
     "excerpt": "For toy-motivated dogs, this clicker method boosts focus without overfeeding.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-19.html",
+    "imageUrl": "assets/blog-hero/week-19.webp",
+    "imageAlt": "Clicker Training with Toy Rewards Instead of Treats",
+    "featured": false
   },
   {
-    "slug": "week-20",
+    "weekNumber": 20,
     "title": "Signs a Dog Toy Is Unsafe: 9 Red Flags",
-    "date": "2026-05-18",
-    "excerpt": "From cracked rubber to exposed stuffing, these warning signs mean it\u2019s time to replace a toy.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "datePublished": {
+      "iso": "2026-05-18",
+      "display": "May 18, 2026"
+    },
+    "excerpt": "From cracked rubber to exposed stuffing, these warning signs mean it’s time to replace a toy.",
+    "url": "blog/week-20.html",
+    "imageUrl": "assets/blog-hero/week-20.webp",
+    "imageAlt": "Signs a Dog Toy Is Unsafe: 9 Red Flags",
+    "featured": false
   },
   {
-    "slug": "week-21",
+    "weekNumber": 21,
     "title": "USA-Made Rubber Toys for Aggressive Chewers",
-    "date": "2026-05-25",
+    "datePublished": {
+      "iso": "2026-05-25",
+      "display": "May 25, 2026"
+    },
     "excerpt": "Compare hardness, resilience, and cleaning ease across top domestic rubber toy options.",
-    "category": "Made in USA",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-21.html",
+    "imageUrl": "assets/blog-hero/week-21.webp",
+    "imageAlt": "USA-Made Rubber Toys for Aggressive Chewers",
+    "featured": false
   },
   {
-    "slug": "week-22",
+    "weekNumber": 22,
     "title": "Flirt Pole Play: Best Accessories for Controlled Chase",
-    "date": "2026-06-01",
+    "datePublished": {
+      "iso": "2026-06-01",
+      "display": "June 1, 2026"
+    },
     "excerpt": "Get safer chase sessions with flirt pole add-ons designed for grip and durability.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-22.html",
+    "imageUrl": "assets/blog-hero/week-22.webp",
+    "imageAlt": "Flirt Pole Play: Best Accessories for Controlled Chase",
+    "featured": false
   },
   {
-    "slug": "week-23",
+    "weekNumber": 23,
     "title": "Toy Swap Manners: Teaching Dogs to Trade Calmly",
-    "date": "2026-06-08",
+    "datePublished": {
+      "iso": "2026-06-08",
+      "display": "June 8, 2026"
+    },
     "excerpt": "Avoid resource guarding by training a predictable trade game with high-value toys.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-23.html",
+    "imageUrl": "assets/blog-hero/week-23.webp",
+    "imageAlt": "Toy Swap Manners: Teaching Dogs to Trade Calmly",
+    "featured": false
   },
   {
-    "slug": "week-24",
+    "weekNumber": 24,
     "title": "Senior Dog Toy Guide for Sensitive Teeth and Joints",
-    "date": "2026-06-15",
+    "datePublished": {
+      "iso": "2026-06-15",
+      "display": "June 15, 2026"
+    },
     "excerpt": "Support aging dogs with softer textures, lighter toss toys, and low-impact games.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-24.html",
+    "imageUrl": "assets/blog-hero/week-24.webp",
+    "imageAlt": "Senior Dog Toy Guide for Sensitive Teeth and Joints",
+    "featured": false
   },
   {
-    "slug": "week-25",
+    "weekNumber": 25,
     "title": "Best Plush Toys That Survive Moderate Chewers",
-    "date": "2026-06-22",
+    "datePublished": {
+      "iso": "2026-06-22",
+      "display": "June 22, 2026"
+    },
     "excerpt": "These plush construction details help toys last longer for dogs that shred occasionally.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-25.html",
+    "imageUrl": "assets/blog-hero/week-25.webp",
+    "imageAlt": "Best Plush Toys That Survive Moderate Chewers",
+    "featured": false
   },
   {
-    "slug": "week-26",
+    "weekNumber": 26,
     "title": "Nose Work Starter Games with Snuffle Mats and Toys",
-    "date": "2026-06-29",
+    "datePublished": {
+      "iso": "2026-06-29",
+      "display": "June 29, 2026"
+    },
     "excerpt": "Build confidence and reduce boredom using easy scent games you can run in 10 minutes.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-26.html",
+    "imageUrl": "assets/blog-hero/week-26.webp",
+    "imageAlt": "Nose Work Starter Games with Snuffle Mats and Toys",
+    "featured": false
   },
   {
-    "slug": "week-27",
+    "weekNumber": 27,
     "title": "Digestive Safety: Toy Fillings and Fabrics to Avoid",
-    "date": "2026-07-06",
+    "datePublished": {
+      "iso": "2026-07-06",
+      "display": "July 6, 2026"
+    },
     "excerpt": "Know which toy materials and fillers can trigger GI trouble if accidentally swallowed.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-27.html",
+    "imageUrl": "assets/blog-hero/week-27.webp",
+    "imageAlt": "Digestive Safety: Toy Fillings and Fabrics to Avoid",
+    "featured": false
   },
   {
-    "slug": "week-28",
+    "weekNumber": 28,
     "title": "Waterproof Dog Toys for Beach and Pool Days",
-    "date": "2026-07-13",
+    "datePublished": {
+      "iso": "2026-07-13",
+      "display": "July 13, 2026"
+    },
     "excerpt": "Choose floating toys that dry quickly, resist mildew, and stay visible in open water.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-28.html",
+    "imageUrl": "assets/blog-hero/week-28.webp",
+    "imageAlt": "Waterproof Dog Toys for Beach and Pool Days",
+    "featured": false
   },
   {
-    "slug": "week-29",
+    "weekNumber": 29,
     "title": "Stopping Jumping with Structured Tug Breaks",
-    "date": "2026-07-20",
+    "datePublished": {
+      "iso": "2026-07-20",
+      "display": "July 20, 2026"
+    },
     "excerpt": "Use controlled tug as a reward to reduce overexcited jumping when guests arrive.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-29.html",
+    "imageUrl": "assets/blog-hero/week-29.webp",
+    "imageAlt": "Stopping Jumping with Structured Tug Breaks",
+    "featured": false
   },
   {
-    "slug": "week-30",
+    "weekNumber": 30,
     "title": "How Play Intensity Affects Recovery and Sleep",
-    "date": "2026-07-27",
-    "excerpt": "Better toy sessions can improve rest\u2014learn how to balance stimulation with cooldown time.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "datePublished": {
+      "iso": "2026-07-27",
+      "display": "July 27, 2026"
+    },
+    "excerpt": "Better toy sessions can improve rest—learn how to balance stimulation with cooldown time.",
+    "url": "blog/week-30.html",
+    "imageUrl": "assets/blog-hero/week-30.webp",
+    "imageAlt": "How Play Intensity Affects Recovery and Sleep",
+    "featured": false
   },
   {
-    "slug": "week-31",
+    "weekNumber": 31,
     "title": "Made-in-USA Enrichment Toys for Smart Working Breeds",
-    "date": "2026-08-03",
+    "datePublished": {
+      "iso": "2026-08-03",
+      "display": "August 3, 2026"
+    },
     "excerpt": "Challenge high-drive dogs with durable domestic enrichment toys built for repeated use.",
-    "category": "Made in USA",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-31.html",
+    "imageUrl": "assets/blog-hero/week-31.webp",
+    "imageAlt": "Made-in-USA Enrichment Toys for Smart Working Breeds",
+    "featured": false
   },
   {
-    "slug": "week-32",
+    "weekNumber": 32,
     "title": "Top Dental Chew Toys for Fresh Breath Support",
-    "date": "2026-08-10",
+    "datePublished": {
+      "iso": "2026-08-10",
+      "display": "August 10, 2026"
+    },
     "excerpt": "Pair mechanical chewing with hygiene habits for cleaner teeth and better breath.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-32.html",
+    "imageUrl": "assets/blog-hero/week-32.webp",
+    "imageAlt": "Top Dental Chew Toys for Fresh Breath Support",
+    "featured": false
   },
   {
-    "slug": "week-33",
+    "weekNumber": 33,
     "title": "Backyard Agility Warmups Using Everyday Toys",
-    "date": "2026-08-17",
+    "datePublished": {
+      "iso": "2026-08-17",
+      "display": "August 17, 2026"
+    },
     "excerpt": "Turn cones, balls, and tug toys into a simple agility prep circuit for focus and speed.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-33.html",
+    "imageUrl": "assets/blog-hero/week-33.webp",
+    "imageAlt": "Backyard Agility Warmups Using Everyday Toys",
+    "featured": false
   },
   {
-    "slug": "week-34",
+    "weekNumber": 34,
     "title": "Heat-Safe Summer Toy Checklist for Outdoor Play",
-    "date": "2026-08-24",
+    "datePublished": {
+      "iso": "2026-08-24",
+      "display": "August 24, 2026"
+    },
     "excerpt": "Protect paws and gums with summer-safe toy materials and hydration-aware play timing.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-34.html",
+    "imageUrl": "assets/blog-hero/week-34.webp",
+    "imageAlt": "Heat-Safe Summer Toy Checklist for Outdoor Play",
+    "featured": false
   },
   {
-    "slug": "week-35",
+    "weekNumber": 35,
     "title": "Best Quiet Toys for Early-Morning Indoor Play",
-    "date": "2026-08-31",
+    "datePublished": {
+      "iso": "2026-08-31",
+      "display": "August 31, 2026"
+    },
     "excerpt": "Need low-noise options? These toys keep dogs busy without waking the whole house.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-35.html",
+    "imageUrl": "assets/blog-hero/week-35.webp",
+    "imageAlt": "Best Quiet Toys for Early-Morning Indoor Play",
+    "featured": false
   },
   {
-    "slug": "week-36",
+    "weekNumber": 36,
     "title": "Confidence Building for Shy Dogs Through Play",
-    "date": "2026-09-07",
+    "datePublished": {
+      "iso": "2026-09-07",
+      "display": "September 7, 2026"
+    },
     "excerpt": "Use predictable toy games to help timid dogs explore and recover from startling moments.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-36.html",
+    "imageUrl": "assets/blog-hero/week-36.webp",
+    "imageAlt": "Confidence Building for Shy Dogs Through Play",
+    "featured": false
   },
   {
-    "slug": "week-37",
+    "weekNumber": 37,
     "title": "Post-Surgery Toy Ideas for Gentle Mental Enrichment",
-    "date": "2026-09-14",
+    "datePublished": {
+      "iso": "2026-09-14",
+      "display": "September 14, 2026"
+    },
     "excerpt": "During recovery, choose low-impact toys that provide stimulation without risky movement.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-37.html",
+    "imageUrl": "assets/blog-hero/week-37.webp",
+    "imageAlt": "Post-Surgery Toy Ideas for Gentle Mental Enrichment",
+    "featured": false
   },
   {
-    "slug": "week-38",
+    "weekNumber": 38,
     "title": "Durable Multi-Dog Household Toys That Reduce Conflict",
-    "date": "2026-09-21",
+    "datePublished": {
+      "iso": "2026-09-21",
+      "display": "September 21, 2026"
+    },
     "excerpt": "Pick toys and duplicates that lower competition and keep group play fair.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-38.html",
+    "imageUrl": "assets/blog-hero/week-38.webp",
+    "imageAlt": "Durable Multi-Dog Household Toys That Reduce Conflict",
+    "featured": false
   },
   {
-    "slug": "week-39",
+    "weekNumber": 39,
     "title": "Toy-Based Place Command for Better House Manners",
-    "date": "2026-09-28",
-    "excerpt": "Teach a reliable \u2018place\u2019 cue by combining mat training with controlled toy rewards.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "datePublished": {
+      "iso": "2026-09-28",
+      "display": "September 28, 2026"
+    },
+    "excerpt": "Teach a reliable ‘place’ cue by combining mat training with controlled toy rewards.",
+    "url": "blog/week-39.html",
+    "imageUrl": "assets/blog-hero/week-39.webp",
+    "imageAlt": "Toy-Based Place Command for Better House Manners",
+    "featured": false
   },
   {
-    "slug": "week-40",
+    "weekNumber": 40,
     "title": "Travel-Safe Dog Toy Kit for Road Trips",
-    "date": "2026-10-05",
+    "datePublished": {
+      "iso": "2026-10-05",
+      "display": "October 5, 2026"
+    },
     "excerpt": "Pack a compact toy kit that supports comfort, cleanup, and calm behavior in transit.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-40.html",
+    "imageUrl": "assets/blog-hero/week-40.webp",
+    "imageAlt": "Travel-Safe Dog Toy Kit for Road Trips",
+    "featured": false
   },
   {
-    "slug": "week-41",
+    "weekNumber": 41,
     "title": "Eco-Friendly USA Dog Toys Made with Recycled Materials",
-    "date": "2026-10-12",
+    "datePublished": {
+      "iso": "2026-10-12",
+      "display": "October 12, 2026"
+    },
     "excerpt": "Find American-made toy options that reduce waste without sacrificing durability.",
-    "category": "Made in USA",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-41.html",
+    "imageUrl": "assets/blog-hero/week-41.webp",
+    "imageAlt": "Eco-Friendly USA Dog Toys Made with Recycled Materials",
+    "featured": false
   },
   {
-    "slug": "week-42",
+    "weekNumber": 42,
     "title": "Best Starter Toy Bundle for Newly Adopted Dogs",
-    "date": "2026-10-19",
+    "datePublished": {
+      "iso": "2026-10-19",
+      "display": "October 19, 2026"
+    },
     "excerpt": "Set your new dog up for success with a balanced first-month toy lineup.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-42.html",
+    "imageUrl": "assets/blog-hero/week-42.webp",
+    "imageAlt": "Best Starter Toy Bundle for Newly Adopted Dogs",
+    "featured": false
   },
   {
-    "slug": "week-43",
-    "title": "Proofing \u2018Drop It\u2019 with High-Value Tug Toys",
-    "date": "2026-10-26",
-    "excerpt": "Build a dependable \u2018drop it\u2019 cue even when excitement and toy value are high.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "weekNumber": 43,
+    "title": "Proofing ‘Drop It’ with High-Value Tug Toys",
+    "datePublished": {
+      "iso": "2026-10-26",
+      "display": "October 26, 2026"
+    },
+    "excerpt": "Build a dependable ‘drop it’ cue even when excitement and toy value are high.",
+    "url": "blog/week-43.html",
+    "imageUrl": "assets/blog-hero/week-43.webp",
+    "imageAlt": "Proofing ‘Drop It’ with High-Value Tug Toys",
+    "featured": false
   },
   {
-    "slug": "week-44",
+    "weekNumber": 44,
     "title": "Winter Paw Safety and Indoor Exercise Toy Picks",
-    "date": "2026-11-02",
+    "datePublished": {
+      "iso": "2026-11-02",
+      "display": "November 2, 2026"
+    },
     "excerpt": "Keep dogs active in cold weather with safe indoor toys and paw-friendly routines.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-44.html",
+    "imageUrl": "assets/blog-hero/week-44.webp",
+    "imageAlt": "Winter Paw Safety and Indoor Exercise Toy Picks",
+    "featured": false
   },
   {
-    "slug": "week-45",
+    "weekNumber": 45,
     "title": "Top Chew Toys for Extreme Gnawers: What Lasts Longest",
-    "date": "2026-11-09",
+    "datePublished": {
+      "iso": "2026-11-09",
+      "display": "November 9, 2026"
+    },
     "excerpt": "Use this buyer checklist to compare real durability claims before you spend.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-45.html",
+    "imageUrl": "assets/blog-hero/week-45.webp",
+    "imageAlt": "Top Chew Toys for Extreme Gnawers: What Lasts Longest",
+    "featured": false
   },
   {
-    "slug": "week-46",
+    "weekNumber": 46,
     "title": "Reinforcing Calm Greetings with Fetch Rewards",
-    "date": "2026-11-16",
+    "datePublished": {
+      "iso": "2026-11-16",
+      "display": "November 16, 2026"
+    },
     "excerpt": "Reward four paws on the floor using a fetch-based greeting routine.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-46.html",
+    "imageUrl": "assets/blog-hero/week-46.webp",
+    "imageAlt": "Reinforcing Calm Greetings with Fetch Rewards",
+    "featured": false
   },
   {
-    "slug": "week-47",
+    "weekNumber": 47,
     "title": "When to Retire a Favorite Toy (Even If Your Dog Loves It)",
-    "date": "2026-11-23",
-    "excerpt": "Sentimental toys can become hazardous\u2014here\u2019s how to replace them with less stress.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "datePublished": {
+      "iso": "2026-11-23",
+      "display": "November 23, 2026"
+    },
+    "excerpt": "Sentimental toys can become hazardous—here’s how to replace them with less stress.",
+    "url": "blog/week-47.html",
+    "imageUrl": "assets/blog-hero/week-47.webp",
+    "imageAlt": "When to Retire a Favorite Toy (Even If Your Dog Loves It)",
+    "featured": false
   },
   {
-    "slug": "week-48",
-    "title": "Holiday Gift Guide: Dog Toys That Won\u2019t Be Ignored",
-    "date": "2026-11-30",
+    "weekNumber": 48,
+    "title": "Holiday Gift Guide: Dog Toys That Won’t Be Ignored",
+    "datePublished": {
+      "iso": "2026-11-30",
+      "display": "November 30, 2026"
+    },
     "excerpt": "Our seasonal picks focus on engagement, durability, and easy cleanup.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-48.html",
+    "imageUrl": "assets/blog-hero/week-48.webp",
+    "imageAlt": "Holiday Gift Guide: Dog Toys That Won’t Be Ignored",
+    "featured": false
   },
   {
-    "slug": "week-49",
+    "weekNumber": 49,
     "title": "Building Better Focus Before Obedience Sessions",
-    "date": "2026-12-07",
-    "excerpt": "Prime your dog\u2019s attention with short toy games before training reps begin.",
-    "category": "Dog Training",
-    "heroImage": "assets/chew-rope.svg"
+    "datePublished": {
+      "iso": "2026-12-07",
+      "display": "December 7, 2026"
+    },
+    "excerpt": "Prime your dog’s attention with short toy games before training reps begin.",
+    "url": "blog/week-49.html",
+    "imageUrl": "assets/blog-hero/week-49.webp",
+    "imageAlt": "Building Better Focus Before Obedience Sessions",
+    "featured": false
   },
   {
-    "slug": "week-50",
+    "weekNumber": 50,
     "title": "Choosing Toys for Dogs on Weight-Management Plans",
-    "date": "2026-12-14",
+    "datePublished": {
+      "iso": "2026-12-14",
+      "display": "December 14, 2026"
+    },
     "excerpt": "Use toy-based activity to increase movement without adding extra calories.",
-    "category": "Dog Health",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-50.html",
+    "imageUrl": "assets/blog-hero/week-50.webp",
+    "imageAlt": "Choosing Toys for Dogs on Weight-Management Plans",
+    "featured": false
   },
   {
-    "slug": "week-51",
+    "weekNumber": 51,
     "title": "Last-Minute USA-Made Dog Toy Deals for Gifting Season",
-    "date": "2026-12-21",
+    "datePublished": {
+      "iso": "2026-12-21",
+      "display": "December 21, 2026"
+    },
     "excerpt": "Shop smarter with a quick quality checklist for domestic holiday toy buys.",
-    "category": "Made in USA",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-51.html",
+    "imageUrl": "assets/blog-hero/week-51.webp",
+    "imageAlt": "Last-Minute USA-Made Dog Toy Deals for Gifting Season",
+    "featured": false
   },
   {
-    "slug": "week-52",
+    "weekNumber": 52,
     "title": "Year-End Dog Toy Winners: Best Value by Play Style",
-    "date": "2026-12-28",
+    "datePublished": {
+      "iso": "2026-12-28",
+      "display": "December 28, 2026"
+    },
     "excerpt": "Our year-end roundup maps toy types to play habits so you can buy with confidence.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
-  },
-  {
-    "slug": "post-1",
-    "title": "5 Ways to Make Dog Toys Last Longer",
-    "date": "2026-01-15",
-    "excerpt": "Tired of toys falling apart in days? Here are 5 quick ways to extend the life of your pup\u2019s favorite playthings.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
-  },
-  {
-    "slug": "post-2",
-    "title": "Dog Toy Safety: How to Choose the Perfect Toy for Your Pup",
-    "date": "2026-01-22",
-    "excerpt": "A practical guide to choosing safe, durable toys for your dog based on size, age, and chewing style.",
-    "category": "Dog Toys",
-    "heroImage": "assets/chew-rope.svg"
+    "url": "blog/week-52.html",
+    "imageUrl": "assets/blog-hero/week-52.webp",
+    "imageAlt": "Year-End Dog Toy Winners: Best Value by Play Style",
+    "featured": true
   }
 ]
