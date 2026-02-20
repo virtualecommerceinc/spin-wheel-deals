@@ -1,0 +1,241 @@
+name: Generate Blog Hero Images
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_week:
+        description: "Start week number (1–52)"
+        required: true
+        default: "1"
+      end_week:
+        description: "End week number (1–52)"
+        required: true
+        default: "1"
+      overwrite:
+        description: "Overwrite existing images (true/false)"
+        required: true
+        default: "false"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate-images:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: |
+          npm init -y
+          npm install openai@^4 sharp cheerio
+
+      - name: Generate images + update blog hero img src/alt
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          START_WEEK: ${{ github.event.inputs.start_week }}
+          END_WEEK: ${{ github.event.inputs.end_week }}
+          OVERWRITE: ${{ github.event.inputs.overwrite }}
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+          const cheerio = require("cheerio");
+          const sharp = require("sharp");
+          const OpenAI = require("openai");
+
+          if (!process.env.OPENAI_API_KEY) {
+            console.error("Missing OPENAI_API_KEY secret.");
+            process.exit(1);
+          }
+
+          const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+          const clampInt = (v, min, max) => {
+            const n = Number(String(v).trim());
+            if (!Number.isFinite(n)) return min;
+            return Math.max(min, Math.min(max, Math.floor(n)));
+          };
+
+          const startWeek = clampInt(process.env.START_WEEK, 1, 52);
+          const endWeek = clampInt(process.env.END_WEEK, 1, 52);
+          const overwrite = String(process.env.OVERWRITE).toLowerCase() === "true";
+
+          const lo = Math.min(startWeek, endWeek);
+          const hi = Math.max(startWeek, endWeek);
+
+          const blogDir = path.join(process.cwd(), "blog");
+          const outDir = path.join(process.cwd(), "assets", "blog-hero");
+          fs.mkdirSync(outDir, { recursive: true });
+
+          const pad2 = (n) => String(n).padStart(2, "0");
+
+          function pickHeroImg($) {
+            // Try common patterns in order (safe + standard)
+            const candidates = [
+              "figure img",
+              ".post-hero img",
+              ".hero img",
+              "header img",
+              "main img"
+            ];
+            for (const sel of candidates) {
+              const el = $(sel).first();
+              if (el && el.length) return el;
+            }
+            return null;
+          }
+
+          function getTitleAndExcerpt($) {
+            const title =
+              ($("h1").first().text() || "").trim() ||
+              ($("title").text() || "").trim() ||
+              "Dog Training Blog";
+
+            // Prefer meta description, else first paragraph
+            const metaDesc = ($('meta[name="description"]').attr("content") || "").trim();
+            let excerpt = metaDesc;
+
+            if (!excerpt) {
+              excerpt = ($("main p").first().text() || $("p").first().text() || "").trim();
+            }
+
+            // Keep excerpt short for prompting
+            if (excerpt.length > 240) excerpt = excerpt.slice(0, 240).trim() + "…";
+
+            return { title, excerpt };
+          }
+
+          async function sleep(ms) {
+            return new Promise((r) => setTimeout(r, ms));
+          }
+
+          async function generateHeroPng(prompt) {
+            // Uses GPT Image endpoint (v1/images/generations). Returns base64 image data.
+            // Docs: GPT image models return b64_json by default. :contentReference[oaicite:0]{index=0}
+            const res = await client.images.generate({
+              model: "gpt-image-1-mini",
+              prompt,
+              size: "1536x1024",
+              quality: "low"
+            });
+            const b64 = res?.data?.[0]?.b64_json;
+            if (!b64) throw new Error("No b64_json returned from image generation.");
+            return Buffer.from(b64, "base64");
+          }
+
+          function buildPrompt(title, excerpt) {
+            // Keep prompt focused + consistent style across weeks
+            return [
+              "Create a clean, modern hero image for a blog post about dogs.",
+              "Style: friendly, semi-realistic illustration (not a photo), soft lighting, smooth gradients, high clarity.",
+              "No text, no letters, no watermarks, no logos.",
+              "Subject must match this blog topic:",
+              `Title: ${title}`,
+              excerpt ? `Context: ${excerpt}` : "",
+              "Composition: centered subject with generous negative space, suitable as a wide header image.",
+              "Color palette: cool blues/teals with subtle warmth; avoid harsh neon."
+            ].filter(Boolean).join("\n");
+          }
+
+          function toWebpPadded(inputPngBuffer, width, height) {
+            // Fit inside exact dimensions without cropping by padding
+            return sharp(inputPngBuffer)
+              .resize(width, height, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+              .webp({ quality: 82 })
+              .toBuffer();
+          }
+
+          (async () => {
+            console.log(`Generating hero images for weeks ${lo}–${hi} (overwrite=${overwrite})`);
+            const changedFiles = [];
+
+            for (let week = lo; week <= hi; week++) {
+              const file = `week-${pad2(week)}.html`;
+              const blogPath = path.join(blogDir, file);
+
+              if (!fs.existsSync(blogPath)) {
+                console.warn(`Skip: ${blogPath} not found`);
+                continue;
+              }
+
+              const html = fs.readFileSync(blogPath, "utf8");
+              const $ = cheerio.load(html);
+
+              const { title, excerpt } = getTitleAndExcerpt($);
+
+              const outName = `week-${pad2(week)}.webp`;
+              const outPath = path.join(outDir, outName);
+
+              if (!overwrite && fs.existsSync(outPath)) {
+                console.log(`Exists (skip): assets/blog-hero/${outName}`);
+              } else {
+                const prompt = buildPrompt(title, excerpt);
+                console.log(`Generate: week-${pad2(week)} → ${outName}`);
+
+                // Generate image
+                const pngBuf = await generateHeroPng(prompt);
+
+                // Convert to a more web-friendly hero size (wide) without breaking layout
+                // 1200x700 is a good "big hero" that’s still lighter than 1536x1024.
+                const webpBuf = await toWebpPadded(pngBuf, 1200, 700);
+                fs.writeFileSync(outPath, webpBuf);
+
+                // Gentle pacing to reduce accidental bursts (still much less than Amazon’s limits)
+                await sleep(800);
+              }
+
+              // Update the blog HTML to point at the generated file (relative from /blog/)
+              const heroImg = pickHeroImg($);
+              const relSrc = `../assets/blog-hero/${outName}`;
+
+              if (heroImg) {
+                heroImg.attr("src", relSrc);
+                heroImg.attr("loading", "lazy");
+                heroImg.attr("decoding", "async");
+                heroImg.attr("alt", title || `Week ${pad2(week)} blog hero image`);
+                const updated = $.html();
+                if (updated !== html) {
+                  fs.writeFileSync(blogPath, updated, "utf8");
+                  changedFiles.push(`blog/${file}`);
+                }
+              } else {
+                console.warn(`No <img> found to update in ${file} (image was still generated)`);
+              }
+
+              changedFiles.push(`assets/blog-hero/${outName}`);
+            }
+
+            if (!changedFiles.length) {
+              console.log("No changes made.");
+            } else {
+              console.log(`Changed files (count=${new Set(changedFiles).size}):`);
+              for (const f of [...new Set(changedFiles)]) console.log(` - ${f}`);
+            }
+          })().catch((err) => {
+            console.error(err);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: "chore(blog): generate hero images (weeks ${{ github.event.inputs.start_week }}–${{ github.event.inputs.end_week }})"
+          commit-message: "chore(blog): generate hero images (weeks ${{ github.event.inputs.start_week }}–${{ github.event.inputs.end_week }})"
+          branch: "automation/blog-hero-images-${{ github.run_id }}"
+          delete-branch: true
+          body: |
+            Automated hero-image generation for weekly blog posts.
+
+            - Generates images into `assets/blog-hero/week-XX.webp`
+            - Updates each blog post to reference its corresponding hero image
+            - Uses `OPENAI_API_KEY` from repo secrets
