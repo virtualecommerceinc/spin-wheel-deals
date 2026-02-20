@@ -137,6 +137,13 @@
         return (post.datePublished && (post.datePublished.display || post.datePublished.iso)) || '';
       }
 
+      function shortExcerpt(post) {
+        if (!post || typeof post.excerpt !== 'string') return '';
+        const cleaned = post.excerpt.replace(/\s+/g, ' ').trim();
+        if (!cleaned) return '';
+        return cleaned.length > 130 ? cleaned.slice(0, 127).trimEnd() + '…' : cleaned;
+      }
+
       function card(post) {
         const title = escapeHtml(post.title || 'Untitled');
         const imageAlt = escapeHtml(post.imageAlt || post.title || 'Blog post image');
@@ -171,6 +178,13 @@
             return new Date((b.datePublished && b.datePublished.iso) || 0) - new Date((a.datePublished && a.datePublished.iso) || 0);
           });
 
+          const archiveSorted = weeklyPosts.slice().sort(function (a, b) {
+            const aw = (typeof a.weekNumber === 'number') ? a.weekNumber : null;
+            const bw = (typeof b.weekNumber === 'number') ? b.weekNumber : null;
+            if (aw != null && bw != null) return aw - bw;
+            return new Date((a.datePublished && a.datePublished.iso) || 0) - new Date((b.datePublished && b.datePublished.iso) || 0);
+          });
+
           const featured = sorted.find(function (post) { return post.featured; }) || sorted[0];
 
           featuredRoot.innerHTML = featured
@@ -179,14 +193,20 @@
 
           latestRoot.innerHTML = sorted.slice(0, 6).map(card).join('');
 
-          const items = sorted.map(function (post) {
+          const items = archiveSorted.map(function (post) {
             const week = String(post.weekNumber || '').padStart(2, '0');
             const title = escapeHtml(post.title || 'Untitled');
             const url = escapeHtml(post.url || '#');
             const date = escapeHtml(postDate(post));
-            return '<li><a href="' + url + '">Week ' + week + ': ' + title + '</a> <span class="post-meta">(' + date + ')</span></li>';
+            const excerpt = shortExcerpt(post);
+            const excerptMarkup = excerpt ? '<div class="archive-excerpt">' + escapeHtml(excerpt) + '</div>' : '';
+            return '<li class="archive-item">' +
+              '<a class="archive-link" href="' + url + '">Week ' + week + ': ' + title + '</a>' +
+              '<div class="archive-meta">Published: ' + date + '</div>' +
+              excerptMarkup +
+              '</li>';
           }).join('');
-          allRoot.innerHTML = '<ul class="bullet-list">' + items + '</ul>';
+          allRoot.innerHTML = '<div class="archive-intro">Browse every weekly post in chronological order.</div><ul class="archive-list">' + items + '</ul>';
         })
         .catch(function () {
           featuredRoot.innerHTML = '<article class="product-card"><div class="product-card__body"><p>Could not load featured post. Please try again later.</p></div></article>';
