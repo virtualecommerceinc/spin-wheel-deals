@@ -102,6 +102,30 @@
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.22);
     }
 
+
+
+    body.dog-training-page .site-main .guide-section-heading {
+      margin: 0 0 clamp(14px, 2.3vw, 22px);
+      padding: clamp(14px, 2.5vw, 20px) clamp(14px, 2.4vw, 24px);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(15, 66, 49, 0.24);
+      background: linear-gradient(140deg, rgba(233, 247, 241, 0.95), rgba(219, 241, 235, 0.92) 55%, rgba(203, 232, 223, 0.9));
+      box-shadow: 0 10px 24px rgba(15, 44, 31, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(6px);
+      text-align: center;
+    }
+
+    body.dog-training-page .site-main .guide-section-heading h2 {
+      margin: 0;
+      color: #103527;
+      text-align: center;
+      text-shadow: none;
+    }
+
+    body.dog-training-page .site-main > section:is(#training-timeline, #behavior-problems, #training-tools, #sources-trust) > h2 {
+      text-align: center;
+    }
+
     .site-main h3,
     .site-main h4 {
       color: #163a2b;
@@ -202,7 +226,7 @@
   }
   </script>
 </head>
-<body>
+<body class="dog-training-page">
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- Background (required on every page that should show the animated sky/clouds/trees/grass) -->
@@ -267,7 +291,9 @@
     <!-- FOUNDATIONS SECTION            -->
     <!-- ============================== -->
     <section id="foundations" class="foundations">
-      <h2>Training Foundations: Positive Reinforcement</h2>
+      <header class="guide-section-heading">
+        <h2>Training Foundations: Positive Reinforcement</h2>
+      </header>
 
       <div class="content-block">
         <p>Positive reinforcement training focuses on rewarding desired behaviors, building on your dog's natural desire to please and earn rewards. This humane, science-backed approach creates a strong human-dog bond, reduces stress and anxiety, and produces faster learning than punishment-based methods. Dogs trained with positive reinforcement are more confident, engaged, and eager to work.</p>
@@ -456,7 +482,9 @@
     <!-- BASIC COMMANDS SECTION         -->
     <!-- ============================== -->
     <section id="basic-commands" class="commands">
-      <h2>Basic Commands: Step-by-Step Guides</h2>
+      <header class="guide-section-heading">
+        <h2>Basic Commands: Step-by-Step Guides</h2>
+      </header>
 
       <div class="content-block">
         <p>These foundational commands form the basis for all other training. Master these first, then build on them with more advanced skills. Each command should be practiced in short sessions (5-10 minutes) in a quiet, distraction-free space before moving to busier environments.</p>
@@ -562,7 +590,9 @@
     <!-- ADVANCED TRAINING SECTION      -->
     <!-- ============================== -->
     <section id="advanced-training" class="advanced">
-      <h2>Advanced Training: Building on Basics</h2>
+      <header class="guide-section-heading">
+        <h2>Advanced Training: Building on Basics</h2>
+      </header>
 
       <div class="content-block">
         <p>Once your dog has mastered basic commands, you can build on this foundation with more complex behaviors, longer durations, and improved reliability in distracting environments.</p>
@@ -813,7 +843,9 @@
     <!-- PROFESSIONAL HELP SECTION      -->
     <!-- ============================== -->
     <section id="professional-help" class="professional">
-      <h2>When to Hire a Professional Trainer</h2>
+      <header class="guide-section-heading">
+        <h2>When to Hire a Professional Trainer</h2>
+      </header>
 
       <div class="content-block">
         <p>Training is a skill you can develop with patience and guidance, but sometimes professional help accelerates progress, prevents reinforcing bad habits, or addresses serious behavioral issues. Knowing when to reach out is a sign of good judgment, not failure.</p>
