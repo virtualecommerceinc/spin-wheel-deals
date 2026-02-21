@@ -1276,6 +1276,27 @@ a.card:hover,
   margin-bottom: 6px;
 }
 
+.affiliate-disclosure--compact{
+  max-width: min(980px, 92vw);
+  margin: 10px auto 12px;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.45;
+  background: rgba(255,255,255,0.84);
+  border-left: 3px solid rgba(51,102,255,0.55);
+  box-shadow: none;
+}
+.affiliate-disclosure--compact strong{
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+.affiliate-disclosure--compact p{
+  margin: 0;
+}
+.product-grid .affiliate-disclosure{
+  grid-column: 1 / -1;
+}
+
 /* toolkit CTA at bottom */
 .toolkit .cta-btn{
   display: flex;
