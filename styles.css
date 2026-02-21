@@ -1253,12 +1253,33 @@ a.card:hover,
   cursor: pointer;
   color: var(--ink);
 }
+.accordion .accordion-toggle:focus-visible{
+  outline: 3px solid rgba(25, 94, 67, 0.58);
+  outline-offset: -3px;
+}
 .accordion .accordion-panel{
-  display: none;
+  display: block;
   padding: 14px 16px 16px;
   background: rgba(255,255,255,0.92);
 }
+.accordion .accordion-panel[hidden]{ display: none; }
 .accordion .accordion-panel p{ color: var(--ink-soft); }
+
+body.dog-training-page .commands-grid{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  body.dog-training-page .commands-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  body.dog-training-page .commands-grid{
+    grid-template-columns: 1fr;
+  }
+}
 
 /* affiliate disclosure */
 .affiliate-disclosure{

@@ -390,7 +390,7 @@
             <div class="calculator-tool__header">
               <span class="calculator-tool__icon" aria-hidden="true">
                 <svg viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
-                  <path d="M32 2C15.4 2 2 15.4 2 32s13.4 30 30 30 30-13.4 30-30S48.6 2 32 2zm0 55c-13.8 0-25-11.2-25-25s11.2-25 25-25 25 11.2 25 25-11.2 25-25 25zm10-27H33V12h-2v20H22v2h20v-2z" />
+                  <path d="M13 6a5 5 0 0 0-5 5v36a5 5 0 0 0 5 5h38a5 5 0 0 0 5-5V11a5 5 0 0 0-5-5h-5v8h-4V6H22v8h-4V6h-5zm-1 15h40v26a1 1 0 0 1-1 1H13a1 1 0 0 1-1-1V21zm20 5a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 3v7h5v3h-8V29h3z" />
                 </svg>
               </span>
               <div>
@@ -490,7 +490,7 @@
         <p>These foundational commands form the basis for all other training. Master these first, then build on them with more advanced skills. Each command should be practiced in short sessions (5-10 minutes) in a quiet, distraction-free space before moving to busier environments.</p>
       </div>
 
-      <div class="card-group">
+      <div class="card-group commands-grid">
         <div class="card">
           <h3>SIT</h3>
           <p><strong>Difficulty:</strong> Easiest | <strong>Age:</strong> 8+ weeks | <strong>Timeline:</strong> 3-7 days</p>
@@ -654,7 +654,7 @@
 
       <div class="card">
         <button class="accordion-toggle" type="button" aria-expanded="false">Jumping on People</button>
-        <div class="accordion-panel">
+        <div class="accordion-panel" hidden>
           <p><strong>Why dogs jump:</strong> Excitement, seeking attention, trying to greet you at face level. Jumping gets rewarded (people react to it), so dogs keep doing it.</p>
           <p><strong>What NOT to do:</strong> Don't knee the dog, push them away, or yell—this is still attention and rewards the behavior.</p>
           <p class="warning-flag"><strong>Solution strategy:</strong></p>
@@ -672,7 +672,7 @@
 
       <div class="card">
         <button class="accordion-toggle" type="button" aria-expanded="false">Excessive Barking &amp; Whining</button>
-        <div class="accordion-panel">
+        <div class="accordion-panel" hidden>
           <p><strong>Why dogs bark:</strong> Alerting, boredom, anxiety, seeking attention, excitement, or fear.</p>
           <p><strong>First step:</strong> Identify the trigger. Is it the doorbell? Other dogs? Boredom? Separation anxiety?</p>
           <p class="warning-flag"><strong>Solution strategy by trigger:</strong></p>
@@ -690,7 +690,7 @@
 
       <div class="card">
         <button class="accordion-toggle" type="button" aria-expanded="false">Pulling on Leash</button>
-        <div class="accordion-panel">
+        <div class="accordion-panel" hidden>
           <p><strong>Why dogs pull:</strong> The environment is exciting and interesting. Forward progress is the reward for pulling, so they pull more.</p>
           <p class="warning-flag"><strong>Solution strategy:</strong></p>
           <ul class="bullet-list">
@@ -708,7 +708,7 @@
 
       <div class="card">
         <button class="accordion-toggle" type="button" aria-expanded="false">Resource Guarding &amp; Food Aggression</button>
-        <div class="accordion-panel">
+        <div class="accordion-panel" hidden>
           <p><strong>What it is:</strong> Growling, snapping, or biting over food, toys, or other valuables. This is a safety concern requiring professional intervention.</p>
           <p class="warning-flag"><strong>⚠️ IMPORTANT:</strong> This behavior can escalate quickly and result in serious injury. If your dog guards resources aggressively, consult a certified professional trainer or veterinary behaviorist immediately.</p>
           <ul class="bullet-list">
@@ -723,7 +723,7 @@
 
       <div class="card">
         <button class="accordion-toggle" type="button" aria-expanded="false">Reactivity to Other Dogs</button>
-        <div class="accordion-panel">
+        <div class="accordion-panel" hidden>
           <p><strong>What it is:</strong> Lunging, barking, growling, or aggressive behavior toward other dogs. This is often fear-based, not aggression.</p>
           <p><strong>Why it happens:</strong> Past trauma, lack of socialization, fear, or learned behavior (it "works" to make the other dog go away).</p>
           <p class="warning-flag"><strong>Solution strategy:</strong></p>
@@ -742,7 +742,7 @@
 
       <div class="card">
         <button class="accordion-toggle" type="button" aria-expanded="false">Destructive Behavior &amp; Chewing</button>
-        <div class="accordion-panel">
+        <div class="accordion-panel" hidden>
           <p><strong>Why dogs chew/destroy:</strong> Boredom, anxiety, teething (puppies), seeking attention, or just because it's fun.</p>
           <p class="warning-flag"><strong>Solution strategy:</strong></p>
           <ul class="bullet-list">
@@ -1043,8 +1043,14 @@
     document.querySelectorAll('.accordion-toggle').forEach(button => {
       button.addEventListener('click', function() {
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        const panel = this.nextElementSibling;
+
+        if (!panel || !panel.classList.contains('accordion-panel')) {
+          return;
+        }
+
         this.setAttribute('aria-expanded', String(!isExpanded));
-        this.nextElementSibling.hidden = isExpanded;
+        panel.hidden = isExpanded;
       });
     });
 
