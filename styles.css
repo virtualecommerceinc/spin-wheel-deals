@@ -1237,41 +1237,105 @@ a.card:hover,
 .accordion .accordion-panel .bullet-list { margin-top: 10px; }
 
 /* accordion */
-.accordion .card{
+body.dog-training-page .accordion .card{
   text-align: left;
   padding: 0;
   overflow: hidden;
 }
-.accordion .accordion-toggle{
+body.dog-training-page .accordion .accordion-toggle{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   width: 100%;
   text-align: left;
-  padding: 14px 16px;
+  padding: 16px 18px;
   background: rgba(15,23,42,0.06);
-  border: none;
+  border: 1px solid transparent;
+  border-radius: 14px;
   font-size: 16px;
   font-weight: 900;
   cursor: pointer;
   color: var(--ink);
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
-.accordion .accordion-toggle:focus-visible{
+body.dog-training-page .accordion .accordion-toggle::after{
+  content: '+';
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1;
+  color: #0f5239;
+  background: rgba(15, 82, 57, 0.12);
+}
+body.dog-training-page .accordion .accordion-toggle:hover{
+  background: rgba(15, 23, 42, 0.09);
+  border-color: rgba(15, 82, 57, 0.3);
+}
+body.dog-training-page .accordion .accordion-toggle[aria-expanded='true']{
+  background: rgba(15, 82, 57, 0.12);
+  border-color: rgba(15, 82, 57, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+body.dog-training-page .accordion .accordion-toggle[aria-expanded='true']::after{
+  content: '−';
+}
+body.dog-training-page .accordion .accordion-toggle:focus-visible{
   outline: 3px solid rgba(25, 94, 67, 0.58);
-  outline-offset: -3px;
+  outline-offset: 2px;
 }
-.accordion .accordion-panel{
+body.dog-training-page .accordion .accordion-panel{
   display: block;
-  padding: 14px 16px 16px;
+  padding: 0 18px;
   background: rgba(255,255,255,0.92);
+  max-height: 700px;
+  opacity: 1;
+  transition: max-height 250ms ease, opacity 180ms ease, padding 180ms ease;
 }
-.accordion .accordion-panel[hidden]{ display: none; }
-.accordion .accordion-panel p{ color: var(--ink-soft); }
+body.dog-training-page .accordion .accordion-panel[hidden]{
+  display: block;
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+body.dog-training-page .accordion .accordion-panel:not([hidden]){
+  padding-top: 12px;
+  padding-bottom: 18px;
+}
+body.dog-training-page .accordion .accordion-panel p{ color: var(--ink-soft); }
+
+@media (prefers-reduced-motion: reduce) {
+  body.dog-training-page .accordion .accordion-toggle,
+  body.dog-training-page .accordion .accordion-panel {
+    transition: none;
+  }
+}
 
 body.dog-training-page .commands-grid{
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 18px;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+body.dog-training-page .commands-grid .card{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 900px) {
   body.dog-training-page .commands-grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 700px;
   }
 }
 
