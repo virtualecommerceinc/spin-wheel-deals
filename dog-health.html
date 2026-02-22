@@ -49,7 +49,85 @@
     #feeding-calculator .calculator-tool__results--below .calculator-tool__feeding{
       margin-bottom: 10px !important;
     }
+
+    /* =======================================================
+       Make the Amazon cards look obviously CLICKABLE (UI only)
+       (No workflow changes needed; works with current injection)
+       ======================================================= */
+
+    /* Scope only to the Wellness Toolkit product list so we don't affect other cards */
+    #health-toolkit .card-group > a.card{
+      position: relative;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+    }
+
+    /* Stronger hover/focus affordance */
+    #health-toolkit .card-group > a.card:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
+    }
+
+    /* Keyboard users: clear focus ring */
+    #health-toolkit .card-group > a.card:focus-visible{
+      outline: 3px solid rgba(255, 200, 0, 0.9);
+      outline-offset: 3px;
+    }
+
+    /* Add an arrow cue in the title without changing injected HTML */
+    #health-toolkit .card-group > a.card h4{
+      position: relative;
+      padding-right: 26px;
+    }
+    #health-toolkit .card-group > a.card h4::after{
+      content: "↗";
+      position: absolute;
+      right: 0;
+      top: 0;
+      opacity: 0.8;
+      font-weight: 700;
+    }
+
+    /* Add a visible "button" label at the bottom of each card via CSS */
+    #health-toolkit .card-group > a.card::after{
+      content: "View on Amazon";
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.25);
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    /* Make it feel like a button on hover */
+    #health-toolkit .card-group > a.card:hover::after{
+      border-color: rgba(255, 200, 0, 0.55);
+    }
+
+    /* Small helper line to hint it’s clickable */
+    #health-toolkit .card-group > a.card::before{
+      content: "Tap/click to open on Amazon";
+      display: block;
+      opacity: 0.8;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    /* If your global .card has padding, this helps keep the pseudo-elements aligned */
+    #health-toolkit .card-group > a.card::before,
+    #health-toolkit .card-group > a.card::after{
+      pointer-events: none; /* ensures the entire card click still works */
+    }
   </style>
+
   <meta property="og:image" content="https://virtualecommerceinc.com/spin-wheel-deals/assets/cartoon-dog.svg" />
   <meta name="twitter:image" content="https://virtualecommerceinc.com/spin-wheel-deals/assets/cartoon-dog.svg" />
   <script type="application/ld+json">
@@ -676,9 +754,9 @@
       </div>
 
       <section class="affiliate-disclosure affiliate-disclosure--compact" role="note" aria-label="Affiliate disclosure">
-  <strong>Affiliate Disclosure</strong>
-  <p>As an Amazon Associate I earn from qualifying purchases. This page may contain affiliate links, which means we may earn a commission at no extra cost to you.</p>
-</section>
+        <strong>Affiliate Disclosure</strong>
+        <p>As an Amazon Associate I earn from qualifying purchases. This page may contain affiliate links, which means we may earn a commission at no extra cost to you.</p>
+      </section>
 
       <div class="card-group">
         <!-- AMAZON:CREATOR:HEALTH-START -->
