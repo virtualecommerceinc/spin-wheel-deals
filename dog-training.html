@@ -390,7 +390,10 @@
             <div class="calculator-tool__header">
               <span class="calculator-tool__icon" aria-hidden="true">
                 <svg viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
-                  <path d="M13 6a5 5 0 0 0-5 5v36a5 5 0 0 0 5 5h38a5 5 0 0 0 5-5V11a5 5 0 0 0-5-5h-5v8h-4V6H22v8h-4V6h-5zm-1 15h40v26a1 1 0 0 1-1 1H13a1 1 0 0 1-1-1V21zm20 5a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 3v7h5v3h-8V29h3z" />
+                  <rect x="8" y="10" width="48" height="42" rx="9" fill="none" stroke="currentColor" stroke-width="4" />
+                  <path d="M20 6v10M44 6v10M8 22h48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" />
+                  <circle cx="32" cy="38" r="11" fill="none" stroke="currentColor" stroke-width="4" />
+                  <path d="M32 32v7l5 3" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
               </span>
               <div>
@@ -653,108 +656,86 @@
       </div>
 
       <div class="card">
-        <button class="accordion-toggle" type="button" aria-expanded="false">Jumping on People</button>
-        <div class="accordion-panel" hidden>
-          <p><strong>Why dogs jump:</strong> Excitement, seeking attention, trying to greet you at face level. Jumping gets rewarded (people react to it), so dogs keep doing it.</p>
-          <p><strong>What NOT to do:</strong> Don't knee the dog, push them away, or yell—this is still attention and rewards the behavior.</p>
-          <p class="warning-flag"><strong>Solution strategy:</strong></p>
+        <button id="behavior-jumping-toggle" class="accordion-toggle" type="button" aria-expanded="false" aria-controls="behavior-jumping-panel">Jumping on People</button>
+        <div id="behavior-jumping-panel" class="accordion-panel" role="region" aria-labelledby="behavior-jumping-toggle" hidden>
+          <p class="warning-flag"><strong>Positive strategy:</strong> Reward four paws on the floor and make calm greetings the fastest way to attention.</p>
           <ul class="bullet-list">
-            <li><strong>Teach an alternative:</strong> Train "Sit" as the greeting behavior instead. Reward sitting, not jumping</li>
-            <li><strong>Manage the behavior:</strong> Greet your dog at their level (kneel down) so they don't need to jump</li>
-            <li><strong>Remove the reward:</strong> Turn away and ignore jumping immediately; provide attention only for calm behavior</li>
-            <li><strong>Redirect with a toy:</strong> Give them a toy to hold during greetings instead</li>
-            <li><strong>Timing is critical:</strong> Reward the second all four paws are on the ground</li>
-            <li><strong>Consistency:</strong> Everyone who interacts with your dog must follow the same rules</li>
+            <li>Ask for <strong>Sit</strong> before greetings and reward immediately.</li>
+            <li>Turn away silently if jumping starts, then re-engage when paws are down.</li>
+            <li>Coach guests to greet only calm behavior so rules stay consistent.</li>
+            <li>Use a leash or baby gate during practice to prevent rehearsal.</li>
+            <li>Keep greetings short and calm to reduce over-arousal.</li>
           </ul>
-          <p><strong>Timeline:</strong> 2-4 weeks with consistent practice.</p>
         </div>
       </div>
 
       <div class="card">
-        <button class="accordion-toggle" type="button" aria-expanded="false">Excessive Barking &amp; Whining</button>
-        <div class="accordion-panel" hidden>
-          <p><strong>Why dogs bark:</strong> Alerting, boredom, anxiety, seeking attention, excitement, or fear.</p>
-          <p><strong>First step:</strong> Identify the trigger. Is it the doorbell? Other dogs? Boredom? Separation anxiety?</p>
-          <p class="warning-flag"><strong>Solution strategy by trigger:</strong></p>
+        <button id="behavior-barking-toggle" class="accordion-toggle" type="button" aria-expanded="false" aria-controls="behavior-barking-panel">Excessive Barking &amp; Whining</button>
+        <div id="behavior-barking-panel" class="accordion-panel" role="region" aria-labelledby="behavior-barking-toggle" hidden>
+          <p class="warning-flag"><strong>Positive strategy:</strong> Find the trigger first, then reward quiet choices before the barking escalates.</p>
           <ul class="bullet-list">
-            <li><strong>Attention-seeking barking:</strong> Ignore completely (even negative attention rewards it). Wait for quiet, then reward</li>
-            <li><strong>Doorbell anxiety:</strong> Desensitize by having a friend ring the bell repeatedly at low volume while rewarding calm behavior</li>
-            <li><strong>Boredom barking:</strong> Increase exercise and mental stimulation (puzzle toys, training sessions, activity)</li>
-            <li><strong>Fear/reactivity barking:</strong> Create distance from trigger, reward calm behavior at that distance, gradually decrease distance</li>
-            <li><strong>Teach "Quiet" command:</strong> Wait for a pause in barking, say "Quiet," reward silence. Do NOT reward barking to get the reward</li>
-            <li><strong>Provide outlets:</strong> Interactive toys, sniffing games, chewing opportunities burn mental energy</li>
+            <li>Track patterns: note time, place, and triggers for each barking burst.</li>
+            <li>Reward brief quiet moments and gradually build longer quiet durations.</li>
+            <li>Teach a replacement cue like <strong>Mat</strong> or <strong>Look</strong> when triggers appear.</li>
+            <li>Add enrichment (sniff walks, food puzzles, short training games) daily.</li>
+            <li>For door sounds, practice low-volume recordings while pairing with treats.</li>
           </ul>
-          <p><strong>Important:</strong> Some barking is normal and healthy. The goal is to manage excessive barking, not eliminate all barking.</p>
         </div>
       </div>
 
       <div class="card">
-        <button class="accordion-toggle" type="button" aria-expanded="false">Pulling on Leash</button>
-        <div class="accordion-panel" hidden>
-          <p><strong>Why dogs pull:</strong> The environment is exciting and interesting. Forward progress is the reward for pulling, so they pull more.</p>
-          <p class="warning-flag"><strong>Solution strategy:</strong></p>
+        <button id="behavior-pulling-toggle" class="accordion-toggle" type="button" aria-expanded="false" aria-controls="behavior-pulling-panel">Pulling on Leash</button>
+        <div id="behavior-pulling-panel" class="accordion-panel" role="region" aria-labelledby="behavior-pulling-toggle" hidden>
+          <p class="warning-flag"><strong>Positive strategy:</strong> Make loose leash the only way your dog gets to move forward.</p>
           <ul class="bullet-list">
-            <li><strong>Stop moving when they pull</strong> — Don't reward forward progress for pulling</li>
-            <li><strong>Wait for slack in the leash,</strong> then move forward—reward the loose leash</li>
-            <li><strong>Reward frequently</strong> for walking without pulling (every 10 steps initially)</li>
-            <li><strong>Change direction unpredictably</strong> to keep their attention on you, not distractions</li>
-            <li><strong>Teach a focus cue</strong> like "Watch" to redirect attention when excited</li>
-            <li><strong>Use a front-clip harness</strong> to make pulling less effective (not a substitute for training)</li>
-            <li><strong>Start in low-distraction environments</strong> and slowly increase difficulty</li>
+            <li>Freeze when leash gets tight; resume only when slack returns.</li>
+            <li>Reward every few steps of loose leash in low-distraction areas.</li>
+            <li>Use frequent direction changes to keep your dog connected to you.</li>
+            <li>Practice focus cues before approaching exciting triggers.</li>
+            <li>Gradually add harder routes once success is consistent.</li>
           </ul>
-          <p><strong>Patience required:</strong> This can take weeks or months, but it's one of the most transformative behaviors to train.</p>
         </div>
       </div>
 
       <div class="card">
-        <button class="accordion-toggle" type="button" aria-expanded="false">Resource Guarding &amp; Food Aggression</button>
-        <div class="accordion-panel" hidden>
-          <p><strong>What it is:</strong> Growling, snapping, or biting over food, toys, or other valuables. This is a safety concern requiring professional intervention.</p>
-          <p class="warning-flag"><strong>⚠️ IMPORTANT:</strong> This behavior can escalate quickly and result in serious injury. If your dog guards resources aggressively, consult a certified professional trainer or veterinary behaviorist immediately.</p>
+        <button id="behavior-guarding-toggle" class="accordion-toggle" type="button" aria-expanded="false" aria-controls="behavior-guarding-panel">Resource Guarding &amp; Food Aggression</button>
+        <div id="behavior-guarding-panel" class="accordion-panel" role="region" aria-labelledby="behavior-guarding-toggle" hidden>
+          <p class="warning-flag"><strong>Safety first:</strong> Guarding can escalate quickly. Work with a credentialed trainer if there is growling, snapping, or biting.</p>
           <ul class="bullet-list">
-            <li><strong>Do NOT attempt to take items away</strong> — this confirms guarding is necessary</li>
-            <li><strong>Manage first:</strong> Feed in separate rooms, put toys away, prevent access</li>
-            <li><strong>Professional help:</strong> A certified trainer can teach "trade" games and desensitization</li>
-            <li><strong>Prevention:</strong> Early socialization to having hands near food reduces risk</li>
+            <li>Avoid grabbing items; instead teach a calm <strong>Trade</strong> for better rewards.</li>
+            <li>Feed in a quiet area and separate pets during meals.</li>
+            <li>Practice toss-and-walk-away treat drops near bowls to build trust.</li>
+            <li>Manage valuable chews with gates or crates to prevent conflict.</li>
+            <li>Get professional support early for any escalation signals.</li>
           </ul>
-          <p><strong>Safety note:</strong> Some level of protective behavior is normal, but aggression is not. Professional guidance is essential.</p>
         </div>
       </div>
 
       <div class="card">
-        <button class="accordion-toggle" type="button" aria-expanded="false">Reactivity to Other Dogs</button>
-        <div class="accordion-panel" hidden>
-          <p><strong>What it is:</strong> Lunging, barking, growling, or aggressive behavior toward other dogs. This is often fear-based, not aggression.</p>
-          <p><strong>Why it happens:</strong> Past trauma, lack of socialization, fear, or learned behavior (it "works" to make the other dog go away).</p>
-          <p class="warning-flag"><strong>Solution strategy:</strong></p>
+        <button id="behavior-reactivity-toggle" class="accordion-toggle" type="button" aria-expanded="false" aria-controls="behavior-reactivity-panel">Reactivity to Other Dogs</button>
+        <div id="behavior-reactivity-panel" class="accordion-panel" role="region" aria-labelledby="behavior-reactivity-toggle" hidden>
+          <p class="warning-flag"><strong>Positive strategy:</strong> Keep distance where your dog can stay calm, then pair dog sightings with rewards.</p>
           <ul class="bullet-list">
-            <li><strong>Identify the threshold distance</strong> where your dog notices other dogs but stays calm</li>
-            <li><strong>Stay below threshold</strong> and reward calm behavior when other dogs are visible</li>
-            <li><strong>Gradually decrease distance</strong> over weeks/months as your dog improves</li>
-            <li><strong>Teach a strong "Watch" command</strong> to redirect focus to you, not other dogs</li>
-            <li><strong>Manage the environment:</strong> Walk at quieter times, cross streets when seeing other dogs</li>
-            <li><strong>Never force greetings</strong> — let your dog approach if they choose to</li>
-            <li><strong>Consider a professional:</strong> Serious reactivity requires expert guidance</li>
+            <li>Find threshold distance and train below it, not in the red zone.</li>
+            <li>Mark and reward calm check-ins when another dog appears.</li>
+            <li>Use U-turns and distance as tools before your dog explodes.</li>
+            <li>Keep sessions short and end on success, even if tiny.</li>
+            <li>Skip forced greetings; prioritize neutral, relaxed passing.</li>
           </ul>
-          <p><strong>Key insight:</strong> Reactivity improves when your dog learns that other dogs = good things happen (treats from you, not confrontation).</p>
         </div>
       </div>
 
       <div class="card">
-        <button class="accordion-toggle" type="button" aria-expanded="false">Destructive Behavior &amp; Chewing</button>
-        <div class="accordion-panel" hidden>
-          <p><strong>Why dogs chew/destroy:</strong> Boredom, anxiety, teething (puppies), seeking attention, or just because it's fun.</p>
-          <p class="warning-flag"><strong>Solution strategy:</strong></p>
+        <button id="behavior-chewing-toggle" class="accordion-toggle" type="button" aria-expanded="false" aria-controls="behavior-chewing-panel">Destructive Behavior &amp; Chewing</button>
+        <div id="behavior-chewing-panel" class="accordion-panel" role="region" aria-labelledby="behavior-chewing-toggle" hidden>
+          <p class="warning-flag"><strong>Positive strategy:</strong> Prevent access to tempting items and reward legal chewing options.</p>
           <ul class="bullet-list">
-            <li><strong>Manage the environment:</strong> Put away tempting objects, use baby gates to limit access</li>
-            <li><strong>Provide appropriate outlets:</strong> Puzzle toys, chew toys, sniffing games</li>
-            <li><strong>Rotate toys</strong> to keep interest high</li>
-            <li><strong>Exercise &amp; mental stimulation:</strong> A tired dog is less likely to be destructive</li>
-            <li><strong>Don't punish,</strong> it creates anxiety and teaches them to hide destruction</li>
-            <li><strong>Reward appropriate chewing</strong> — praise when they chew on their toys, not yours</li>
-            <li><strong>Crate training</strong> protects your belongings while teaching boundaries</li>
+            <li>Set up management: gates, closed doors, and tidy counters.</li>
+            <li>Offer durable chews and food puzzles matched to chew style.</li>
+            <li>Rotate enrichment toys every few days to keep novelty high.</li>
+            <li>Reward your dog whenever they choose approved chew items.</li>
+            <li>Add structured sniffing and training games to reduce boredom.</li>
           </ul>
-          <p><strong>Puppies tip:</strong> Constant supervision and regular breaks reduce most puppy destructiveness.</p>
         </div>
       </div>
 
@@ -1039,18 +1020,29 @@
       calculateTimeline();
     });
 
-    // Accordion toggle functionality
-    document.querySelectorAll('.accordion-toggle').forEach(button => {
-      button.addEventListener('click', function() {
-        const isExpanded = this.getAttribute('aria-expanded') === 'true';
-        const panel = this.nextElementSibling;
+    // Behavior accordion (single-open)
+    const behaviorButtons = document.querySelectorAll('#behavior-problems .accordion-toggle');
 
-        if (!panel || !panel.classList.contains('accordion-panel')) {
-          return;
+    function setBehaviorPanel(button, shouldExpand) {
+      const panelId = button.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (!panel) return;
+
+      button.setAttribute('aria-expanded', String(shouldExpand));
+      panel.hidden = !shouldExpand;
+    }
+
+    behaviorButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+        behaviorButtons.forEach((otherButton) => {
+          setBehaviorPanel(otherButton, false);
+        });
+
+        if (!isExpanded) {
+          setBehaviorPanel(button, true);
         }
-
-        this.setAttribute('aria-expanded', String(!isExpanded));
-        panel.hidden = isExpanded;
       });
     });
 
