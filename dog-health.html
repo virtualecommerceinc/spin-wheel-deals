@@ -62,7 +62,7 @@
   }
   </script>
 </head>
-<body>
+<body class="dog-health-page">
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- Background (required on every page that should show the animated sky/clouds/trees/grass) -->
@@ -931,29 +931,40 @@
       updateResults(false);
     })();
 
-    // Accordion Behavior with Accessibility
-    document.querySelectorAll('.accordion-toggle').forEach(btn => {
-      // Initialize panels as hidden
-      const panel = btn.nextElementSibling;
-      if (panel && panel.classList.contains('accordion-panel')) {
-        panel.style.display = 'none';
-        btn.setAttribute('aria-expanded', 'false');
-
-        // Generate unique IDs for accessibility
-        const id = 'accordion-panel-' + Math.random().toString(36).substr(2, 9);
-        panel.id = id;
-        btn.setAttribute('aria-controls', id);
-      }
-
-      btn.addEventListener('click', () => {
+    // Accordion Behavior with Accessibility ([hidden] + keyboard support)
+    (() => {
+      const accordionButtons = document.querySelectorAll('.accordion-toggle');
+      accordionButtons.forEach((btn, index) => {
         const panel = btn.nextElementSibling;
-        if (panel && panel.classList.contains('accordion-panel')) {
+        if (!panel || !panel.classList.contains('accordion-panel')) return;
+
+        const panelId = panel.id || `accordion-panel-${index + 1}`;
+        const buttonId = btn.id || `accordion-toggle-${index + 1}`;
+
+        panel.id = panelId;
+        btn.id = buttonId;
+        btn.setAttribute('aria-controls', panelId);
+        panel.setAttribute('aria-labelledby', buttonId);
+
+        const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+        panel.hidden = !isExpanded;
+
+        const togglePanel = () => {
           const expanded = btn.getAttribute('aria-expanded') === 'true';
-          btn.setAttribute('aria-expanded', !expanded);
-          panel.style.display = expanded ? 'none' : 'block';
-        }
+          const nextExpanded = !expanded;
+          btn.setAttribute('aria-expanded', String(nextExpanded));
+          panel.hidden = !nextExpanded;
+        };
+
+        btn.addEventListener('click', togglePanel);
+        btn.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            togglePanel();
+          }
+        });
       });
-    });
+    })();
   </script>
 </body>
 </html>
