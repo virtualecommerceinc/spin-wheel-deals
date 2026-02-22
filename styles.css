@@ -1195,6 +1195,33 @@ a.card:hover,
   width: 100%;
 }
 
+body.dog-health-page .checklist .card-group,
+body.dog-health-page .accordion .card-group{
+  width: 100%;
+}
+
+body.dog-health-page #features.card-group{
+  gap: 18px;
+}
+
+body.dog-health-page #features.card-group .card{
+  min-height: 132px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+body.dog-health-page #features.card-group .card h3{
+  margin-bottom: 4px;
+  font-size: 1.08rem;
+}
+
+body.dog-health-page #features.card-group .card p{
+  font-size: 0.96rem;
+}
+
 .content-block{
   width: 100%;
   max-width: 100%;
@@ -1237,12 +1264,14 @@ a.card:hover,
 .accordion .accordion-panel .bullet-list { margin-top: 10px; }
 
 /* accordion */
-body.dog-training-page .accordion .card{
+body.dog-training-page .accordion .card,
+body.dog-health-page .accordion .card{
   text-align: left;
   padding: 0;
   overflow: hidden;
 }
-body.dog-training-page .accordion .accordion-toggle{
+body.dog-training-page .accordion .accordion-toggle,
+body.dog-health-page .accordion .accordion-toggle{
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1259,7 +1288,8 @@ body.dog-training-page .accordion .accordion-toggle{
   color: var(--ink);
   transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
-body.dog-training-page .accordion .accordion-toggle::after{
+body.dog-training-page .accordion .accordion-toggle::after,
+body.dog-health-page .accordion .accordion-toggle::after{
   content: '+';
   flex: 0 0 auto;
   width: 26px;
@@ -1273,23 +1303,28 @@ body.dog-training-page .accordion .accordion-toggle::after{
   color: #0f5239;
   background: rgba(15, 82, 57, 0.12);
 }
-body.dog-training-page .accordion .accordion-toggle:hover{
+body.dog-training-page .accordion .accordion-toggle:hover,
+body.dog-health-page .accordion .accordion-toggle:hover{
   background: rgba(15, 23, 42, 0.09);
   border-color: rgba(15, 82, 57, 0.3);
 }
-body.dog-training-page .accordion .accordion-toggle[aria-expanded='true']{
+body.dog-training-page .accordion .accordion-toggle[aria-expanded='true'],
+body.dog-health-page .accordion .accordion-toggle[aria-expanded='true']{
   background: rgba(15, 82, 57, 0.12);
   border-color: rgba(15, 82, 57, 0.3);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-body.dog-training-page .accordion .accordion-toggle[aria-expanded='true']::after{
+body.dog-training-page .accordion .accordion-toggle[aria-expanded='true']::after,
+body.dog-health-page .accordion .accordion-toggle[aria-expanded='true']::after{
   content: '−';
 }
-body.dog-training-page .accordion .accordion-toggle:focus-visible{
+body.dog-training-page .accordion .accordion-toggle:focus-visible,
+body.dog-health-page .accordion .accordion-toggle:focus-visible{
   outline: 3px solid rgba(25, 94, 67, 0.58);
   outline-offset: 2px;
 }
-body.dog-training-page .accordion .accordion-panel{
+body.dog-training-page .accordion .accordion-panel,
+body.dog-health-page .accordion .accordion-panel{
   display: block;
   padding: 0 18px;
   background: rgba(255,255,255,0.92);
@@ -1297,7 +1332,8 @@ body.dog-training-page .accordion .accordion-panel{
   opacity: 1;
   transition: max-height 250ms ease, opacity 180ms ease, padding 180ms ease;
 }
-body.dog-training-page .accordion .accordion-panel[hidden]{
+body.dog-training-page .accordion .accordion-panel[hidden],
+body.dog-health-page .accordion .accordion-panel[hidden]{
   display: block;
   max-height: 0;
   opacity: 0;
@@ -1305,15 +1341,19 @@ body.dog-training-page .accordion .accordion-panel[hidden]{
   padding-bottom: 0;
   overflow: hidden;
 }
-body.dog-training-page .accordion .accordion-panel:not([hidden]){
+body.dog-training-page .accordion .accordion-panel:not([hidden]),
+body.dog-health-page .accordion .accordion-panel:not([hidden]){
   padding-top: 12px;
   padding-bottom: 18px;
 }
-body.dog-training-page .accordion .accordion-panel p{ color: var(--ink-soft); }
+body.dog-training-page .accordion .accordion-panel p,
+body.dog-health-page .accordion .accordion-panel p{ color: var(--ink-soft); }
 
 @media (prefers-reduced-motion: reduce) {
   body.dog-training-page .accordion .accordion-toggle,
-  body.dog-training-page .accordion .accordion-panel {
+  body.dog-training-page .accordion .accordion-panel,
+  body.dog-health-page .accordion .accordion-toggle,
+  body.dog-health-page .accordion .accordion-panel {
     transition: none;
   }
 }
