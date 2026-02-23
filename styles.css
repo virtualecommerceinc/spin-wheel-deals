@@ -1422,11 +1422,45 @@ body.dog-training-page .commands-grid .card{
   grid-column: 1 / -1;
 }
 
-/* toolkit CTA at bottom */
-.toolkit .cta-btn{
+/* toolkit CTA at bottom (only the section-level browse link) */
+#health-toolkit > .toolkit-bottom-cta{
   display: flex;
   width: min(420px, 92vw);
   margin: 12px auto 0;
+}
+
+/* Keep wellness toolkit product cards equal-height with compact CTA chips */
+#health-toolkit .card-group > a.card{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+#health-toolkit .card-group > a.card p{
+  margin-bottom: 0;
+}
+
+#health-toolkit .card-group > a.card .toolkit-card-cta{
+  margin-top: auto;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 999px;
+  display: inline-flex;
+  align-self: center;
+  width: auto;
+  max-width: 100%;
+  white-space: nowrap;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.14);
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  #health-toolkit .card-group > a.card .toolkit-card-cta{
+    font-size: 13px;
+    padding: 9px 12px;
+  }
 }
 
 /* ============== Responsive refinements ============== */
