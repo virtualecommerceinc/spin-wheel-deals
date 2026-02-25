@@ -1772,6 +1772,21 @@ body.dog-training-page .toolkit .card-group {
   gap: 18px;
 }
 
+/* Prevent right-edge overflow artifacts inside toolkit */
+body.dog-training-page .toolkit {
+  overflow-x: clip;
+}
+
+body.dog-training-page .toolkit .content-block,
+body.dog-training-page .toolkit .affiliate-disclosure--compact,
+body.dog-training-page .toolkit .card-group,
+body.dog-training-page .toolkit > h3 {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 body.dog-training-page .card {
   text-align: left;
 }
