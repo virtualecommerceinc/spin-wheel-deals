@@ -1773,18 +1773,37 @@ body.dog-training-page .toolkit .card-group {
 }
 
 /* Prevent right-edge overflow artifacts inside toolkit */
-body.dog-training-page .toolkit {
-  overflow-x: clip;
+body.dog-training-page #training-toolkit {
+  overflow-x: hidden;
 }
 
-body.dog-training-page .toolkit .content-block,
-body.dog-training-page .toolkit .affiliate-disclosure--compact,
-body.dog-training-page .toolkit .card-group,
-body.dog-training-page .toolkit > h3 {
+body.dog-training-page #training-toolkit .content-block,
+body.dog-training-page #training-toolkit .affiliate-disclosure--compact,
+body.dog-training-page #training-toolkit > h3 {
   width: 100%;
   max-width: 100%;
   margin-left: 0;
   margin-right: 0;
+}
+
+body.dog-training-page #training-toolkit .card-group {
+  width: auto;
+  max-width: 100%;
+  margin: 18px 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.dog-training-page #training-toolkit .card-group > a.card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body.dog-training-page #training-toolkit .toolkit-bottom-cta {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 12px 0 0;
 }
 
 body.dog-training-page .card {
