@@ -16,6 +16,22 @@ html, body { height: 100%; }
   --shadow-md: 0 12px 30px rgba(0,0,0,0.12);
   --radius-lg: 20px;
   --radius-md: 14px;
+
+  /* ================================
+     GLOBAL WIDTH SYSTEM (NEW)
+     Desktop = extra wide, consistent across ALL pages.
+     ================================ */
+  --container-max: 1320px;     /* <- “extra wide” desktop */
+  --container-pad: 22px;       /* default side padding */
+  --readable-max: 860px;       /* long-text max width */
+  --narrow-max: 520px;         /* small widgets like the wheel card */
+}
+
+/* Fluid container helpers (no HTML changes needed) */
+:root{
+  --container: min(var(--container-max), calc(100vw - (var(--container-pad) * 2)));
+  --readable:  min(var(--readable-max),  calc(100vw - (var(--container-pad) * 2)));
+  --narrow:    min(var(--narrow-max),    calc(100vw - (var(--container-pad) * 2)));
 }
 
 body {
@@ -113,7 +129,11 @@ a:hover, a:focus-visible { text-decoration: underline; }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 16px clamp(16px, 4vw, 40px);
+
+  /* keep the header aligned with the rest of the page */
+  width: var(--container);
+  margin: 0 auto;
+  padding: 16px 0;
 }
 
 /* ===== Header Logo CTA (CSS-only, no HTML changes) ===== */
@@ -210,7 +230,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px 16px 60px;
+  padding: 32px 0 60px;
   gap: 24px;
 }
 
@@ -220,6 +240,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
   isolation: isolate;
   text-align: center;
   margin-bottom: 14px;
+  width: var(--container);
 }
 
 .hero::before,
@@ -287,7 +308,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
 .page-hero {
   position: relative;
   isolation: isolate;
-  max-width: 900px;
+  width: var(--readable);
   text-align: center;
   padding: 12px 12px 0;
   color: var(--ink);
@@ -311,7 +332,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
 
 /* ============== Blog actions ============== */
 .blog-actions {
-  width: min(960px, 92vw);
+  width: var(--container);
   display: flex;
   justify-content: center;
   margin: 18px 0 4px;
@@ -320,7 +341,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
 
 /* ============== Readable content containers ============== */
 .content-card {
-  width: min(760px, 92vw);
+  width: var(--readable);
   padding: 20px 22px;
   border-radius: var(--radius-lg);
   background: var(--paper);
@@ -339,7 +360,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
 }
 
 .section-heading {
-  width: min(960px, 92vw);
+  width: var(--container);
   margin: 8px 0 0;
   text-align: left;
   background: var(--paper-soft);
@@ -356,7 +377,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
 .section-heading p { margin: 0; color: var(--ink-soft); }
 
 /* ============== Blog Archive (All Posts) polish ============== */
-#all-posts.content-card { width: min(960px, 92vw); }
+#all-posts.content-card { width: var(--container); }
 
 #all-posts .archive-intro {
   margin: 0 0 6px;
@@ -416,7 +437,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
 
 /* ============== Product Grid ============== */
 .product-grid {
-  width: min(960px, 92vw);
+  width: var(--container);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
@@ -464,7 +485,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
 }
 
 .wheel-card {
-  width: min(520px, 92vw);
+  width: var(--narrow);
   padding: 18px 16px 16px;
   border-radius: 22px;
   background: rgba(0,0,0,0.18);
@@ -477,7 +498,7 @@ a:hover, a:focus-visible { text-decoration: underline; }
 /* ============== Wheel Area ============== */
 #wheel-container {
   position: relative;
-  width: min(420px, 82vw);
+  width: min(420px, calc(100vw - (var(--container-pad) * 2)));
   aspect-ratio: 1 / 1;
   margin: 8px auto 14px;
   display: grid;
@@ -619,7 +640,11 @@ a:hover, a:focus-visible { text-decoration: underline; }
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 18px clamp(16px, 4vw, 40px);
+
+  /* keep footer aligned with the rest of the page */
+  width: var(--container);
+  margin: 0 auto;
+  padding: 18px 0;
   font-size: 13px;
 }
 .site-footer__links { display: flex; gap: 16px; }
@@ -639,7 +664,7 @@ a:focus-visible {
   position: relative;
   isolation: isolate;
   text-align: center;
-  max-width: 980px;
+  width: var(--container);
   margin: 0 auto 18px;
   padding: 10px 8px 0;
   color: #fff;
@@ -665,6 +690,8 @@ a:focus-visible {
 }
 
 @media (max-width: 640px) {
+  :root{ --container-pad: 16px; }
+
   .hero::before,
   .hero-section::before,
   .page-hero::before {
@@ -694,7 +721,7 @@ a:focus-visible {
 .cta-btn:active { transform: translateY(1px); }
 
 .jump-nav {
-  width: min(980px, 92vw);
+  width: var(--container);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -721,7 +748,7 @@ a:focus-visible {
 .safety-cards,
 .toolkit,
 .sources-section{
-  width: min(980px, 92vw);
+  width: var(--container);
   margin: 32px auto;
   padding: clamp(20px, 3vw, 32px) clamp(16px, 3vw, 28px);
   background: var(--paper-soft);
@@ -736,7 +763,7 @@ a:focus-visible {
 
 /* “card group” is the GRID WRAPPER */
 .card-group{
-  width: min(980px, 92vw);
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
@@ -1362,7 +1389,7 @@ body.dog-training-page .commands-grid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
   gap: 18px;
-  max-width: 900px;
+  width: var(--container);
   margin-inline: auto;
 }
 
@@ -1375,13 +1402,14 @@ body.dog-training-page .commands-grid .card{
 @media (max-width: 900px) {
   body.dog-training-page .commands-grid{
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 700px;
+    width: min(700px, calc(100vw - (var(--container-pad) * 2)));
   }
 }
 
 @media (max-width: 600px) {
   body.dog-training-page .commands-grid{
     grid-template-columns: 1fr;
+    width: var(--container);
   }
 }
 
@@ -1402,7 +1430,7 @@ body.dog-training-page .commands-grid .card{
 }
 
 .affiliate-disclosure--compact{
-  max-width: min(980px, 92vw);
+  width: var(--container);
   margin: 10px auto 12px;
   padding: 10px 12px;
   font-size: 13px;
@@ -1425,7 +1453,7 @@ body.dog-training-page .commands-grid .card{
 /* toolkit CTA at bottom (only the section-level browse link) */
 #health-toolkit > .toolkit-bottom-cta{
   display: flex;
-  width: min(420px, 92vw);
+  width: min(420px, calc(100vw - (var(--container-pad) * 2)));
   margin: 12px auto 0;
 }
 
@@ -1483,7 +1511,7 @@ body.dog-training-page .commands-grid .card{
    Contact Page Polish (scoped, does not affect calculators)
    ========================================================= */
 body.contact-page .contact-card{
-  width: min(820px, 92vw);
+  width: min(900px, calc(100vw - (var(--container-pad) * 2)));
 }
 
 body.contact-page .contact-header h1{
@@ -1587,7 +1615,6 @@ body.contact-page .contact-note{
   body.contact-page .contact-form{ padding: 14px; }
   body.contact-page .contact-btn{ font-size: 15px; }
 }
-
 
 /* =========================================================
    Amazon Picks (blog cards)
