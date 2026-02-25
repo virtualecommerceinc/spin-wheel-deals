@@ -1514,6 +1514,21 @@ body.dog-training-page .commands-grid .card{
   grid-column: 1 / -1;
 }
 
+/* Keep health toolkit internals fully inside section shell */
+#health-toolkit {
+  overflow-x: hidden;
+}
+
+#health-toolkit .content-block,
+#health-toolkit .affiliate-disclosure--compact,
+#health-toolkit .card-group,
+#health-toolkit > h3 {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* toolkit CTA at bottom (only the section-level browse link) */
 #health-toolkit > .toolkit-bottom-cta{
   display: flex;
