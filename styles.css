@@ -1733,8 +1733,8 @@ body.contact-page .contact-note{
    Fixes mixed-width sections + overly thin cards on desktop
    ========================================================= */
 body.dog-training-page {
-  --guide-shell-max: 1040px;
-  --guide-read-max: 860px;
+  --guide-shell-max: 980px;
+  --guide-read-max: 820px;
 }
 
 body.dog-training-page .hero-section,
@@ -1751,15 +1751,81 @@ body.dog-training-page .content-card {
   width: min(var(--guide-read-max), calc(100vw - (var(--container-pad) * 2)));
 }
 
-body.dog-training-page #features.card-group,
+/* Keep long text blocks readable and centered inside wide sections */
+body.dog-training-page .content-block {
+  width: min(100%, 860px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Feature cards should be a clean 3-up row on desktop */
+body.dog-training-page #features.card-group {
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Toolkit cards: stable 2-up desktop to avoid ultra-thin cards */
 body.dog-training-page .toolkit .card-group {
   width: 100%;
   grid-template-columns: repeat(2, minmax(280px, 1fr));
   gap: 18px;
 }
 
+/* Prevent right-edge overflow artifacts inside toolkit */
+body.dog-training-page #training-toolkit {
+  overflow-x: hidden;
+}
+
+body.dog-training-page #training-toolkit .content-block,
+body.dog-training-page #training-toolkit .affiliate-disclosure--compact,
+body.dog-training-page #training-toolkit > h3 {
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+body.dog-training-page #training-toolkit .card-group {
+  width: auto;
+  max-width: 100%;
+  margin: 18px 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.dog-training-page #training-toolkit .card-group > a.card {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body.dog-training-page #training-toolkit .toolkit-bottom-cta {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 12px 0 0;
+}
+
 body.dog-training-page .card {
   text-align: left;
+}
+
+/* Improve section rhythm */
+body.dog-training-page section[id] {
+  scroll-margin-top: 110px;
+}
+
+body.dog-training-page .accordion,
+body.dog-training-page .toolkit,
+body.dog-training-page .sources-section {
+  margin-top: 26px;
+  margin-bottom: 26px;
+}
+
+@media (max-width: 1024px) {
+  body.dog-training-page #features.card-group {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
 }
 
 @media (max-width: 900px) {
