@@ -1727,3 +1727,44 @@ body.contact-page .contact-note{
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================================
+   Dog Training page width normalization
+   Fixes mixed-width sections + overly thin cards on desktop
+   ========================================================= */
+body.dog-training-page {
+  --guide-shell-max: 1040px;
+  --guide-read-max: 860px;
+}
+
+body.dog-training-page .hero-section,
+body.dog-training-page .jump-nav,
+body.dog-training-page .accordion,
+body.dog-training-page .toolkit,
+body.dog-training-page .sources-section {
+  width: min(var(--guide-shell-max), calc(100vw - (var(--container-pad) * 2)));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+body.dog-training-page .content-card {
+  width: min(var(--guide-read-max), calc(100vw - (var(--container-pad) * 2)));
+}
+
+body.dog-training-page #features.card-group,
+body.dog-training-page .toolkit .card-group {
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+body.dog-training-page .card {
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  body.dog-training-page #features.card-group,
+  body.dog-training-page .toolkit .card-group {
+    grid-template-columns: 1fr;
+  }
+}
