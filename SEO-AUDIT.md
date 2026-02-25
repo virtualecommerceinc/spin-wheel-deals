@@ -1,3 +1,4 @@
+PR test: 2026-02-24 (no functional change).
 # SEO Audit – Spin Wheel Deals
 
 ## Clarification Gate (completed before edits)
