@@ -1772,11 +1772,36 @@ body.dog-training-page .bullet-list li {
   line-height: 1.7;
 }
 
-/* Feature cards should be a clean 3-up row on desktop */
+/* Feature cards should be a clean, aligned 3-up row on desktop */
 body.dog-training-page #features.card-group {
   width: 100%;
   grid-template-columns: repeat(3, minmax(260px, 1fr));
   gap: 16px;
+  align-items: stretch;
+  margin: 14px 0 10px;
+}
+
+body.dog-training-page #features.card-group > a.card {
+  min-height: 124px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  text-align: left;
+  padding: 16px 16px;
+}
+
+body.dog-training-page #features.card-group > a.card h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.2;
+}
+
+body.dog-training-page #features.card-group > a.card p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
 /* Section card groups should stay comfortably wide */
