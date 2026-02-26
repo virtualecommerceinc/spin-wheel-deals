@@ -18,46 +18,6 @@
   <meta name="robots" content="index,follow" />
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Match Dog Health pattern: page-scoped, UI-only improvements (no workflow changes) -->
-  <style>
-    /* Make the Amazon cards look obviously CLICKABLE (UI only)
-       (No workflow changes needed; works with current injection) */
-    #training-toolkit .card-group > a.card{
-      position: relative;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
-    }
-
-    #training-toolkit .card-group > a.card:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
-    }
-
-    #training-toolkit .card-group > a.card:focus-visible{
-      outline: 3px solid rgba(255, 200, 0, 0.9);
-      outline-offset: 3px;
-    }
-
-    #training-toolkit .card-group > a.card h4{
-      position: relative;
-      padding-right: 26px;
-    }
-
-    #training-toolkit .card-group > a.card h4::after{
-      content: "↗";
-      position: absolute;
-      right: 0;
-      top: 0;
-      opacity: 0.8;
-      font-weight: 700;
-    }
-
-    #training-toolkit .card-group > a.card .toolkit-card-cta{
-      margin-top: auto;
-      pointer-events: none;
-    }
-  </style>
 
   <meta property="og:image" content="https://virtualecommerceinc.com/spin-wheel-deals/assets/cartoon-dog.svg" />
   <meta name="twitter:image" content="https://virtualecommerceinc.com/spin-wheel-deals/assets/cartoon-dog.svg" />
@@ -110,6 +70,7 @@
       <a href="#training-foundations">Training Foundations</a>
       <a href="#reward-systems">Reward Systems</a>
       <a href="#puppy-plan">Puppy Plan</a>
+      <a href="#basic-commands">Basic Commands</a>
       <a href="#common-problems">Common Problems</a>
       <a href="#training-toolkit">Training Toolkit</a>
       <a href="#sources-trust">Sources &amp; Trust</a>
@@ -153,6 +114,37 @@
           <h4>Management Matters</h4>
           <p>Training improves faster when you prevent repeated mistakes. Baby gates, leashes indoors, covered trash, and predictable routines help you avoid “practicing” unwanted behaviors.</p>
         </div>
+      </div>
+
+
+      <div class="content-block training-session-planner" aria-label="Training session planner">
+        <h3>Training Session Planner</h3>
+        <div class="planner-header">
+          <span class="planner-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <rect x="3.5" y="4.5" width="17" height="16" rx="2.5"></rect>
+              <path d="M8 2.8v3.2M16 2.8v3.2M7 11h10M7 15h5"></path>
+              <circle cx="18" cy="17" r="3.8"></circle>
+              <path d="M18 15.2v2.1l1.3.8"></path>
+            </svg>
+          </span>
+          <p>Keep progress steady with short sessions and repeatable reps instead of long drills.</p>
+        </div>
+        <div class="planner-grid" role="list">
+          <div class="planner-item" role="listitem">
+            <h4>Session length</h4>
+            <p>5–8 minutes</p>
+          </div>
+          <div class="planner-item" role="listitem">
+            <h4>Sessions per day</h4>
+            <p>2–3 short sessions</p>
+          </div>
+          <div class="planner-item" role="listitem">
+            <h4>Weekly total</h4>
+            <p>70–168 focused minutes</p>
+          </div>
+        </div>
+        <p class="planner-note"><strong>Tip:</strong> Rotate easy reps and one harder rep, then end on success.</p>
       </div>
 
       <div class="content-block">
@@ -252,6 +244,73 @@
       </div>
     </section>
 
+
+    <section id="basic-commands" class="guide-panel">
+      <h2>Basic Commands: Step-by-Step</h2>
+      <div class="commands-grid">
+        <article class="card">
+          <h3>Sit</h3>
+          <ul class="bullet-list">
+            <li>Hold a treat at your dog’s nose, then lift it slightly up and back.</li>
+            <li>Mark and reward as soon as the rear touches the floor.</li>
+            <li>Add the cue “Sit” after your dog is offering the motion.</li>
+            <li>Practice in short sets before adding distractions.</li>
+          </ul>
+          <p><strong>Common mistake:</strong> Repeating “sit” multiple times before helping your dog succeed.</p>
+        </article>
+        <article class="card">
+          <h3>Down</h3>
+          <ul class="bullet-list">
+            <li>From sit or stand, lure the treat straight down between the paws.</li>
+            <li>Slide the lure forward along the floor to invite elbows down.</li>
+            <li>Mark and reward the instant your dog settles into position.</li>
+            <li>Fade the lure gradually and add your verbal cue.</li>
+          </ul>
+          <p><strong>Common mistake:</strong> Pushing shoulders or forcing posture instead of shaping calmly.</p>
+        </article>
+        <article class="card">
+          <h3>Stay</h3>
+          <ul class="bullet-list">
+            <li>Ask for sit or down, then pause one second before rewarding.</li>
+            <li>Release with a clear cue like “Free” after each success.</li>
+            <li>Increase only one challenge at a time: duration, distance, or distraction.</li>
+            <li>Reset to easier reps if your dog breaks position.</li>
+          </ul>
+          <p><strong>Common mistake:</strong> Adding distance and distractions too quickly in the same session.</p>
+        </article>
+        <article class="card">
+          <h3>Come</h3>
+          <ul class="bullet-list">
+            <li>Start indoors and say your cue once in a cheerful tone.</li>
+            <li>Move backward a step to encourage your dog toward you.</li>
+            <li>Reward heavily when your dog reaches you and check in briefly.</li>
+            <li>Practice many easy wins before testing in busy areas.</li>
+          </ul>
+          <p><strong>Common mistake:</strong> Calling your dog for things they dislike, which weakens recall value.</p>
+        </article>
+        <article class="card">
+          <h3>Leave It</h3>
+          <ul class="bullet-list">
+            <li>Present a low-value item in your closed hand and wait silently.</li>
+            <li>Mark and reward from your other hand when your dog disengages.</li>
+            <li>Progress to visible floor items only when response is reliable.</li>
+            <li>Pair with a strong reinforcement history before outdoor use.</li>
+          </ul>
+          <p><strong>Common mistake:</strong> Advancing to hard temptations before the cue is fluent indoors.</p>
+        </article>
+        <article class="card">
+          <h3>Loose Leash Walking</h3>
+          <ul class="bullet-list">
+            <li>Reward near your side every few steps when leash stays slack.</li>
+            <li>Stop forward motion whenever tension appears.</li>
+            <li>Resume walking once your dog returns and the leash softens.</li>
+            <li>Use frequent direction changes to keep engagement high.</li>
+          </ul>
+          <p><strong>Common mistake:</strong> Continuing forward while the leash is tight, which reinforces pulling.</p>
+        </article>
+      </div>
+    </section>
+
     <!-- ============================== -->
     <!-- COMMON PROBLEMS (ACCORDION)    -->
     <!-- ============================== -->
@@ -342,64 +401,64 @@
       <h3>Training Foundations Picks</h3>
       <div class="card-group">
         <!-- AMAZON:CREATOR:TRAINING-FOUNDATIONS-START -->
-        <a class="card" href="#" aria-disabled="true">
+        <div class="card card--placeholder" role="group" aria-label="Coming soon product card">
           <h4>Coming soon: curated Amazon picks</h4>
           <p><strong>Why it’s useful:</strong> High-quality training essentials selected for clear communication and consistent reps.</p>
           <span class="cta-btn toolkit-card-cta">View on Amazon</span>
-        </a>
-        <a class="card" href="#" aria-disabled="true">
+        </div>
+        <div class="card card--placeholder" role="group" aria-label="Coming soon product card">
           <h4>Coming soon: curated Amazon picks</h4>
           <p><strong>Why it’s useful:</strong> Tools that support routine-building, motivation, and calm daily practice.</p>
           <span class="cta-btn toolkit-card-cta">View on Amazon</span>
-        </a>
+        </div>
         <!-- AMAZON:CREATOR:TRAINING-FOUNDATIONS-END -->
       </div>
 
       <h3>Training Tools Picks</h3>
       <div class="card-group">
         <!-- AMAZON:CREATOR:TRAINING-TOOLS-START -->
-        <a class="card" href="#" aria-disabled="true">
+        <div class="card card--placeholder" role="group" aria-label="Coming soon product card">
           <h4>Coming soon: curated Amazon picks</h4>
           <p><strong>Why it’s useful:</strong> Session-ready tools for daily training reps and cue practice.</p>
           <span class="cta-btn toolkit-card-cta">View on Amazon</span>
-        </a>
-        <a class="card" href="#" aria-disabled="true">
+        </div>
+        <div class="card card--placeholder" role="group" aria-label="Coming soon product card">
           <h4>Coming soon: curated Amazon picks</h4>
           <p><strong>Why it’s useful:</strong> Practical accessories for leash skills and structured outdoor work.</p>
           <span class="cta-btn toolkit-card-cta">View on Amazon</span>
-        </a>
+        </div>
         <!-- AMAZON:CREATOR:TRAINING-TOOLS-END -->
       </div>
 
       <h3>Behavior Support Picks</h3>
       <div class="card-group">
         <!-- AMAZON:CREATOR:TRAINING-BEHAVIOR-START -->
-        <a class="card" href="#" aria-disabled="true">
+        <div class="card card--placeholder" role="group" aria-label="Coming soon product card">
           <h4>Coming soon: curated Amazon picks</h4>
           <p><strong>Why it’s useful:</strong> Support options for calm greetings, focus work, and lower arousal routines.</p>
           <span class="cta-btn toolkit-card-cta">View on Amazon</span>
-        </a>
-        <a class="card" href="#" aria-disabled="true">
+        </div>
+        <div class="card card--placeholder" role="group" aria-label="Coming soon product card">
           <h4>Coming soon: curated Amazon picks</h4>
           <p><strong>Why it’s useful:</strong> Management tools that help structure behavior practice safely.</p>
           <span class="cta-btn toolkit-card-cta">View on Amazon</span>
-        </a>
+        </div>
         <!-- AMAZON:CREATOR:TRAINING-BEHAVIOR-END -->
       </div>
 
       <h3>Training Extras Picks</h3>
       <div class="card-group">
         <!-- AMAZON:CREATOR:TRAINING-EXTRAS-START -->
-        <a class="card" href="#" aria-disabled="true">
+        <div class="card card--placeholder" role="group" aria-label="Coming soon product card">
           <h4>Coming soon: curated Amazon picks</h4>
           <p><strong>Why it’s useful:</strong> Optional add-ons for organized, consistent training plans.</p>
           <span class="cta-btn toolkit-card-cta">View on Amazon</span>
-        </a>
-        <a class="card" href="#" aria-disabled="true">
+        </div>
+        <div class="card card--placeholder" role="group" aria-label="Coming soon product card">
           <h4>Coming soon: curated Amazon picks</h4>
           <p><strong>Why it’s useful:</strong> Helpful extras for maintenance routines in multi-dog households.</p>
           <span class="cta-btn toolkit-card-cta">View on Amazon</span>
-        </a>
+        </div>
         <!-- AMAZON:CREATOR:TRAINING-EXTRAS-END -->
       </div>
 
