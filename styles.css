@@ -2049,4 +2049,14 @@ body.dog-training-page .sources-section {
   body.dog-training-page .card {
     font-size: 15px;
   }
+
+/* FIX: dog-toys page uses a narrower .product-grid (inline). 
+   Prevent the compact affiliate disclosure from overflowing that container. */
+.product-grid .affiliate-disclosure--compact{
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  box-sizing: border-box;
+ } 
 }
